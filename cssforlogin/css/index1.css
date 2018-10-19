@@ -1,0 +1,348 @@
+html *
+{
+   font-family: Arial ; /* !important */
+}
+body {
+    background-image: url("../images/site-image.jpg");
+    background-repeat: no-repeat, repeat;
+    background-color: #cccccc;
+background-size: 100% 135%;
+}
+
+
+.divsize {
+background: rgba(237, 56, 56,0.5);
+    max-width: 500px;
+    height: 110px;
+    left: 50%;
+    margin-left: 35%;
+    padding-top: 10px;
+}
+#divcon {
+background: rgba(216, 0, 0,0.6);
+
+color: white;
+}
+.colortrans {
+background-color: powderblue;
+
+}
+table.calendar {
+border-left: 1px solid #999;
+}
+tr.calendar-row {
+}
+td.calendar-day {
+min-height: 80px;
+font-size: 11px;
+position: relative;
+vertical-align: top;
+}
+* html div.calendar-day {
+height: 80px;
+}
+td.calendar-day:hover {
+background: #eceff5;
+}
+td.calendar-day-np {
+background: #eee;
+min-height: 80px;
+}
+* html div.calendar-day-np {
+height: 80px;
+}
+td.calendar-day-head {
+background: #ccc;
+font-weight: bold;
+text-align: center;
+width: 120px;
+padding: 5px;
+border-bottom: 1px solid #999;
+border-top: 1px solid #999;
+border-right: 1px solid #999;
+}
+div.day-number {
+background: #999;
+padding: 5px;
+color: #fff;
+font-weight: bold;
+float: right;
+margin: -5px -5px 0 0;
+width: 20px;
+text-align: center;
+}
+td.calendar-day, td.calendar-day-np {
+width: 120px;
+padding: 5px;
+border-bottom: 1px solid #999;
+border-right: 1px solid #999;
+}
+input[type=button], input[type=submit], input[type=reset]{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+    input[type=text],input[type=number] {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+select {
+    width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.button {
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: crimson;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  width: 130px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.smallbutton {
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: crimson;
+  text-align: center;
+  font-size: 17px;
+  padding: 6px;
+  width: 120px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.buttoncal {
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: crimson;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  width: 280px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.buttoncal span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.buttoncal span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+.buttoncal:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.buttoncal:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.pulse:hover, .pulse:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+.pulse {
+  --color: #ef6eae;
+  --hover: #ef8f6e;
+  background-color: white;
+}
+
+button {
+  color: var(--color);
+  transition: 0.25s;
+}
+button:hover, button:focus {
+  border-color: var(--hover);
+  color: #ef8f6e;
+}
+
+button {
+  background: none;
+
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+
+code {
+  color: #e4cb58;
+  font: inherit;
+}
+.fontforlogo{
+     font-family: Old English Text MT;
+     color:white;
+	 
+}
+.fontfortitle{
+    font-family: Lucida Calligraphy;
+    }
+/* MODAL */
+    * {
+  box-sizing: border-box;
+}
+
+
+
+.btn {
+  padding: 20px 50px;
+  display: inline-block;
+  background: #EF233C;
+  color: white;
+  text-decoration: none;
+  transition: 0.35s ease-in-out;
+  font-weight: 700;
+}
+.btn:hover {
+  background: #dc1029;
+}
+
+.overlay {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.35s ease-in-out;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.overlay.open {
+  opacity: 1;
+  pointer-events: inherit;
+}
+.overlay .modal {
+  background: white;
+  text-align: center;
+  padding: 40px 80px;
+  box-shadow: 0px 1px 10px rgba(255, 255, 255, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.35s ease-in-out;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.overlay .modal.open {
+  opacity: 1;
+  pointer-events: inherit;
+}
+.overlay .modal.open .content {
+  transform: translate(0, 0px);
+  opacity: 1;
+}
+.overlay .modal .content {
+  transform: translate(0, -10px);
+  opacity: 0;
+  transition: 0.35s ease-in-out;
+}
+.overlay .modal .title {
+  margin-top: 0;
+}
+.image{
+    margin-left: 63%;
+    margin-top: -13%;
+    width:8%;
+    }
+.header {
+  overflow: hidden;
+  background-color:rgba(216, 0, 0,0.6)    ;
+  padding: 0px 10px;
+}
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+.heade a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+.header-right {
+  float: right;
+}
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
