@@ -2,6 +2,7 @@
 session_start();
 
     $_SESSION['venuename'] =  "";
+    $_SESSION['department_id'] =  "";
     $_SESSION['capacity'] =  "";
     $_SESSION['mincapacity'] =  "";
     $_SESSION['venueimagee'] =  "";
@@ -447,12 +448,12 @@ if ($conn->query($sql) === TRUE) {
 }
 
 function updatevenue (){
-        $id           =  e($_POST['venueid']);
-        $department_id  = e($_POST['department_id']);
-        $venuename    =  e($_POST['venuename']);
-		$capacity     =  e($_POST['capacity']);
-		$mincapacity  =  e($_POST['mincapacity']);
-        $image        =  $_FILES['venueimage']['name'];
+        $id            =  e($_POST['venueid']);
+        $department_id =  e($_POST['department_id']);
+        $venuename     =  e($_POST['name']);
+		$capacity      =  e($_POST['capacity']);
+		$mincapacity   =  e($_POST['mincapacity']);
+        $image         =  $_FILES['venueimage']['name'];
 
 $servername = "localhost";
 $username = "root";
@@ -469,15 +470,17 @@ if ($conn->connect_error) {
 } 
 
 
-	$sql = "UPDATE venues SET RoomName = '$venuename',RoomCapacity = '$capacity',RoomMinimumCapacity= '$mincapacity', VenueImage = '$image'   WHERE RoomID = $id"; 
+	$sql = "UPDATE venues SET RoomName = '$venuename',Department_Id = '$department_id',RoomCapacity = '$capacity',RoomMinimumCapacity= '$mincapacity', VenueImage = '$image'   WHERE RoomID = $id"; 
 	
 	if ($conn->query($sql) === TRUE) {
     ?>
     <script>
-         alert("Venue updated successfully")
+         alert("Room updated successfully")
     </script>
 <?php
+    
     $_SESSION['venuename'] =  "";
+    $_SESSION['department_id'] =  "";
     $_SESSION['capacity'] =  "";
     $_SESSION['mincapacity'] =  "";
     $_SESSION['venueimagee'] =  "";
@@ -498,11 +501,12 @@ $dbname = "cbfosystem";
 $id = e($_POST['venueid']);
 
 	$con=mysqli_connect($servername,$username,$password,$dbname);
-	$result = mysqli_query($con,"SELECT RoomId,RoomName,RoomCapacity,RoomMinimumCapacity,VenueImage FROM venues WHERE RoomId = $id"); 
+	$result = mysqli_query($con,"SELECT RoomId,RoomName,Department_Id,RoomCapacity,RoomMinimumCapacity,VenueImage FROM venues WHERE RoomId = $id"); 
 	$row = mysqli_fetch_array($result);
 	
 	$_SESSION['venueid'] =  $id;
     $_SESSION['venuename'] =  $row['RoomName'];
+    $_SESSION['department_id'] =  $row['Department_Id'];
     $_SESSION['capacity'] =  $row['RoomCapacity'];
     $_SESSION['mincapacity'] =  $row['RoomMinimumCapacity'];
     $_SESSION['venueimagee'] =  $row['VenueImage'];

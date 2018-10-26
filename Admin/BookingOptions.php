@@ -416,6 +416,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 <script src="jquery-1.10.2.js"></script>
 <script src="jquery-ui.js"></script>
 
+    <link rel="stylesheet" type="text/css" media="all"
+href="../cssforlogin/vendor/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript"
+src="../cssforlogin/vendor/daterangepicker/jquery.js"></script>
+    <script type="text/javascript"
+src="../cssforlogin/vendor/daterangepicker/moment.min.js"></script>
+    <script type="text/javascript"
+src="../cssforlogin/vendor/daterangepicker/daterangepicker.js"></script>
 
 <!--<script src="lang/datepicker-fi.js"></script>-->
 <script>
@@ -442,7 +450,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
   </script>
 
 </head>
-
+<script>
+$(function() {
+  $('input[name="start_day"]').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    maxYear: parseInt(moment().format('YYYY'),10)
+  });
+});
+</script>
 <body>
 <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
@@ -511,7 +528,10 @@ width="400" align="center"  style=margin-top: "30%">
 <form action="cancel.php" method="post">
 <p></p>
 ID: <input name="id" required="" type="text" autocomplete="off"/><br />
-            <p></p>
+            <p>
+    <input id="from" name="start_day" required="" placeholder="dd/mm/yy" type="text"
+autocomplete="off" />
+    </p>
 
                 <div class="buttons">
 <p><!--<input name="cancel" type="submit" value="Cancel" /> -->
