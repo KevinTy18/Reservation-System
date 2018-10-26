@@ -73,7 +73,7 @@ $row['RoomID'], "val" => $row['VenueImage']);
          subcatSelect.options[0] = new Option("Select a Room", "");
         subcatSelect.options[0].disabled = true;
         for(var i = 0; i < subcats[catid].length; i++){
-          subcatSelect.options[i+1] = new Option(subcats[catid][i].val,subcats[catid][i].id);
+          subcatSelect.options[i+1] = new Option(subcats[catid][i].val,subcats[catid][i].val);
         }
       }
 
@@ -758,7 +758,7 @@ autocomplete="off"/></td>
 <tr>
 <td style="color:black;padding-left:20px">Day of Event:</td>
 <td>
-<input id="from" name="start_day" required="" placeholder="dd/mm/yy" type="text"
+<input  name="start_day" required="" placeholder="dd/mm/yy" type="text"
 autocomplete="off" /></td>
 <!--
 <td>-</td>
@@ -803,10 +803,10 @@ Reservation:</td>
       <td>
           <ul class="categorychecklist">
             <li><select name="Duration" style="width:200px;">
-            <option selected="selected">30 minutes</option>
-            <option>1 hour</option>
-            <option>1 hour and 30 minutes</option>
-            <option>2 hours</option>
+            <option selected="selected" value="1800">30 minutes</option>
+            <option value="3600">1 hour</option>
+            <option value="5400">1 hour and 30 minutes</option>
+            <option value="7200">2 hours</option>
             </select>
             </li>
           </ul>

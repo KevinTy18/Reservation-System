@@ -82,7 +82,7 @@ room_department.Department ";
         subcatSelect.options[0] = new Option("Select a Room", "");
         subcatSelect.options[0].disabled = true;
         for(var i = 0; i < subcats[catid].length; i++){
-          subcatSelect.options[i + 1] = new Option(subcats[catid][i].val,subcats[catid][i].id);
+          subcatSelect.options[i + 1] = new Option(subcats[catid][i].val,subcats[catid][i].val);
         }
       }
 
@@ -878,10 +878,10 @@ autocomplete="off"/></td> -->
       <td>  
           <ul class="categorychecklist">
             <li><select name="Duration" style="width:200px;">
-            <option selected="selected">30 minutes</option>
-            <option>1 hour</option>
-            <option>1 hour and 30 minutes</option>
-            <option>2 hours</option>
+            <option selected="selected" value="1800">30 minutes</option>
+            <option value="3600">1 hour</option>
+            <option value="5400">1 hour and 30 minutes</option>
+            <option value="7200">2 hours</option>
             </select>
             </li>        
           </ul>
