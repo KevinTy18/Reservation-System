@@ -24,7 +24,7 @@ mysqli_select_db($con,'cbfosystem');
 
 //get invoices data
 //$date =str_replace('/', ',', $_POST['invoiceID']);
-$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND item= '". $_SESSION['FilterResult'] ."' ORDER BY start_day ASC");
+$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' ORDER BY start_day ASC");
 $invoice = mysqli_fetch_array($query);
 
 //A4 width : 219mm
@@ -105,7 +105,7 @@ $pdf->SetFont('Arial','',12);
 //Numbers are right-aligned so we give 'R' after new line parameter
 
 //items
-$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND item= '". $_SESSION['FilterResult'] ."' ORDER BY start_day ASC"
+$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' ORDER BY start_day ASC"
 );
 
 $tax = 0; //total tax

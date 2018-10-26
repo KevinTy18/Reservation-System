@@ -1,16 +1,16 @@
 <?php
 include('../functions.php');
-include('config.php');
 
-if (!isAdmin()) {
+
+if (!isStudent()) {
 $_SESSION['msg'] = "You must log in first";
-header('location: ../adminlogin.php');
+header('location: ../userlogin.php');
 }
 
     if (isset($_GET['logout'])) {
 session_destroy();
 unset($_SESSION['user']);
-header("location: ../adminlogin.php");
+header("location: ../userlogin.php");
 
 $Image;
 }
@@ -202,7 +202,7 @@ button.right::before {
     }
 .parallax {
     /* The image used */
-    background-image: url('site-image.jpg');
+    background-image: url('../sanbedapics/site-image.jpg');
 
     /* Full height */
     height: 100%;
@@ -329,17 +329,11 @@ body {
   }
 }
 </style>
-</head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SBCA Booking Calendar</title>
 <link href="jquery-ui.css" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <body>
- <div class="header">
+     <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
 (isset($_SESSION['user'])) : ?>
 <strong><?php echo $_SESSION['user']['username']; ?>!</strong>
@@ -347,15 +341,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 
 <?php endif ?></a>
   <div class="header-right">
-    <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
+    <a href="index.php" class="smallbutton"
+style="margin-right:5px;background-color:white;color:maroon;">
           <span class="fa fa-home" style="font-size:20px"></span> Home
     </a>
-    <a href="index.php?logout='1'" class="smallbutton"
+    <a href="checkbookingsUsers.php?logout='1'" class="smallbutton"
 style="margin-right:10px;color:maroon;">
           <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
     </a>
   </div>
 </div>
+    
 
 <!-- BackToTop Button -->
 <a href="javascript:void(0);" id="scroll" title="Scroll to Top"
@@ -367,32 +363,13 @@ style="display: none;">Top<span></span></a>
 <div class="parallax" style="">
    <div class="divsize" style="margin:0 auto;margin-top:250px">
 
-    <div class="divlogo"><img src="sbcalogo.png" alt="SBCA Logo"
+    <div class="divlogo"><img src="../sanbedapics/sbcalogo.png" alt="SBCA Logo"
 width="20%" height="80%" style="margin-left:20px"></div>
     <div class="divsbcalogo" ><h2 class="fontforlogo">  SBCA Booking
 Calendar</h2></div>
 </div>
 </div>
-<div>
-    <div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
-    
-<h3 class="fontfortitle">Cancel Schedule</h3>
-<form action="cancel.php" method="post">
-<p></p>
-ID: <input name="id" required="" type="text" autocomplete="off"/><br />
-            <p></p>
 
-                <div class="buttons" >
-               <button name="cancel" type="submit"
-class="smallbuttonnav" style="margin:0 auto;background-color:black">Cancel Schedule</button>
-
-            </div>
-</form>
-
-
-    </div>
-</div>
-    
 <div class="divmargin">
     <div class="divcalendar">
         <center>

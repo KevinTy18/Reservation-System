@@ -11,6 +11,8 @@ session_destroy();
 unset($_SESSION['user']);
 header("location: login.php");
 }
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -37,7 +39,10 @@ body {
     background-image: url("../cssforlogin/images/site-image.jpg");
     background-repeat: no-repeat, repeat;
     background-color: #cccccc;
-background-size: 100% 135%;
+    background-size: cover;
+    width: 100%;
+
+  background-position: center top;
 }
 
 
@@ -146,6 +151,19 @@ select {
   font-size: 17px;
   padding: 6px;
   width: 120px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.smallbuttonnav {
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: crimson;
+  text-align: center;
+  font-size: 17px;
+  padding: 6px;
+  width: 200px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -451,7 +469,48 @@ style="margin-right:10px;color:maroon;">
 width="14%">  SBCA Booking System</h2>
 
 </div>
-<br>
+
+    <div class="buttons">
+<form action="checkbookings.php">
+    <!--<input type="submit" value="Check Calendar" /> -->
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa
+fa-calendar" style="font-size:24px;color:red"></i> Check
+Calendar</span></button>
+</form>
+
+<div class="buttons">
+<form action="BookingOptions.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa fa-gears"
+style="font-size:24px;color:red;" ></i> Cancel
+Reservation</span></button>
+</form>
+</div>
+
+<form action="addvenue.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa
+fa-plus-circle" style="font-size:24px;color:red;"></i>
+Add Venues</span></button>
+</form>
+
+<form action="checkrooms.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa
+fa-check-circle" style="font-size:24px;color:red;"></i>
+Venue Descriptions</span></button>
+</form>
+
+<form action="reports.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class=" fa fa-table"
+style="font-size:24px;color:red;"></i>
+Check Reports</span></button>
+</form>
+
+
+    </div>
    
     
 <div class="w3-container">
@@ -460,34 +519,47 @@ width="800" class="w3-table w3-centered" >
 <tr>
 <td valign="top">
 <form action="addvenue.php" method="post" enctype="multipart/form-data">
-<h3 class="fontfortitle">Create Venue</h3>
+<h3 class="fontfortitle">Create Room</h3>
 
 <center>
-<p></p>
-<!-- 
-<p><input checked="checked" name="item" type="radio" value="MPH" />MPH
-| <input name="item" type="radio" value="ST.Maur" />St Maur Hall
-| <input name="item" type="radio" value="AVR" />CAS AVR
-| <input name="item" type="radio" value="Balcruz" />Balcruz |
-  <input name="item" type="radio" value="Bellarmine Hall" />Bellarmine Hall |
-              <input name="item" type="radio" value="Rosendo" />Rosendo </p> -->
+
+
 <table style="width: 70%">
 <tr>
-<td style="color:black;padding-left:20px;text-align:right">Venue Name:</td>
-<td> <input maxlength="50" name="venuename" required="" type="text"
+<td style="color:black;padding-left:20px;text-align:right">Department:</td>
+<td> 
+    <?php
+    $query = $db->query("SELECT Id,Department FROM room_department "); // Run your query
+    
+    echo '<select name="deparment" style="width:200px">'; // Open your drop down box
+
+// Loop through the query results, outputing the options one by one
+while ($row = $query->fetch_assoc()) {
+   echo '<option value="'.$row['Id'].'">'.$row['Department'].'</option>';
+}
+
+echo '</select>';// Close your drop down box
+?>
+</td>
+<!-- <td>&nbsp;</td>
+<td>&nbsp;</td> -->
+</tr>
+<tr>
+<td style="color:black;padding-left:20px;text-align:right">Room Name:</td>
+<td> <input maxlength="50" name="roomname" required="" type="text"
 autocomplete="off"/></td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style="color:black;padding-left:20px;text-align:right">Venue Capacity:</td>
+<td style="color:black;padding-left:20px;text-align:right">Room Capacity:</td>
 <td> <input maxlength="50" name="capacity" required="" type="number"
 autocomplete="off" min="1"/></td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style="color:black;padding-left:20px;text-align:right">Minimun Venue Capacity:</td>
+<td style="color:black;padding-left:20px;text-align:right">Minimun Room Capacity:</td>
 <td>
 <input maxlength="20" name="mincapacity" required="" type="number"
 autocomplete="off" min="1"/></td>
@@ -495,7 +567,7 @@ autocomplete="off" min="1"/></td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td style="color:black;padding-left:20px;text-align:right">Venue Image:</td>
+<td style="color:black;padding-left:20px;text-align:right">Room Image:</td>
 <td>
 <!-- <input maxlength="20" name="venueimage" required="" type="number"
 autocomplete="off" min="0"/> -->
@@ -530,40 +602,6 @@ type="submit" style="margin-right:98px"><span>Create venue</span></button>
 </tr>
 </table>
 
-
-
-    <div class="buttons">
-<form action="checkbookings.php">
-    <!--<input type="submit" value="Check Calendar" /> -->
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> Check
-Calendar</span></button>
-</form>
-
-<div class="buttons">
-<form action="BookingOptions.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Cancel Reservation</span></button>
-</form>
-</div>
-    
-<form action="addvenue.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-plus-circle" style="font-size:24px;color:red;"></i>
-Add Venues</span></button>
-</form>
-    
-<form action="checkrooms.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-check-circle" style="font-size:24px;color:red;"></i>
-Venue Descriptions</span></button>
-</form>
-        
-<form action="reports.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="	fa fa-table" style="font-size:24px;color:red;"></i>
-Check Reports</span></button>
-</form>
-
-    </div>
     </div>
 
 

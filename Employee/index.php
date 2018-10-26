@@ -2,40 +2,47 @@
 include('../functions.php');
 include('config.php');
 
-if (!isAdmin()) {
-$_SESSION['msg'] = "You must log in first";
-header('location: ../adminlogin.php');
+if (!isEmployee()) {
+  $_SESSION['msg'] = "You must log in first";
+  header('location: ../userlogin.php');
 }
 
 if (isset($_GET['logout'])) {
-session_destroy();
-unset($_SESSION['user']);
-header("location: ../adminlogin.php");
+  session_destroy();
+  unset($_SESSION['user']);
+  header("location: ../userlogin.php");
+}
+/*echo '<pre>';
+    die(var_dump($_SESSION['user']['username']));
+    echo '</pre>';*/
+
+$query = "SELECT *, room_department.Department FROM tbl_student INNER JOIN room_department on tbl_student.Department_Id = room_department.Id WHERE username=  '". $_SESSION['user']['username'] . "'  AND
+password= '". $_SESSION['user']['password'] . "' LIMIT 1";
+$results = mysqli_query($db, $query);
+/*echo '<pre>';
+    die(var_dump($_SESSION['user']));
+    echo '</pre>';*/
+if (mysqli_num_rows($results) == 1) { // user found
+// check if user is admin or user
+$logged_in_user = mysqli_fetch_assoc($results);
+$_SESSION['user'] = $logged_in_user;
 }
 
-
 $revenues = getRevenues();
- $query = "SELECT Id,Department FROM room_department INNER JOIN venues
-on venues.Department_Id = room_department.Id GROUP BY
+ $query = "SELECT room_department.Id,room_department.Department FROM room_department   GROUP BY
 room_department.Department";
   $result = $db->query($query);
 
   while($row = $result->fetch_assoc()){
-    $room_deparment_categories[] = array("id" => $row['Id'], "val" =>
-$row['Department']);
+    $room_deparment_categories[] = array("id" => $row['Id'], "val" => $row['Department']);
   }
 
-  $query = "SELECT RoomID, RoomName, Department_Id,
-RoomCapacity,RoomMinimumCapacity,VenueImage, Availability FROM venues
-INNER JOIN room_department ON venues.Department_Id =
-room_department.Id Where Availability = 'Available'";
+  $query = "SELECT RoomID, RoomName, Department_Id, RoomCapacity,RoomMinimumCapacity,VenueImage, Availability FROM venues INNER JOIN room_department ON venues.Department_Id = room_department.Id Where Availability = 'Available'";
   $result = $db->query($query);
 
   while($row = $result->fetch_assoc()){
-    $venues_categories[$row['Department_Id']][] = array("id" =>
-$row['RoomID'], "val" => $row['RoomName']);
-    $venues_images_categories[$row['RoomID']][] = array("id" =>
-$row['RoomID'], "val" => $row['VenueImage']);
+    $venues_categories[$row['Department_Id']][] = array("id" => $row['RoomID'], "val" => $row['RoomName']);
+    $venues_images_categories[$row['RoomID']][] = array("id" => $row['RoomID'], "val" => $row['VenueImage']);
   }
 /*echo '<pre>';
     die(var_dump($venues_images_categories));
@@ -52,19 +59,17 @@ $row['RoomID'], "val" => $row['VenueImage']);
       <?php
         echo "var categories = $jsonCats; \n";
         echo "var subcats = $jsonSubCats; \n";
-        echo "var venues_images_categories =
-$json_venues_images_categories; \n";
+        echo "var venues_images_categories = $json_venues_images_categories; \n";
       ?>
 
-
+        
       function loadCategories(){
         var select = document.getElementById("categoriesSelect");
         select.onchange = updateSubCats;
-        select.options[0] = new Option("Select a Department", "");
+         select.options[0] = new Option("Select a Department", "");
         select.options[0].disabled = true;
         for(var i = 0; i < categories.length; i++){
-          select.options[i+1] = new
-Option(categories[i].val,categories[i].id);
+          select.options[i + 1] = new Option(categories[i].val,categories[i].id);          
         }
       }
       function updateSubCats(){
@@ -72,18 +77,18 @@ Option(categories[i].val,categories[i].id);
         var catid = this.value;
         var subcatSelect = document.getElementById("subcatsSelect");
         subcatSelect.options.length = 0;
-         subcatSelect.options[0] = new Option("Select a Room", "");
+        subcatSelect.options[0] = new Option("Select a Room", "");
         subcatSelect.options[0].disabled = true;
         for(var i = 0; i < subcats[catid].length; i++){
-          subcatSelect.options[i+1] = new Option(subcats[catid][i].val,subcats[catid][i].id);
+          subcatSelect.options[i + 1] = new Option(subcats[catid][i].val,subcats[catid][i].id);
         }
       }
 
       function change_picture(imageValue)
-    {
+    { 
     if (imageValue == ""){
       document.getElementById("sample").innerHTML = "";
-    }
+    } 
     else {
       //document.getElementById("sample").innerHTML = "sdadad";
       if (window.XMLHttpRequest){
@@ -103,7 +108,7 @@ Option(categories[i].val,categories[i].id);
       xmlhttp.send();
     }
   }
-
+       
     </script>
  <script>
 $(function() {
@@ -115,9 +120,8 @@ $(function() {
   });
 });
 </script>
-
+    
 <style>
-
 
 
 .divsize {
@@ -548,33 +552,28 @@ img {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SBCA BOOKING CALENDAR</title>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
+    
 <script src="jquery-1.10.2.js"></script>
-
+    
 <script src="jquery-ui.js"></script>
-
+    
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+    
 <link rel="stylesheet"
 href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 crossorigin="anonymous">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 <link href="jquery-ui.css" rel="stylesheet">
-
+    
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" media="all"
-href="../cssforlogin/vendor/daterangepicker/daterangepicker.css" />
-    <script type="text/javascript"
-src="../cssforlogin/vendor/daterangepicker/jquery.js"></script>
-    <script type="text/javascript"
-src="../cssforlogin/vendor/daterangepicker/moment.min.js"></script>
-    <script type="text/javascript"
-src="../cssforlogin/vendor/daterangepicker/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="../cssforlogin/vendor/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="../cssforlogin/vendor/daterangepicker/jquery.js"></script>
+    <script type="text/javascript" src="../cssforlogin/vendor/daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="../cssforlogin/vendor/daterangepicker/daterangepicker.js"></script>
 </head>
 
 
@@ -613,7 +612,7 @@ $(function() {
 </script>
 
 
-<body onload='loadCategories();'>
+<body onload='loadCategories()'>
 
 <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
@@ -623,8 +622,7 @@ $(function() {
 
 <?php endif ?></a>
   <div class="header-right">
-    <a href="#" class="smallbutton"
-style="margin-right:5px;background-color:white;color:maroon;">
+    <a href="#" class="smallbutton" style="margin-right:5px;background-color:white;color:maroon;">
           <span class="fa fa-home" style="font-size:20px"></span> Home
     </a>
     <a href="index.php?logout='1'" class="smallbutton"
@@ -638,52 +636,22 @@ style="margin-right:10px;background-color:white;color:maroon;">
 </div>
 <div class="divsize" align="center">
 <!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="sbcalogo.png" alt="SBCA Logo"
-width="14%"> <b> SBCA BOOKING SYSTEM </b> </h2>
+<h2 class="fontforlogo"><img src="../sanbedapics/sbcalogo.png" alt="SBCA Logo"
+width="14%"> <b> LRC BOOKING SYSTEM </b> </h2>
 
 </div>
-
-<div class="buttons">
+<div>
+<div class="buttons" style="margin:0 auto;">
 <form action="checkbookings.php">
     <!--<input type="submit" value="Check Calendar" /> -->
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa
+    <button class="smallbuttonnav" type="submit" style="float:left"><span><i class="fa
 fa-calendar" style="font-size:24px;color:red"></i> Check
 Calendar</span></button>
 </form>
 
-<div class="buttons">
-<form action="BookingOptions.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa fa-gears"
-style="font-size:24px;color:red;" ></i> Cancel
-Reservation</span></button>
-</form>
-</div>
-
-<form action="addvenue.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa
-fa-plus-circle" style="font-size:24px;color:red;"></i>
-Add Venues</span></button>
-</form>
-
-<form action="checkrooms.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa
-fa-check-circle" style="font-size:24px;color:red;"></i>
-Venue Descriptions</span></button>
-</form>
-
-<form action="reports.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class=" fa fa-table"
-style="font-size:24px;color:red;"></i>
-Check Reports</span></button>
-</form>
-
 
     </div>
+</div>
 <div class="w3-container">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
 width="100%" height="450px">
@@ -691,45 +659,45 @@ width="100%" height="450px">
 <script>
 
     /*function change_picture(imageValue)
-    {
-document.getElementById("imagedest").innerHTML = '<div><div
-class="landscape"><img src="../sanbedapics/' + imageValue + '"
-style="width:100%"></div></div>';
+    {     
+    document.getElementById("imagedest").innerHTML = '<div><div class="landscape"><img src="../sanbedapics/' + imageValue + '" style="width:100%"></div></div>';
     }*/
 
 </script>
-
+   
 
 <td valign="top">
 <form action="index.php" method="post">
-<center><h3 class="fontfortitle">Make a Reservation</h3>
+<center><h3 class="fontfortitle">Make a Schedule</h3>
 
 
 
 <!-- <?php
 foreach ($revenues as $revenue) {
-$name = $revenue['RoomName'];
-$image = $revenue['VenueImage'];
-    echo "<input type='radio' name='item' value='$name'
-onclick='change_picture(\"" . $image . "\")'>$name</input> ";
+  $name = $revenue['RoomName'];
+  $image = $revenue['VenueImage'];
+  
+    echo "<input type='radio' name='item' value='$name' onclick='change_picture(\"" . $image . "\")'>$name</input> ";
 }
 ?>  -->
 
-</center>
+</center> 
 <table>
 <tr>
-<td style="color:black;padding-left:20px">Choose a room:</td>
+<td style="color:black;padding-left:20px">Choose a Department:</td>
 <td>
-<select id='categoriesSelect' name="RoomDepartment" style="width:170px">
+<select id='categoriesSelect' name="RoomDepartment" style="width: 200px;">
     </select>
-
-    <select id='subcatsSelect' onchange="change_picture(this.value)"
-name="Roomname" style="width:170px">
-    </select>
+</td></tr>
+<tr>
+<td style="color:black;padding-left:20px">Choose a Room:</td>
+<td>
+    <select id='subcatsSelect' style="width: 200px;" onchange="change_picture(this.value)" name="Roomname">
+    </select>  
 </td>
 </tr>
 <tr>
-<td style="color:black;padding-left:20px">Event Name:</td>
+<td style="color:black;padding-left:20px">Purpose:</td>
 <td> <input maxlength="50" name="eventname" required="" type="text"
 autocomplete="off"/></td>
 <!-- <td>&nbsp;</td>
@@ -738,33 +706,31 @@ autocomplete="off"/></td>
 <tr>
 <td style="color:black;padding-left:20px">Organization:</td>
 <td> <input maxlength="50" name="organization" required="" type="text"
-autocomplete="off"/></td>
+autocomplete="off"/ value="<?php echo $_SESSION['user']['Department'] ?>" readonly="readonly"></td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style="color:black;padding-left:20px">Reservee name:</td>
+<td style="color:black;padding-left:20px">Name:</td>
 <td> <input maxlength="50" name="reservee" required="" type="text"
-autocomplete="off"/></td>
+autocomplete="off" value="<?php echo $_SESSION['user']['firstname'] ." ". $_SESSION['user']['middlename']." " . $_SESSION['user']['lastname']  ?>" readonly="readonly"/></td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style="color:black;padding-left:20px">Designation:</td>
- <td><input  checked="checked" name="designation" type="radio"
-value="Student" />Student
-| <input name="designation" type="radio" value="Employee" />Employee
+<!-- <td style="color:black;padding-left:20px">Designation:</td> -->
+ <td><input type="text"  name="designation" value="Student" readonly="readonly" autocomplete="off" style="display: none"/>
  </td>
  </tr>
  <tr>
-<td style="color:black;padding-left:20px">Reservee ID:</td>
+<td style="color:black;padding-left:20px">ID Number:</td>
 <td>
-<input maxlength="15" name="designation_id" required="" type="text"
+<input maxlength="15" name="designation_id" value="<?php echo $_SESSION['user']['School_Id']  ?>" readonly="readonly" required="" type="text"
 autocomplete="off"/></td>
 
 </tr>
 <tr>
-<td style="color:black;padding-left:20px">Day of Event:</td>
+<td style="color:black;padding-left:20px">Schedule Day:</td>
 <td>
 <input id="from" name="start_day" required="" placeholder="dd/mm/yy" type="text"
 autocomplete="off" /></td>
@@ -773,14 +739,65 @@ autocomplete="off" /></td>
 <td><input id="to" name="end_day" required="" type="text"
 autocomplete="off"/></td> -->
 </tr>
-
+<?php if($_SESSION['user']['Department_Id'] == 1) {?>
 <tr>
-<td style="color:black;padding-left:20px">Time of Reservation:</td>
-<td>
+<td style="color:black;padding-left:20px">Schedule Time:</td>   
+<td> 
     <ul class="categorychecklist">
         <li><select name="start_hour">
-            <option selected="selected">06 am</option>
-            <option>07 am</option>
+            <option selected="selected">07 am</option>
+            <option>08 am</option>
+            <option>09 am</option>
+            <option>10 am</option>
+            <option>11 am</option>
+            <option>12 pm</option>
+            <option>1 pm</option>
+            <option>2 pm</option>
+            <option>3 pm</option>
+            </select>
+            <select name="start_minute">
+            <option selected="selected">00</option>
+            <option>30</option>
+            </select>
+        </li>
+      </ul>  
+     </td>
+</tr>
+<?php } ?>
+<?php if($_SESSION['user']['Department_Id'] == 2) {?>
+<tr>
+<td style="color:black;padding-left:20px">Schedule Time:</td>   
+<td> 
+    <ul class="categorychecklist">
+        <li><select name="start_hour">
+            <option selected="selected">07 am</option>
+            <option>08 am</option>
+            <option>09 am</option>
+            <option>10 am</option>
+            <option>11 am</option>
+            <option>12 pm</option>
+            <option>1 pm</option>
+            <option>2 pm</option>
+            <option>3 pm</option>
+            <option>4 pm</option>
+            <option>5 pm</option>
+            </select>
+            <select name="start_minute">
+            <option selected="selected">00</option>
+            <option>30</option>
+            </select>
+        </li>
+      </ul>  
+     </td>
+</tr>
+<?php } ?>
+<?php if($_SESSION['user']['Department_Id'] == 3) {?>
+<tr>
+<td style="color:black;padding-left:20px">Schedule Time:</td>   
+<td> 
+    <ul class="categorychecklist">
+        <li><select name="start_hour">
+            <option selected="selected">07 am</option>
             <option>08 am</option>
             <option>09 am</option>
             <option>10 am</option>
@@ -792,23 +809,71 @@ autocomplete="off"/></td> -->
             <option>4 pm</option>
             <option>5 pm</option>
             <option>6 pm</option>
-            <option>7 pm</option>
-            <option>8 pm</option>
-            <option>9 pm</option>
-            <option>10 pm</option>
             </select>
             <select name="start_minute">
             <option selected="selected">00</option>
             <option>30</option>
             </select>
         </li>
-      </ul>
+      </ul>  
      </td>
 </tr>
+<?php } ?>
+<?php if($_SESSION['user']['Department_Id'] == 4) {?>
+<tr>
+<td style="color:black;padding-left:20px">Schedule Time:</td>   
+<td> 
+    <ul class="categorychecklist">
+        <li><select name="start_hour">
+            <option selected="selected">07 am</option>
+            <option>08 am</option>
+            <option>09 am</option>
+            <option>10 am</option>
+            <option>11 am</option>
+            <option>12 pm</option>
+            <option>1 pm</option>
+            <option>2 pm</option>
+            <option>3 pm</option>
+            <option>4 pm</option>
+            <option>5 pm</option>
+            <option>6 pm</option>
+            </select>
+            <select name="start_minute">
+            <option selected="selected">00</option>
+            <option>30</option>
+            </select>
+        </li>
+      </ul>  
+     </td>
+</tr>
+<?php } ?>
+<?php if($_SESSION['user']['Department_Id'] == 5 || $_SESSION['user']['Department_Id'] == 6 ) {?>
+<tr>
+<td style="color:black;padding-left:20px">Schedule Time:</td>   
+<td> 
+    <ul class="categorychecklist">
+        <li><select name="start_hour">
+            <option selected="selected">12 pm</option>
+            <option>1 pm</option>
+            <option>2 pm</option>
+            <option>3 pm</option>
+            <option>4 pm</option>
+            <option>5 pm</option>
+            <option>6 pm</option>
+            <option>7 pm</option>
+            </select>
+            <select name="start_minute">
+            <option selected="selected">00</option>
+            <option>30</option>
+            </select>
+        </li>
+      </ul>  
+     </td>
+</tr>
+<?php } ?>
     <tr>
-      <td style="color:black;padding-left:20px">Duration of the
-Reservation:</td>
-      <td>
+      <td style="color:black;padding-left:20px">Duration:</td>
+      <td>  
           <ul class="categorychecklist">
             <li><select name="Duration" style="width:200px;">
             <option selected="selected">30 minutes</option>
@@ -816,10 +881,10 @@ Reservation:</td>
             <option>1 hour and 30 minutes</option>
             <option>2 hours</option>
             </select>
-            </li>
+            </li>        
           </ul>
- </td>
- </tr>
+ </td> 
+ </tr> 
 
 
 <tr>
@@ -840,13 +905,10 @@ autocomplete="off" min="0"/></td>
 <td style="color:black;padding-left:20px">Borrow Materials:</td>
 <td>
 <ul class="categorychecklist">
-    <li><input type="checkbox" name="material_list[]" value="Remote
-Control-Smart TV">Remote Control -Smart TV<br></li>
-    <li><input type="checkbox" name="material_list[]"
-value="Whiteboard Marker">Whiteboard Marker<br></li>
-    <li><input type="checkbox" name="material_list[]"
-value="Eraser">Eraser<br></li>
-    <li>-Other (Please Specify)<input type="text" name="material_list[]" ></li>
+    <li><input type="checkbox" name="material_list[]" value="Remote Control-Smart TV">Remote Control -Smart TV<br></li>
+    <li><input type="checkbox" name="material_list[]" value="Whiteboard Marker">Whiteboard Marker<br></li>
+    <li><input type="checkbox" name="material_list[]" value="Eraser">Eraser<br></li> 
+    <li>-Other (Please Specify)<input type="text" name="material_list[]" ></li> 
 </ul>
 </td>
 </tr>
@@ -857,11 +919,11 @@ value="Eraser">Eraser<br></li>
                 <button class="smallbutton" name="book"
 type="submit"><span>Reserve</span></button>
             </div>
-</td>
+</td>    
 </tr>
 </table>
 
-
+            
 <!--<input name="book" type="submit" value="Book" /> -->
 </form>
 
@@ -878,49 +940,49 @@ type="submit"><span>Reserve</span></button>
 
 
 <?php
+        
+      
+        
 $servername = "localhost";
 $username = "root";
 $password = "";
 $db = "cbfosystem";
 
 
-$con=mysqli_connect($servername,$username,$password,$db);
-$result = mysqli_query($con,"SELECT
-RoomName,RoomCapacity,RoomMinimumCapacity FROM venues");
+        $con=mysqli_connect($servername,$username,$password,$db);
+        $result = mysqli_query($con,"SELECT RoomName,RoomCapacity,RoomMinimumCapacity FROM venues ORDER BY RoomName ASC"); 
+        
    ?>
-<div class="tablesize">
+<div class="tablesize">   
     <table style='border: solid 1px black;'>
         <tr style=color:black, text-align:right;>
 
         <th>Venue Name</th>
         <th>Venue Capacity</th>
-
-
+        
+       
         </tr>
  <?php
 while($row = mysqli_fetch_array($result)) {
 
 
-
-    echo "<td style='width:150px;border:1px solid black;'>" .
-$row['RoomName'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" .
-$row['RoomMinimumCapacity'] . " - ". $row['RoomCapacity'] . "
-persons</td>";
-
+    
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomName'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomMinimumCapacity'] . " - ". $row['RoomCapacity'] . " persons</td>";
+    
      "</td>";
-
+    
  echo "</tr>";
 }
 ?>
     </table>
-</div>
+</div> 
 </td>
 
 </tr>
 </table>
     </div>
 
-
+   
 </body>
 </html>

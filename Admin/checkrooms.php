@@ -361,6 +361,10 @@ code {
 .header-right {
   float: right;
 }
+    .tablesize{
+    max-height: 400px;
+    overflow-y: scroll;
+}
 </style>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -493,9 +497,10 @@ $db = "cbfosystem";
 				$con=mysqli_connect($servername,$username,$password,$db);
 				$result = mysqli_query($con,"SELECT RoomID,RoomName,RoomCapacity,RoomMinimumCapacity,VenueImage,Availability FROM venues"); 
 				
-   
-echo "<table style='border: solid 1px black;' >";
- echo "<tr style=color:black, text-align:right;>
+   ?>
+<div class="tablesize">
+ <table style='border: solid 1px black;' >"
+  <tr style=color:black, text-align:right;>
  <th>Venue ID</th>
  <th>Venue Name</th>
  <th>Venue Capacity</th>
@@ -505,8 +510,8 @@ echo "<table style='border: solid 1px black;' >";
  <th>Edit</th>
  <th>Deactivate</th>
  <th>Activate</th>
- </tr>";
- 
+ </tr>
+ <?php
 while($row = mysqli_fetch_array($result)) {
 $id = $row['RoomID'];
 
@@ -533,8 +538,9 @@ echo '<td><form method="post" action="" enctype="multipart/form-data">
 <input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
  echo "</tr>";
 }
-echo "</table>";
 ?>
+</table>
+    </div>
 </div>
 
 

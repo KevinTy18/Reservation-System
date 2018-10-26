@@ -480,9 +480,9 @@ width="400" align="center"  >
 		$db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
 
 					//show invoices list as options
-					$query = mysqli_query($db,"select * from bookingcalendar GROUP by item");
+					$query = mysqli_query($db,"select * from bookingcalendar GROUP by room");
 					while($invoice = mysqli_fetch_array($query)){ ?>
-						<option style="color:black" value= <?php echo $invoice['item'];?>> <?php echo $invoice['item']; ?> </option>";					
+						<option style="color:black" value= <?php echo $invoice['room'];?>> <?php echo $invoice['room']; ?> </option>";					
 					<?php		
 					}
 				?>

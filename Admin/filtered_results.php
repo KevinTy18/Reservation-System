@@ -585,7 +585,7 @@ $db = "cbfosystem";
 
 				$con=mysqli_connect($servername,$username,$password,$db);
 				$_SESSION['FilterResult'] =  $_POST['invoiceID'];
-			$result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND item= '". $_POST['invoiceID'] ."' ORDER BY start_day ASC"); 
+			$result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_POST['invoiceID'] ."' ORDER BY start_day ASC"); 
 			
 	$_SESSION['FilterResult'] =  $_POST['invoiceID']; 
  
@@ -610,7 +610,7 @@ while($row = mysqli_fetch_array($result)) {
     echo "<td style='width:150px;border:1px solid black;'>" . $row['eventname'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['organization'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['phone'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['item'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['room'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . date('d/m/Y',$row['start_day']) . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . date('d/m/Y',$row['end_day']) . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) ." " . $row["TimeBeginDenum"]."</td>";

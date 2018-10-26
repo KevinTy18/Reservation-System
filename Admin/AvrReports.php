@@ -158,7 +158,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	  $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
 
 					//show invoices list as options
-					$query = mysqli_query($db,"select *, count(item) as Number from bookingcalendar WHERE item = 'AVR' GROUP by reservee_type ");
+					$query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE room = 'AVR' GROUP by reservee_type ");
 				
 				
 				?>
