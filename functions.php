@@ -306,21 +306,38 @@ array_push($errors, "Please Enter  a valid Phone Number");
 <?php 
 
 // prevent double booking
-$sql = "SELECT * FROM $tablename WHERE room='$item' AND
-(start_day>=$start_day OR end_day>=$start_day) AND canceled=0";
-$sql1 = "SELECT * FROM $tablevenue WHERE RoomID='$item'";
+$sql = "SELECT * FROM `bookingcalendar` WHERE room ='$item' AND
+(start_day>=$start_day OR end_day >=$start_day) AND canceled=0";
+$sql1 = "SELECT * FROM `venues` where RoomName = '$item'";
+$sql2 = "SELECT * FROM unavailable_dates WHERE date='$start_day'";
 $result = mysqli_query($conn, $sql);
 $result1 = mysqli_query($conn, $sql1);
+/*echo '<pre>';
+    die(var_dump($item));
+    echo '</pre>';*/
+$result2 = mysqli_query($conn, $sql2);
 if(count($errors) == 0){
-if (mysqli_num_rows($result) > 0) {
-// handle every row
-while($row = mysqli_fetch_assoc($result)) {
-// check overlapping at 10 minutes interval
-for ($i = $start_epoch; $i <= $end_epoch; $i=$i+600) {
-if ($i>($row["start_day"]+$row["start_time"]) &&
-$i<($row["end_day"]+$row["end_time"])) {
+    if (mysqli_num_rows($result2) > 0) {
+        ?>
+        <script>
+            alert("Unfortunately The date is Unavailable.")
+        </script>
+        <?php
+        goto end;
+    }
+/*echo '<pre>';
+    die(var_dump($result));
+    echo '</pre>';*/
+   if (mysqli_num_rows($result) > 0) {
+    
+    while($row = mysqli_fetch_assoc($result)) {
+    
+    for ($i = $start_epoch; $i <= $end_epoch; $i=$i+600) {
+       
+    if ($i>($row["start_day"]+$row["start_time"]) &&
+    $i<($row["end_day"]+$row["end_time"])) {
+        
     ?>
-
 <script>
 alert("Unfortunately has already been booked for the time requested.")
 </script>
@@ -332,30 +349,32 @@ goto end;
 }
 /*$sql1 = "SELECT * FROM $tablevenue WHERE RoomID='$item'";*/
 /**/
-$Roomsql = "SELECT * FROM $tablevenue WHERE RoomID = $item";
+/*$Roomsql = "SELECT * FROM $tablevenue WHERE room = '$item'";
 $Roomresult = mysqli_query($conn, $Roomsql);
 $RoomName = "";
 if (mysqli_num_rows($Roomresult) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($Roomresult)) {
-       $RoomName = $row['RoomName'];
+       $RoomName = $row['room'];
      
      
     }
 } else {
   
     echo "0 results";
-}
+}*/
+
 $sql = "INSERT INTO $tablename (eventname, organization,reservee_name,reservee_type,designation_id, phone, Room_Department,room,Materials,date_reserved,
 start_day, start_time, end_day, TimeBeginDenum ,
 TimeEndDenum,end_time, canceled, Capacity)
-VALUES ('$eventname','$organization','$reservee','$designation',$Id,'$phone','$RoomDepartment', '$RoomName','$Materials',$date_reserved, $start_day,
+VALUES ('$eventname','$organization','$reservee','$designation',$Id,'$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
 $start_time, $end_day, '$starttime[1]' ,'$endtime[1]',$end_time,0,'$capacity')";
 
 /*
 echo '<pre>';
     die(var_dump($item));
     echo '</pre>';*/  
+    
 if (mysqli_num_rows($result1) > 0 ){
   
 $row1 = mysqli_fetch_assoc($result1);
