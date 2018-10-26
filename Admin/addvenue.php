@@ -535,7 +535,7 @@ width="800" class="w3-table w3-centered" >
 
 // Loop through the query results, outputing the options one by one
 while ($row = $query->fetch_assoc()) {
-   echo '<option value="'.$row['Id'].'">'.$row['Department'].'</option>';
+   echo '<option value='.$row['Id'].'>'.$row['Department'].'</option>';
 }
 
 echo '</select>';// Close your drop down box

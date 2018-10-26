@@ -435,7 +435,10 @@ $password = "";
 $dbname = "cbfosystem";
 
 $venuename      = e($_POST['roomname']);
-$department_id  = e($_POST['department_id']);
+$department_id  = e($_POST['deparment']);
+/*echo '<pre>';
+    die(var_dump($_POST['deparment']));
+    echo '</pre>';*/
 $capacity       = e($_POST['capacity']);
 $mincapacity    = e($_POST['mincapacity']);
 $image          = $_FILES['image']['name'];
@@ -452,7 +455,7 @@ $image          = $_FILES['image']['name'];
 
         $sql = "INSERT INTO venues
 (RoomName,Department_Id,RoomCapacity,RoomMinimumCapacity,VenueImage) VALUES
-('$venuename','$capacity', '$mincapacity','$image')";
+('$venuename',$department_id,'$capacity', '$mincapacity','$image')";
     
 if ($conn->query($sql) === TRUE) {
     ?>
