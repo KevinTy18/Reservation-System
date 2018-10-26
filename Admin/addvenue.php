@@ -518,7 +518,7 @@ Check Reports</span></button>
 width="800" class="w3-table w3-centered" >
 <tr>
 <td valign="top">
-<form action="addvenue.php" method="post" enctype="multipart/form-data">
+<form action="addvenue.php" method="POST" enctype="multipart/form-data">
 <h3 class="fontfortitle">Create Room</h3>
 
 <center>

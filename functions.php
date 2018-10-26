@@ -44,14 +44,14 @@ session_start();
     if (isset($_POST['deletevenue'])) {
 		deletevenue();
 	}
-if (isset($_POST['restorevenue'])) {
+    if (isset($_POST['restorevenue'])) {
 		restorevenue();
 	}
-if (isset($_GET['logout'])) {
-session_destroy();
-unset($_SESSION['user']);
-header("location: ../login.php");
-}
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        unset($_SESSION['user']);
+        header("location: ../login.php");
+    }
 
 
 // LOGIN USER
@@ -241,9 +241,10 @@ function book(){
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
 // Check connection
-if (!$conn) {
-die("Connection failed: " . mysqli_connect_error());
-}
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
 $start_day = intval(strtotime(htmlspecialchars($_POST["start_day"])));
 $date_reserved = intval(strtotime(htmlspecialchars(date("d/m/Y"))));
 $start_time = (60*60*intval(htmlspecialchars($_POST["start_hour"]))) +
