@@ -509,11 +509,10 @@ Calendar</span></button>
 </form>
 
 <div class="buttons">
-<form action="BookingOptions.php">
+<form action="UnavailableDates.php">
     <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa fa-gears"
-style="font-size:24px;color:red;" ></i> Cancel
-Reservation</span></button>
+style="float:left;width:250px"><span><i class="fa fa-gears"
+style="font-size:24px;color:red;" ></i>Manage Unavailable Dates</span></button>
 </form>
 </div>
 

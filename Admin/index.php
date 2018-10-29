@@ -645,9 +645,9 @@ Calendar</span></button>
 </form>
 
 <div class="buttons">
-<form action="BookingOptions.php">
+<form action="UnavailableDates.php">
     <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa fa-gears"
+style="float:left;width:250px"><span><i class="fa fa-gears"
 style="font-size:24px;color:red;" ></i>Manage Unavailable Dates</span></button>
 </form>
 </div>
@@ -661,7 +661,7 @@ Add Venues</span></button>
 
 <form action="checkrooms.php">
     <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa
+style="float:left;"><span><i class="fa
 fa-check-circle" style="font-size:24px;color:red;"></i>
 Venue Descriptions</span></button>
 </form>
@@ -896,7 +896,7 @@ $db = "cbfosystem";
 
 $con=mysqli_connect($servername,$username,$password,$db);
 $result = mysqli_query($con,"SELECT
-RoomName,RoomCapacity,RoomMinimumCapacity FROM venues");
+RoomName,RoomCapacity,RoomMinimumCapacity FROM venues ORDER BY RoomName ASC");
    ?>
 <div class="tablesize">
     <table style='border: solid 1px black;'>

@@ -37,7 +37,10 @@ body {
     background-image: url("../cssforlogin/images/site-image.jpg");
     background-repeat: no-repeat, repeat;
     background-color: #cccccc;
-background-size: 100% 135%;
+    background-size: cover;
+    width: 100%;
+
+  background-position: center top;
 }
 
 
@@ -149,6 +152,19 @@ select {
   cursor: pointer;
   margin: 5px;
 }
+.smallbutton1 {
+    border-radius: 4px;
+    background-color: #f13434;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    padding: 6px;
+    width: 120px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
 .buttoncal {
   border-radius: 4px;
   background-color: white;
@@ -490,7 +506,7 @@ width="400" align="center"  style=margin-top: "30%">
 
 <td valign="top">
 <center>
-<h3 class="fontfortitle">Cancel Reservation</h3>
+<h3 class="fontfortitle">Cancel Date</h3>
 <form action="AddUnavailableDates.php" method="post">
 <p></p>
 Day: <input id="from" name="unavailable_day" required="" placeholder="dd/mm/yy" type="text"
@@ -501,7 +517,7 @@ autocomplete="off"/><br />
                 <div class="buttons">
 <p><!--<input name="cancel" type="submit" value="Cancel" /> -->
                <button name="cancel" type="submit"
-class="pulse">Cancel Reservation</button>
+class="smallbutton1">Cancel Date</button>
 
             </p>
             </div>
@@ -527,7 +543,7 @@ Calendar</span></button>
 
 <div class="buttons">
 <form action="UnavailableDates.php">
-    <button class="buttoncal" type="submit" style="float:left;width:275px"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Cancel Reservation</span></button>
+    <button class="buttoncal" type="submit" style="float:left;width:340px"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Manage Unavailable Dates</span></button>
 </form>
 </div>
     
