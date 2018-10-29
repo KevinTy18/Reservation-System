@@ -11,6 +11,8 @@ session_destroy();
 unset($_SESSION['user']);
 header("location: login.php");
 }
+
+ $query = $db->query("SELECT Id,Department FROM room_department ");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -37,8 +39,12 @@ body {
     background-image: url("../cssforlogin/images/site-image.jpg");
     background-repeat: no-repeat, repeat;
     background-color: #cccccc;
-background-size: 100% 135%;
+    background-size: cover;
+    width: 100%;
+
+  background-position: center top;
 }
+
 
 
 #divcon {
@@ -131,7 +137,7 @@ select {
   text-align: center;
   font-size: 20px;
   padding: 20px;
-  width: 130px;
+  width: 190px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -145,6 +151,19 @@ select {
   font-size: 17px;
   padding: 6px;
   width: 120px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.smallbuttonnav {
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: crimson;
+  text-align: center;
+  font-size: 17px;
+  padding: 6px;
+  width: 200px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -362,8 +381,10 @@ code {
   float: right;
 }
     .tablesize{
-    max-height: 400px;
+    max-height: 450px;
     overflow-y: scroll;
+    overflow-x: hidden;
+    
 }
 </style>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -476,11 +497,50 @@ width="14%">  SBCA Booking System</h2>
 
 </div>
     
-    
-<br>
+<div class="buttons">
+<form action="checkbookings.php">
+    <!--<input type="submit" value="Check Calendar" /> -->
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa
+fa-calendar" style="font-size:24px;color:red"></i> Check
+Calendar</span></button>
+</form>
+
+<div class="buttons">
+<form action="BookingOptions.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa fa-gears"
+style="font-size:24px;color:red;" ></i> Cancel
+Reservation</span></button>
+</form>
+</div>
+
+<form action="addvenue.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa
+fa-plus-circle" style="font-size:24px;color:red;"></i>
+Add Venues</span></button>
+</form>
+
+<form action="checkrooms.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa
+fa-check-circle" style="font-size:24px;color:red;"></i>
+Venue Descriptions</span></button>
+</form>
+
+<form action="reports.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class=" fa fa-table"
+style="font-size:24px;color:red;"></i>
+Check Reports</span></button>
+</form>
+
+
+    </div>
 <div class="w3-container">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
-width="800" class="w3-table w3-centered" >
+width="1000px" class="w3-table w3-centered" >
 <tr>
 <td valign="top">
 <div class="ex3"> 
@@ -495,17 +555,24 @@ $db = "cbfosystem";
 
 
 				$con=mysqli_connect($servername,$username,$password,$db);
-				$result = mysqli_query($con,"SELECT RoomID,RoomName,RoomCapacity,RoomMinimumCapacity,VenueImage,Availability FROM venues"); 
+				$result = mysqli_query($con,"
+                SELECT venues.RoomID,venues.RoomName,venues.Department_Id,venues.RoomCapacity,venues.RoomMinimumCapacity,venues.VenueImage,venues.Availability,room_department.Department 
+FROM venues
+INNER JOIN room_department ON venues.Department_Id = room_department.Id;
+                
+                ");
+      
 				
    ?>
 <div class="tablesize">
- <table style='border: solid 1px black;' >"
+ <table style='border: solid 1px black;' >
   <tr style=color:black, text-align:right;>
- <th>Venue ID</th>
- <th>Venue Name</th>
- <th>Venue Capacity</th>
+ <th>Room ID</th>
+ <th>Department</th>
+ <th>Room Name</th>
+ <th>Room Capacity</th>
  <th>Minimum Capacity</th>
- <th>Venue Image</th>
+ <th>Room Image</th>
  <th>Availability</th>
  <th>Edit</th>
  <th>Deactivate</th>
@@ -517,6 +584,7 @@ $id = $row['RoomID'];
 
     echo "<tr style=color:black;>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomID'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['Department'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomName'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomCapacity'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomMinimumCapacity'] . "</td>";
@@ -551,36 +619,46 @@ echo '<td><form method="post" action="" enctype="multipart/form-data">
 
 <td valign="top">
 <form action="checkrooms.php" method="post" enctype="multipart/form-data">
-<h3 class="fontfortitle">Edit Venue</h3>
-<div class="tooltip"><p>Hover over me</p>
-  <span class="tooltiptext">Tooltip text</span>
-</div>
+<h3 class="fontfortitle">Edit Rooms</h3>
 
-<p></p>
-<!-- 
-<p><input checked="checked" name="item" type="radio" value="MPH" />MPH
-| <input name="item" type="radio" value="ST.Maur" />St Maur Hall
-| <input name="item" type="radio" value="AVR" />CAS AVR
-| <input name="item" type="radio" value="Balcruz" />Balcruz |
-  <input name="item" type="radio" value="Bellarmine Hall" />Bellarmine Hall |
-              <input name="item" type="radio" value="Rosendo" />Rosendo </p> -->
-<table style="width: 70%">
+
+
+<table style="width: 10%">
 <tr>
-<td style=color:black>Venue Name:</td>
+<td style="color:black;padding-left:20px;text-align:right">Department:</td>
+<td> 
+    <?php
+    // Run your query
+    
+    echo '<select name="deparment" style="width:200px">'; // Open your drop down box
+
+// Loop through the query results, outputing the options one by one
+while ($row = $query->fetch_assoc()) {
+   echo '<option value='.$row['Id'].'>'.$row['Department'].'</option>';
+}
+
+echo '</select>';// Close your drop down box
+?>
+</td>
+<!-- <td>&nbsp;</td>
+<td>&nbsp;</td> -->
+</tr>
+<tr>
+<td style=color:black>Room Name:</td>
 <td> <input maxlength="50" name="venuename" required="" type="text"
 autocomplete="off" value="<?php echo $_SESSION['venuename']?>" /></td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style=color:black>Venue Capacity:</td>
+<td style=color:black>Room Capacity:</td>
 <td> <input maxlength="50" name="capacity" required="" type="number"
 autocomplete="off" min="1" value="<?php echo $_SESSION['capacity']?>" /></td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style=color:black>Minimun Venue Capacity:</td>
+<td style=color:black>Minimun Room Capacity:</td>
 <td>
 <input maxlength="20" name="mincapacity" required="" type="number"
 autocomplete="off" min="1" value="<?php echo $_SESSION['mincapacity']?>" /></td>
@@ -588,7 +666,7 @@ autocomplete="off" min="1" value="<?php echo $_SESSION['mincapacity']?>" /></td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td style=color:black>Venue Image:</td>
+<td style=color:black>Room Image:</td>
 <td>
     
     <input type="hidden" value="<?php echo $_SESSION['venueimagee']?>">
@@ -605,8 +683,10 @@ autocomplete="off" min="1" value="<?php echo $_SESSION['mincapacity']?>" /></td>
 <p>
             <div class="buttons">
                 <button class="button" name="editvenue"
-                        type="submit"><span><i class="fa fa-pencil-square-o"></i>Edit venue</span></button>
+                        type="submit"><i class="fa fa-pencil-square-o"></i>Edit venue</button>
             </div>
+    
+    
 <!--<input name="book" type="submit" value="Book" /> -->
 </form>
 </td>
@@ -614,40 +694,6 @@ autocomplete="off" min="1" value="<?php echo $_SESSION['mincapacity']?>" /></td>
 </table>
 
 
-
-
-    <div class="buttons">
-<form action="checkbookings.php">
-    <!--<input type="submit" value="Check Calendar" /> -->
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> Check
-Calendar</span></button>
-</form>
-
-<div class="buttons">
-<form action="BookingOptions.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Cancel Reservation</span></button>
-</form>
-</div>
-    
-<form action="addvenue.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-plus-circle" style="font-size:24px;color:red;"></i>
-Add Venues</span></button>
-</form>
-    
-<form action="checkrooms.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-check-circle" style="font-size:24px;color:red;"></i>
-Venue Descriptions</span></button>
-</form>
-        
-<form action="reports.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="	fa fa-table" style="font-size:24px;color:red;"></i>
-Check Reports</span></button>
-</form>
-
-    </div>
     </div>
 
 
