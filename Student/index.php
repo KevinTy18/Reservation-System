@@ -14,7 +14,7 @@ if (isset($_GET['logout'])) {
 }
 
 
-$query = "SELECT * FROM tbl_student INNER JOIN room_department on tbl_student.Department_Id = room_department.Id WHERE username=  '". $_SESSION['user']['username'] . "'  AND
+$query = "SELECT * FROM tbl_student INNER JOIN room_department on tbl_student.Department_Id = room_department.Id INNER JOIN school_level on tbl_student.School_Level_Id = school_level.Id WHERE username=  '". $_SESSION['user']['username'] . "'  AND
 password= '". $_SESSION['user']['password'] . "' LIMIT 1";
 $results = mysqli_query($db, $query);
 
@@ -89,10 +89,10 @@ room_department.Department ";
       function change_picture(imageValue)
     { 
     if (imageValue == ""){
-      document.getElementById("sample").innerHTML = "";
+      /* document.getElementById("sample").innerHTML = "first error";*/
     } 
     else {
-      //document.getElementById("sample").innerHTML = "sdadad";
+      /*document.getElementById("sample").innerHTML = "second error";*/
       if (window.XMLHttpRequest){
         xmlhttp = new XMLHttpRequest();
       }
@@ -100,11 +100,14 @@ room_department.Department ";
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
       }
       xmlhttp.onreadystatechange = function() {
-
+         //  document.getElementById("sample").innerHTML = "third error";
         if (this.readyState == 4 && this.status == 200){
           var test = document.getElementById("imagedest");
           test.src = "../sanbedapics/"+JSON.parse(this.responseText);
         }
+        /*else {
+           document.getElementById("sample").innerHTML = this.responseText;
+        }*/
       };
       xmlhttp.open("GET","ChangeImage.php?VenueImage=" + imageValue,true);
       xmlhttp.send();
@@ -659,29 +662,12 @@ Calendar</span></button>
 width="100%" height="450px">
 <tr>
 <script>
-
-    /*function change_picture(imageValue)
-    { 	  
-		document.getElementById("imagedest").innerHTML = '<div><div class="landscape"><img src="../sanbedapics/' + imageValue + '" style="width:100%"></div></div>';
-    }*/
-
 </script>
    
 
 <td valign="top">
 <form action="index.php" method="post">
 <center><h3 class="fontfortitle">Make a Schedule</h3>
-
-
-
-<!-- <?php
-foreach ($revenues as $revenue) {
-	$name = $revenue['RoomName'];
-	$image = $revenue['VenueImage'];
-	
-    echo "<input type='radio' name='item' value='$name' onclick='change_picture(\"" . $image . "\")'>$name</input> ";
-}
-?>  -->
 
 </center> 
 <table>
@@ -730,6 +716,13 @@ autocomplete="off" value="<?php echo $_SESSION['user']['firstname'] ." ". $_SESS
 <input maxlength="15" name="designation_id" value="<?php echo $_SESSION['user']['School_Id']  ?>" readonly="readonly" required="" type="text"
 autocomplete="off"/></td>
 
+</tr>
+<tr>
+<td style="color:black;padding-left:20px">School Level / Course:</td>
+<td> <input maxlength="50" name="reservee" required="" type="text"
+autocomplete="off" value="<?php echo $_SESSION['user']['Name_or_Course'] ?>" readonly="readonly"/></td>
+<!-- <td>&nbsp;</td>
+<td>&nbsp;</td> -->
 </tr>
 <tr>
 <td style="color:black;padding-left:20px">Schedule Day:</td>
@@ -933,8 +926,8 @@ type="submit"><span>Reserve</span></button>
 
 
 <div class='landscape'>
-<img id="imagedest" style="width:100%;max-width: 100%;
-    height: auto;">
+<img id="imagedest" style="width:100%;max-width: 100%; height: auto;">
+  
 </div>
 
 </td>

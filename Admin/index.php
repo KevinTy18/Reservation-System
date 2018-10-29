@@ -735,6 +735,25 @@ autocomplete="off"/></td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
+<td style="color:black;padding-left:20px;text-align:right">School Level / Course:</td>
+<td> 
+    <?php
+    $query = $db->query("SELECT Id,Name_or_Course FROM school_level"); // Run your query
+    
+    echo '<select name="School_Level" style="width:200px">'; // Open your drop down box
+
+// Loop through the query results, outputing the options one by one
+while ($row = $query->fetch_assoc()) {
+   echo '<option value='.$row['Name_or_Course'].'>'.$row['Name_or_Course'].'</option>';
+}
+
+echo '</select>';// Close your drop down box
+?>
+</td>
+<!-- <td>&nbsp;</td>
+<td>&nbsp;</td> -->
+</tr>
+<tr>
 <td style="color:black;padding-left:20px">Reservee name:</td>
 <td> <input maxlength="50" name="reservee" required="" type="text"
 autocomplete="off"/></td>
