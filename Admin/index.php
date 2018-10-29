@@ -648,8 +648,7 @@ Calendar</span></button>
 <form action="BookingOptions.php">
     <button class="smallbuttonnav" type="submit"
 style="float:left"><span><i class="fa fa-gears"
-style="font-size:24px;color:red;" ></i> Cancel
-Reservation</span></button>
+style="font-size:24px;color:red;" ></i>Manage Unavailable Dates</span></button>
 </form>
 </div>
 
@@ -694,7 +693,7 @@ style="width:100%"></div></div>';
 
 <td valign="top">
 <form action="index.php" method="post">
-<center><h3 class="fontfortitle">Make a Reservation</h3>
+<center><h3 class="fontfortitle">Make a Schedule</h3>
 
 
 
@@ -735,7 +734,7 @@ autocomplete="off"/></td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style="color:black;padding-left:20px;text-align:right">School Level / Course:</td>
+<td style="color:black;padding-left:20px;">School Level / Course:</td>
 <td> 
     <?php
     $query = $db->query("SELECT Id,Name_or_Course FROM school_level"); // Run your query

@@ -36,9 +36,11 @@ body {
     background-image: url("../cssforlogin/images/site-image.jpg");
     background-repeat: no-repeat, repeat;
     background-color: #cccccc;
-background-size: 100% 135%;
-}
+    background-size: cover;
+    width: 100%;
 
+  background-position: center top;
+}
 
 #divcon {
 background-color: rgba(255,255,255,0.8);
@@ -148,6 +150,19 @@ select {
   cursor: pointer;
   margin: 5px;
 }
+.smallbutton {
+    border-radius: 4px;
+    background-color: #f13434;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    padding: 6px;
+    width: 120px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
 .buttoncal {
   border-radius: 4px;
   background-color: white;
@@ -449,11 +464,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 
 <?php endif ?></a>
   <div class="header-right">
-    <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
+    <a href="index.php" class="smallbutton" style="margin-right:5px;background-color:white;color:maroon;">
           <span class="fa fa-home" style="font-size:20px"></span> Home
     </a>
     <a href="index.php?logout='1'" class="smallbutton"
-style="margin-right:10px;color:maroon;">
+style="margin-right:5px;background-color:white;color:maroon;">
           <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
     </a>
   </div>
@@ -474,7 +489,7 @@ width="400" align="center"  >
     <td valign="top" style="padding-left:20px">
         <div>
         <form method='post' action='filtered_results.php'>
-			<select name='invoiceID'>
+			<select name='invoiceID' style="width:200px">
 				<?php
 	
 		$db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
@@ -488,14 +503,14 @@ width="400" align="center"  >
 				?>
 			</select>
 		
-            <button type="submit" value='Generate' class="pulse" name="generate_btn">Show Report</button>
+            <button type="submit" value='Generate' class="smallbutton" name="generate_btn">Show Report</button>
 			
 		</form>
         </div>
 		
         <div>
             <form method='post' action='designationreports.php' >
-            <button type="submit" value='Generate' class="pulse" name="generate_btn" style="width:340px;">Show Reports of Students and Employee</button>
+            <button type="submit" value='Generate' class="smallbutton" name="generate_btn" style="width:340px;">Show Reports of Students and Employee</button>
 		</form>
         </div>
         
