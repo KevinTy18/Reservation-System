@@ -254,9 +254,7 @@ $end_day = intval(strtotime(htmlspecialchars($_POST["start_day"])));
 $end_time = $start_time + (intval(htmlspecialchars($_POST["Duration"])));
 $eventname = htmlspecialchars($_POST["eventname"]);
 $organization = htmlspecialchars($_POST["organization"]);
-/*$organization = htmlspecialchars($_POST["organization"]);
-$organization = htmlspecialchars($_POST["organization"]);
-$organization = htmlspecialchars($_POST["organization"]);*/
+$school_level = htmlspecialchars($_POST["School_Level"]);
 $reservee = htmlspecialchars($_POST["reservee"]);
 $capacity = intval(($_POST["atendee"]));
 $phone = htmlspecialchars($_POST["phone"]);
@@ -269,6 +267,7 @@ $starttime = explode(" ",$_POST["start_hour"]);
 $endtime = $end_time;
 $start_epoch = $start_day + $start_time;
 $end_epoch = $end_day + $end_time;
+
 
 if (empty($start_day)) {
 array_push($errors, "Starting Day is required");
@@ -285,11 +284,11 @@ array_push($errors, "End Time is required");
 if (!is_numeric($capacity)) {
 array_push($errors, "Capacity must be numeric");
 }
-if (!preg_match("/^[a-zA-Z ]*$/",$organization)) {
+if (!preg_match("/^[a-zA-Z .\-]*$/",$organization)) {
 array_push($errors, "Organization must contain only letters");
 }
-if (!preg_match("/^[a-zA-Z ]*$/",$reservee)) {
-array_push($errors, "Organization must contain only letters");
+if (!preg_match("/^[a-zA-Z\s]+$/",$reservee)) {
+array_push($errors, "Name must be Valid");
 }
 if (!preg_match("/^[a-z0-9 .\-]+$/i",$Id)) {
 array_push($errors, "ID must contain be Valid");
@@ -365,10 +364,10 @@ if (mysqli_num_rows($Roomresult) > 0) {
     echo "0 results";
 }*/
 
-$sql = "INSERT INTO $tablename (eventname, organization,reservee_name,reservee_type,designation_id, phone, Room_Department,room,Materials,date_reserved,
+$sql = "INSERT INTO $tablename (eventname, organization,reservee_name,reservee_type,designation_id,School_Level_or_Course,phone, Room_Department,room,Materials,date_reserved,
 start_day, start_time, end_day, TimeBeginDenum ,
 TimeEndDenum,end_time, canceled, Capacity)
-VALUES ('$eventname','$organization','$reservee','$designation',$Id,'$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
+VALUES ('$eventname','$organization','$reservee','$designation',$Id,'$school_level','$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
 $start_time, $end_day, '$starttime[1]' ,'$endtime[1]',$end_time,0,'$capacity')";
 
 /*

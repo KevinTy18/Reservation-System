@@ -719,7 +719,7 @@ autocomplete="off"/></td>
 </tr>
 <tr>
 <td style="color:black;padding-left:20px">School Level / Course:</td>
-<td> <input maxlength="50" name="reservee" required="" type="text"
+<td> <input maxlength="50" name="School_Level" required="" type="text"
 autocomplete="off" value="<?php echo $_SESSION['user']['Name_or_Course'] ?>" readonly="readonly"/></td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
