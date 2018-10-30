@@ -43,23 +43,20 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" placeholder="Username" autocomplete="off">
+						<input class="input100" type="text" name="username" placeholder="Username" autocomplete="off" required>
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
+						<input class="input100" type="password" name="password" placeholder="Password" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
-                    <!--
-					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							Remember me
-						</label>
-					</div>
-                    -->
-					<div class="container-login100-form-btn">
+                    <?php
+                        if(isset($_GET['error']) == TRUE) {
+                            echo '<span class="fa fa-exclamation-circle" style="color:white;"> Wrong username/password combination</span>';
+                        }
+                    ?>
+					<div class="container-login100-form-btn" style="margin-top:15px">
 						<button class="login100-form-btn" type="submit" name=userlogin_btn>
 							Login
 						</button>

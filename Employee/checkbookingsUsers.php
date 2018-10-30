@@ -202,7 +202,7 @@ button.right::before {
     }
 .parallax {
     /* The image used */
-    background-image: url('../sanbedapics/site-image.jpg');
+    background-image: url('../sanbedapics/site-imagecropped.jpg');
 
     /* Full height */
     height: 100%;
@@ -213,6 +213,12 @@ button.right::before {
 
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     
     overflow: hidden;
     background-color: #B22222;
@@ -220,6 +226,8 @@ button.right::before {
    
     margin-left: -17px;
     margin-right: -10px;
+    
+      
 }
 body {
     color:black;
@@ -341,6 +349,9 @@ body {
 
 <?php endif ?></a>
   <div class="header-right">
+      <a href="index.php" class="smallbutton" style="margin-right:5px;background-color:white;color:maroon;">
+          <span class="fa fa-home" style="font-size:20px"></span> Home
+    </a>
     <a href="checkbookingsUsers.php?logout='1'" class="smallbutton"
 style="margin-right:10px;color:maroon;">
           <span class="fa fa-sign-out" style="font-size:20px"></span> Log out

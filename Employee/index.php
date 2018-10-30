@@ -548,34 +548,11 @@ img {
     overflow-y: scroll;
 }
 </style>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SBCA BOOKING CALENDAR</title>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    
-<script src="jquery-1.10.2.js"></script>
-    
-<script src="jquery-ui.js"></script>
-    
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
-<link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-crossorigin="anonymous">
-    
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-<link href="jquery-ui.css" rel="stylesheet">
-    
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" media="all" href="../cssforlogin/vendor/daterangepicker/daterangepicker.css" />
-    <script type="text/javascript" src="../cssforlogin/vendor/daterangepicker/jquery.js"></script>
-    <script type="text/javascript" src="../cssforlogin/vendor/daterangepicker/moment.min.js"></script>
-    <script type="text/javascript" src="../cssforlogin/vendor/daterangepicker/daterangepicker.js"></script>
 </head>
-
+<?php
+  include '../includes/head.php'; 
+?>
 
 <!--<script src="lang/datepicker-fi.js"></script>-->
 <script>
@@ -642,7 +619,7 @@ width="14%"> <b> LRC BOOKING SYSTEM </b> </h2>
 </div>
 <div>
 <div class="buttons" style="margin:0 auto;">
-<form action="checkbookings.php">
+<form action="checkbookingsUsers.php">
     <!--<input type="submit" value="Check Calendar" /> -->
     <button class="smallbuttonnav" type="submit" style="float:left"><span><i class="fa
 fa-calendar" style="font-size:24px;color:red"></i> Check
@@ -653,6 +630,7 @@ Calendar</span></button>
     </div>
 </div>
 <div class="w3-container">
+       <div class="animated fadeIn">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
 width="100%" height="450px">
 <tr>
@@ -707,6 +685,25 @@ autocomplete="off"/></td>
 <td style="color:black;padding-left:20px">Organization:</td>
 <td> <input maxlength="50" name="organization" required="" type="text"
 autocomplete="off"/ value="<?php echo $_SESSION['user']['Department'] ?>" readonly="readonly"></td>
+<!-- <td>&nbsp;</td>
+<td>&nbsp;</td> -->
+</tr>
+<tr>
+<td style="color:black;padding-left:20px;">School Level / Course:</td>
+<td> 
+    <?php
+    $query = $db->query("SELECT Id,Name_or_Course FROM school_level"); // Run your query
+    
+    echo '<select name="School_Level" style="width:200px">'; // Open your drop down box
+
+// Loop through the query results, outputing the options one by one
+while ($row = $query->fetch_assoc()) {
+   echo '<option value='.$row['Name_or_Course'].'>'.$row['Name_or_Course'].'</option>';
+}
+
+echo '</select>';// Close your drop down box
+?>
+</td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
 </tr>
@@ -981,6 +978,7 @@ while($row = mysqli_fetch_array($result)) {
 
 </tr>
 </table>
+    </div>
     </div>
 
    

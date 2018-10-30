@@ -202,7 +202,7 @@ button.right::before {
     }
 .parallax {
     /* The image used */
-    background-image: url('../sanbedapics/site-image.jpg');
+    background-image: url('../sanbedapics/site-imagecropped.jpg');
 
     /* Full height */
     height: 100%;
@@ -213,13 +213,20 @@ button.right::before {
 
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     
     overflow: hidden;
     background-color: #B22222;
-    padding: 0px 10px;
+    
    
-    margin-left: -17px;
-    margin-right: -10px;
+    
+    
+      
 }
 body {
     color:black;
