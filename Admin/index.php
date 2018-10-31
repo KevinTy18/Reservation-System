@@ -37,12 +37,30 @@ $row['RoomID'], "val" => $row['RoomName']);
     $venues_images_categories[$row['RoomID']][] = array("id" =>
 $row['RoomID'], "val" => $row['VenueImage']);
   }
+
+
+   $query = "SELECT Duration_Description,Duration_Value, Department_Id FROM department_duration INNER JOIN room_department ON department_duration.Department_Id = room_department.Id";
+  $result = $db->query($query);
+
+  while($row = $result->fetch_assoc()){
+    $venues_durations[$row['Department_Id']][] = array("id" => $row['Duration_Value'], "val" => $row['Duration_Description']);
+
+  }
+    $query = "SELECT Schedule_Description,Schedule_Value, Department_Id FROM department_schedule INNER JOIN room_department ON department_schedule.Department_Id = room_department.Id";
+  $result = $db->query($query);
+
+  while($row = $result->fetch_assoc()){
+    $venues_schedule[$row['Department_Id']][] = array("id" => $row['Schedule_Value'], "val" => $row['Schedule_Description']);
+
+  }
 /*echo '<pre>';
     die(var_dump($venues_images_categories));
     echo '</pre>';*/
   $jsonCats = json_encode($room_deparment_categories);
   $jsonSubCats = json_encode($venues_categories);
   $json_venues_images_categories = json_encode($venues_images_categories);
+  $json_venues_duration = json_encode($venues_durations);
+  $json_venues_schedule = json_encode($venues_schedule);
 
 
 
@@ -55,6 +73,8 @@ $row['RoomID'], "val" => $row['VenueImage']);
         echo "var categories = $jsonCats; \n";
         echo "var subcats = $jsonSubCats; \n";
         echo "var venues_images_categories = $json_venues_images_categories; \n";
+        echo "var venues_durations = $json_venues_duration; \n";
+        echo "var venues_schedule = $json_venues_schedule; \n";
       ?>
 
       function loadCategories(){
@@ -64,18 +84,37 @@ $row['RoomID'], "val" => $row['VenueImage']);
         select.options[0].disabled = true;
         for(var i = 0; i < categories.length; i++){
           select.options[i+1] = new Option(categories[i].val,categories[i].id);
+
         }
+
+
       }
 
       function updateSubCats(){
         var catSelect = this;
         var catid = this.value;
         var subcatSelect = document.getElementById("subcatsSelect");
+        var durationselect = document.getElementById("duration");
+        var scheduleselect = document.getElementById("schedule");
         subcatSelect.options.length = 0;
-         subcatSelect.options[0] = new Option("Select a Room", "");
+        durationselect.options.length = 0;
+        scheduleselect.options.length = 0;
+        subcatSelect.options[0] = new Option("Select a Room", "");
         subcatSelect.options[0].disabled = true;
-        for(var i = 0; i < subcats[catid].length; i++){
-          subcatSelect.options[i+1] = new Option(subcats[catid][i].val,subcats[catid][i].val);
+
+        durationselect.options[0] = new Option("Select a Duration", "");
+        durationselect.options[0].disabled = true;
+
+        scheduleselect.options[0] = new Option("Select a Schedule", "");
+        scheduleselect.options[0].disabled = true;
+        for(var i = 0; i < subcats[catid].length; i++) {
+          subcatSelect.options[i+1] = new Option(subcats[catid][i].val,subcats[catid][i].val);   
+        }
+        for(var i = 0; i < venues_durations[catid].length; i++) {
+          durationselect.options[i+1] = new Option(venues_durations[catid][i].val,venues_durations[catid][i].id);   
+        }
+         for(var i = 0; i < venues_schedule[catid].length; i++) {
+          scheduleselect.options[i+1] = new Option(venues_schedule[catid][i].val,venues_schedule[catid][i].id);   
         }
       }
 
@@ -103,6 +142,7 @@ $row['RoomID'], "val" => $row['VenueImage']);
           xmlhttp.send();
         }
       }
+
 
     $(function() {
       $('input[name="start_day"]').daterangepicker({
@@ -671,23 +711,13 @@ style="width:100%"></div></div>';
 
 
 
-<!-- <?php
-foreach ($revenues as $revenue) {
-$name = $revenue['RoomName'];
-$image = $revenue['VenueImage'];
-    echo "<input type='radio' name='item' value='$name'
-onclick='change_picture(\"" . $image . "\")'>$name</input> ";
-}
-?>  -->
-
 </center>
 <table>
 <tr>
 <td style="color:black;padding-left:20px">Choose a room:</td>
 <td>
-<select id='categoriesSelect' name="RoomDepartment" style="width:170px">
+<select id='categoriesSelect' onchange="change_Timer(this.value)" name="RoomDepartment" style="width:170px">
     </select>
-
     <select id='subcatsSelect' onchange="change_picture(this.value)"
 name="Roomname" style="width:170px">
     </select>
@@ -762,7 +792,7 @@ autocomplete="off"/></td> -->
 <td style="color:black;padding-left:20px">Time of Reservation:</td>
 <td>
     <ul class="categorychecklist">
-        <li><select name="start_hour">
+        <li><select id="schedule" name="start_hour">
             <option selected="selected">06 am</option>
             <option>07 am</option>
             <option>08 am</option>
@@ -794,12 +824,7 @@ autocomplete="off"/></td> -->
 Reservation:</td>
       <td>
           <ul class="categorychecklist">
-            <li><select name="Duration" style="width:200px;">
-            <option selected="selected" value="1800">30 minutes</option>
-            <option value="3600">1 hour</option>
-            <option value="5400">1 hour and 30 minutes</option>
-            <option value="7200">2 hours</option>
-            </select>
+            <li><select name="Duration" id="duration" style="width:200px;">
             </li>
           </ul>
  </td>
