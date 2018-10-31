@@ -14,6 +14,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 <script src="jquery-ui.js"></script>
 <link rel="stylesheet" href="../cssforlogin/vendor/animate/animate.css">
 
+<!--Custom Alert-->
+<script src="../cssforlogin/js/sweetalert.js"></script>
+<link rel="stylesheet" href="../cssforlogin/css/sweetalert.css">
 
 
     <link rel="stylesheet" type="text/css" media="all"

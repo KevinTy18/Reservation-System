@@ -595,7 +595,9 @@ $(function() {
 
 
 <body onload='loadCategories()'>
-
+<?php
+include('../includes/bookingalerts.php');
+?>
 <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
 (isset($_SESSION['user'])) : ?>
@@ -626,11 +628,17 @@ width="14%"> <b> LRC BOOKING SYSTEM </b> </h2>
 <div class="buttons" style="margin:0 auto;">
 <form action="checkbookingsUsers.php">
     <!--<input type="submit" value="Check Calendar" /> -->
-    <button class="smallbuttonnav" type="submit" style="float:left"><span><i class="fa
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa
 fa-calendar" style="font-size:24px;color:red"></i> Check
 Calendar</span></button>
 </form>
 
+<form action="bookedDates.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left;"><span><i class="fa fa-gears"
+style="font-size:24px;color:red;" ></i>Booked Dates</span></button>
+</form>
 
     </div>
 </div>

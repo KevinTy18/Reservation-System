@@ -590,7 +590,9 @@ $(function() {
 
 
 <body onload='loadCategories()'>
-
+<?php
+include('../includes/bookingalerts.php');
+?>
 <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
 (isset($_SESSION['user'])) : ?>

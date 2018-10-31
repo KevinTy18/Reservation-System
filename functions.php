@@ -318,11 +318,9 @@ $result1 = mysqli_query($conn, $sql1);
 $result2 = mysqli_query($conn, $sql2);
 if(count($errors) == 0){
     if (mysqli_num_rows($result2) > 0) {
-        ?>
-        <script>
-            alert("Unfortunately The date is Unavailable.")
-        </script>
-        <?php
+        
+        echo header('location:../Admin/index.php?dateunavailable=0');
+       
         goto end;
     }
 /*echo '<pre>';
@@ -336,12 +334,8 @@ if(count($errors) == 0){
        
     if ($i>($row["start_day"]+$row["start_time"]) &&
     $i<($row["end_day"]+$row["end_time"])) {
-        
-    ?>
-<script>
-alert("Unfortunately has already been booked for the time requested.")
-</script>
-<?php
+        echo header('location:../Admin/index.php?hasbooked=0');
+ 
 goto end;
 }
 }
@@ -381,29 +375,25 @@ $row1 = mysqli_fetch_assoc($result1);
 if ($row1["RoomCapacity"] == $capacity || $row1["RoomCapacity"] >=
 $capacity && $capacity >= $row1["RoomMinimumCapacity"]){
 if (mysqli_query($conn, $sql)) {
-    ?>
-    <script>
-alert("Booking succeed!")
-</script>
-<?php
+
+    /*if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
+   echo header('location:../Admin/index.php?success=0');
+}*/
+echo header('location:../Admin/index.php?success=0');
+    
 } else {
 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 }
 else if ($capacity < $row1["RoomMinimumCapacity"]){
-    ?>
-<script>
-            alert("Atendees are too low")
-        </script>
- <!-- echo "<center><h3> Atendees are too low </h3></center>"; -->
-<?php
+    
+ echo header('location:../Admin/index.php?toolow=0');
+    
 }
 else if ($capacity > $row1["RoomCapacity"]) {
-    ?>
-<script>
-alert("Capacity Overload / Expected atendee exceeded the room capacity!")
-</script>
-<?php
+    
+    echo header('location:../Admin/index.php?overload=0');
+ 
 }
 }
 

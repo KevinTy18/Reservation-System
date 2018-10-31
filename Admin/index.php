@@ -44,6 +44,8 @@ $row['RoomID'], "val" => $row['VenueImage']);
   $jsonSubCats = json_encode($venues_categories);
   $json_venues_images_categories = json_encode($venues_images_categories);
 
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -575,7 +577,9 @@ $(function() {
 
 
 <body onload='loadCategories();'>
-
+<?php
+include('../includes/bookingalerts.php');
+?>
 <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
 (isset($_SESSION['user'])) : ?>
@@ -844,7 +848,6 @@ type="submit"><span>Reserve</span></button>
 
 <!--<input name="book" type="submit" value="Book" /> -->
 </form>
-
 
 
 
