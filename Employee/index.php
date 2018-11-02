@@ -44,12 +44,30 @@ room_department.Department";
     $venues_categories[$row['Department_Id']][] = array("id" => $row['RoomID'], "val" => $row['RoomName']);
     $venues_images_categories[$row['RoomID']][] = array("id" => $row['RoomID'], "val" => $row['VenueImage']);
   }
+
+    $query = "SELECT Duration_Description,Duration_Value, Department_Id FROM department_duration INNER JOIN room_department ON department_duration.Department_Id = room_department.Id";
+  $result = $db->query($query);
+
+  while($row = $result->fetch_assoc()){
+    $venues_durations[$row['Department_Id']][] = array("id" => $row['Duration_Value'], "val" => $row['Duration_Description']);
+
+  }
+    $query = "SELECT Schedule_Description,Schedule_Value, Department_Id FROM department_schedule INNER JOIN room_department ON department_schedule.Department_Id = room_department.Id";
+  $result = $db->query($query);
+
+  while($row = $result->fetch_assoc()){
+    $venues_schedule[$row['Department_Id']][] = array("id" => $row['Schedule_Value'], "val" => $row['Schedule_Description']);
+
+  }
+
 /*echo '<pre>';
-    die(var_dump($venues_images_categories));
+    die(var_dump($venues_schedule));
     echo '</pre>';*/
   $jsonCats = json_encode($room_deparment_categories);
   $jsonSubCats = json_encode($venues_categories);
   $json_venues_images_categories = json_encode($venues_images_categories);
+  $json_venues_duration = json_encode($venues_durations);
+  $json_venues_schedule = json_encode($venues_schedule);
 
 ?>
 <!DOCTYPE html>
@@ -60,6 +78,8 @@ room_department.Department";
         echo "var categories = $jsonCats; \n";
         echo "var subcats = $jsonSubCats; \n";
         echo "var venues_images_categories = $json_venues_images_categories; \n";
+        echo "var venues_durations = $json_venues_duration; \n";
+        echo "var venues_schedule = $json_venues_schedule; \n";
       ?>
 
         
@@ -76,11 +96,27 @@ room_department.Department";
         var catSelect = this;
         var catid = this.value;
         var subcatSelect = document.getElementById("subcatsSelect");
+        var durationselect = document.getElementById("duration");
+        var scheduleselect = document.getElementById("schedule");
         subcatSelect.options.length = 0;
+        durationselect.options.length = 0;
+        scheduleselect.options.length = 0;
         subcatSelect.options[0] = new Option("Select a Room", "");
         subcatSelect.options[0].disabled = true;
-        for(var i = 0; i < subcats[catid].length; i++){
-          subcatSelect.options[i + 1] = new Option(subcats[catid][i].val,subcats[catid][i].id);
+
+        durationselect.options[0] = new Option("Select a Duration", "");
+        durationselect.options[0].disabled = true;
+
+        scheduleselect.options[0] = new Option("Select a Schedule", "");
+        scheduleselect.options[0].disabled = true;
+        for(var i = 0; i < subcats[catid].length; i++) {
+          subcatSelect.options[i+1] = new Option(subcats[catid][i].val,subcats[catid][i].val);   
+        }
+        for(var i = 0; i < venues_durations[catid].length; i++) {
+          durationselect.options[i+1] = new Option(venues_durations[catid][i].val,venues_durations[catid][i].id);   
+        }
+         for(var i = 0; i < venues_schedule[catid].length; i++) {
+          scheduleselect.options[i+1] = new Option(venues_schedule[catid][i].val,venues_schedule[catid][i].id);   
         }
       }
 
@@ -738,121 +774,21 @@ autocomplete="off" /></td>
 <td><input id="to" name="end_day" required="" type="text"
 autocomplete="off"/></td> -->
 </tr>
-<?php if($_SESSION['user']['Department_Id'] == 1) {?>
+
+
+
 <tr>
 <td style="color:black;padding-left:20px">Schedule Time:</td>   
 <td> 
     <ul class="categorychecklist">
-        <li><select name="start_hour">
-            <option selected="selected">07 am</option>
+       <li><select id="schedule" name="start_hour">
+            <option selected="selected">06 am</option>
+            <option>07 am</option>
             <option>08 am</option>
             <option>09 am</option>
             <option>10 am</option>
             <option>11 am</option>
             <option>12 pm</option>
-            <option>1 pm</option>
-            <option>2 pm</option>
-            <option>3 pm</option>
-            </select>
-            <select name="start_minute">
-            <option selected="selected">00</option>
-            <option>30</option>
-            </select>
-        </li>
-      </ul>  
-     </td>
-</tr>
-<?php } ?>
-<?php if($_SESSION['user']['Department_Id'] == 2) {?>
-<tr>
-<td style="color:black;padding-left:20px">Schedule Time:</td>   
-<td> 
-    <ul class="categorychecklist">
-        <li><select name="start_hour">
-            <option selected="selected">07 am</option>
-            <option>08 am</option>
-            <option>09 am</option>
-            <option>10 am</option>
-            <option>11 am</option>
-            <option>12 pm</option>
-            <option>1 pm</option>
-            <option>2 pm</option>
-            <option>3 pm</option>
-            <option>4 pm</option>
-            <option>5 pm</option>
-            </select>
-            <select name="start_minute">
-            <option selected="selected">00</option>
-            <option>30</option>
-            </select>
-        </li>
-      </ul>  
-     </td>
-</tr>
-<?php } ?>
-<?php if($_SESSION['user']['Department_Id'] == 3) {?>
-<tr>
-<td style="color:black;padding-left:20px">Schedule Time:</td>   
-<td> 
-    <ul class="categorychecklist">
-        <li><select name="start_hour">
-            <option selected="selected">07 am</option>
-            <option>08 am</option>
-            <option>09 am</option>
-            <option>10 am</option>
-            <option>11 am</option>
-            <option>12 pm</option>
-            <option>1 pm</option>
-            <option>2 pm</option>
-            <option>3 pm</option>
-            <option>4 pm</option>
-            <option>5 pm</option>
-            <option>6 pm</option>
-            </select>
-            <select name="start_minute">
-            <option selected="selected">00</option>
-            <option>30</option>
-            </select>
-        </li>
-      </ul>  
-     </td>
-</tr>
-<?php } ?>
-<?php if($_SESSION['user']['Department_Id'] == 4) {?>
-<tr>
-<td style="color:black;padding-left:20px">Schedule Time:</td>   
-<td> 
-    <ul class="categorychecklist">
-        <li><select name="start_hour">
-            <option selected="selected">07 am</option>
-            <option>08 am</option>
-            <option>09 am</option>
-            <option>10 am</option>
-            <option>11 am</option>
-            <option>12 pm</option>
-            <option>1 pm</option>
-            <option>2 pm</option>
-            <option>3 pm</option>
-            <option>4 pm</option>
-            <option>5 pm</option>
-            <option>6 pm</option>
-            </select>
-            <select name="start_minute">
-            <option selected="selected">00</option>
-            <option>30</option>
-            </select>
-        </li>
-      </ul>  
-     </td>
-</tr>
-<?php } ?>
-<?php if($_SESSION['user']['Department_Id'] == 5 || $_SESSION['user']['Department_Id'] == 6 ) {?>
-<tr>
-<td style="color:black;padding-left:20px">Schedule Time:</td>   
-<td> 
-    <ul class="categorychecklist">
-        <li><select name="start_hour">
-            <option selected="selected">12 pm</option>
             <option>1 pm</option>
             <option>2 pm</option>
             <option>3 pm</option>
@@ -860,6 +796,9 @@ autocomplete="off"/></td> -->
             <option>5 pm</option>
             <option>6 pm</option>
             <option>7 pm</option>
+            <option>8 pm</option>
+            <option>9 pm</option>
+            <option>10 pm</option>
             </select>
             <select name="start_minute">
             <option selected="selected">00</option>
@@ -869,18 +808,12 @@ autocomplete="off"/></td> -->
       </ul>  
      </td>
 </tr>
-<?php } ?>
     <tr>
       <td style="color:black;padding-left:20px">Duration:</td>
       <td>  
           <ul class="categorychecklist">
-            <li><select name="Duration" style="width:200px;">
-            <option selected="selected">30 minutes</option>
-            <option>1 hour</option>
-            <option>1 hour and 30 minutes</option>
-            <option>2 hours</option>
-            </select>
-            </li>        
+           <li><select name="Duration" id="duration" style="width:200px;">
+            </li> 
           </ul>
  </td> 
  </tr> 

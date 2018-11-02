@@ -158,7 +158,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	  $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
 
 					//show invoices list as options
-					$query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE room = 'Rosendo' GROUP by reservee_type ");
+					$query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE Room_Department = 5 GROUP by reservee_type ");
 				
 				
 				?>
@@ -178,7 +178,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'Percentage of Reservee of Rosendo',  
+                      title: 'Percentage of Reservee of GSL',  
                       //is3D:true,  
                       pieHole: 0.4  
                      };  
@@ -222,12 +222,12 @@ style="margin-right:10px;color:maroon;">
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="designationreports.php">Reservee Reports</a>
-  <a href="AvrReports.php">AVR Reports</a>
-  <a href="BalcruzReports.php">Balcruz Reports</a>
-  <a href="BellarmineHallReports.php">Bellarmine Reports</a>
-  <a href="MPHReports.php">MPH Reports</a>
-  <a href="RosendoReports.php">Rosendo Reports</a>
-  <a href="StMaurReports.php">St. Maur Reports</a>
+   <a href="AvrReports.php">IBED-GS Reports</a>
+  <a href="BalcruzReports.php">IBED-JHS Reports</a>
+  <a href="BellarmineHallReports.php">SHS Reports</a>
+  <a href="MPHReports.php">CAS Reports</a>
+  <a href="RosendoReports.php">GSL Reports</a>
+  <a href="StMaurReports.php">SOL Reports</a>
 </div>
 <br>
 <div class="divsize" align="center">
@@ -246,7 +246,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 	 
  
            <div style="width:950px;height:50px">  
-                <h2>Percentage of Reservee of Rosendo</h2>  
+                <h2>Percentage of Reservee of GSL</h2>  
                 <br />  
                 <center><div id="piechart" style="width: 580px; height: 350px;"></div>  </center>
            </div>

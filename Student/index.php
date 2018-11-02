@@ -39,7 +39,7 @@ room_department.Department ";
     $room_deparment_categories[] = array("id" => $row['Id'], "val" => $row['Department']);
   }
 
-  $query = "SELECT RoomID, RoomName, Department_Id, RoomCapacity,RoomMinimumCapacity,VenueImage, Availability FROM venues INNER JOIN room_department ON venues.Department_Id = room_department.Id Where Availability = 'Available'";
+  $query = "SELECT RoomID, RoomName, Department_Id, RoomCapacity,RoomMinimumCapacity,VenueImage, Availability FROM venues INNER JOIN room_department ON venues.Department_Id = room_department.Id Where Availability = 'Available' AND RoomID <> 20 AND RoomID <> 21";
   $result = $db->query($query);
 
   while($row = $result->fetch_assoc()){

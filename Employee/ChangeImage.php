@@ -5,7 +5,7 @@ $VenueImage = $_GET['VenueImage'];
 $sql="SELECT RoomID, RoomName, Department_Id, RoomCapacity,RoomMinimumCapacity,VenueImage, Availability 
 	FROM venues 
 	Where Availability = 'Available' 
-	AND RoomID = $VenueImage";
+	AND RoomName = '$VenueImage'";
 
 $result = $db->query($sql);
 $row = $result->fetch_assoc();

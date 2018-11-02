@@ -222,12 +222,12 @@ style="margin-right:10px;color:maroon;">
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="designationreports.php">Reservee Reports</a>
-  <a href="AvrReports.php">AVR Reports</a>
-  <a href="BalcruzReports.php">Balcruz Reports</a>
-  <a href="BellarmineHallReports.php">Bellarmine Reports</a>
-  <a href="MPHReports.php">MPH Reports</a>
-  <a href="RosendoReports.php">Rosendo Reports</a>
-  <a href="StMaurReports.php">St. Maur Reports</a>
+  <a href="IBED-GS-Reports.php">IBED-GS Reports</a>
+  <a href="IBED-JHS-Reports.php">IBED-JHS Reports</a>
+  <a href="SHS-Reports.php">SHS Reports</a>
+  <a href="CAS-Reports.php">CAS Reports</a>
+  <a href="GSL-Reports.php">GSL Reports</a>
+  <a href="SOL-Reports.php">SOL Reports</a>
 </div>
 <br>
 <div class="divsize" align="center">
