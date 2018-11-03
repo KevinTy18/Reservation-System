@@ -565,8 +565,8 @@ $row['RoomID'], "val" => $row['VenueImage']);
       max-height: 100%;
   }
   .landscape {
-      height: 250px;
-      width: 500px;
+      height: 35%;
+      width: 35%;
       position: absolute;
       margin-left: 530px;
       margin-top: -340px;

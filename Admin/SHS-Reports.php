@@ -245,10 +245,46 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
     <td valign="top">
 	 
  
-           <div style="width:950px;height:50px">  
-                <h2>Percentage of Reservee of SHS</h2>  
+           <div style="width:950px;height:50px">
+               <div class="w3-row">
+    <a href="javascript:void(0)" onclick="openCity(event, 'London');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">SHS Reservees</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openCity(event, 'Paris');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">By Track</div>
+    </a>
+  </div>
+               
+        <div id="London" class="w3-container city" style="display:none">
+    
+    <h2>Percentage of Reservee of SHS</h2>  
+                <center><div id="piechart" style="width: 580px; height: 350px;"></div>
+            <form method='post' action='PDFInvoice/invoice-db.php'>
+<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
+    margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
+	
+
+</button> 
+</form> 
+            </center>
                 <br />  
-                <center><div id="piechart" style="width: 580px; height: 350px;"></div>  </center>
+  </div>
+
+  <div id="Paris" class="w3-container city" style="display:none">
+    <h2>Reports by Track</h2>
+      <center><div id="piechart" style="width: 580px; height: 350px;"></div>
+            <form method='post' action='PDFInvoice/invoice-db.php'>
+<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
+    margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
+	
+
+</button> 
+</form> 
+            </center>
+                <br />
+  </div>       
+               
+                
            </div>
 
 
@@ -262,44 +298,22 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
 </table>
 
-
-
-
-<div class="buttons" style="margin-left:80px">
-<form action="checkbookings.php">
-    <!--<input type="submit" value="Check Calendar" /> -->
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> Check
-Calendar</span></button>
-</form>
-
-<div class="buttons">
-<form action="BookingOptions.php">
-    <button class="buttoncal" type="submit" style="float:left;width:275px"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Cancel Reservation</span></button>
-</form>
-</div>
-    
-<form action="addvenue.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-plus-circle" style="font-size:24px;color:red;"></i>
-Add Venues</span></button>
-</form>
-    
-<form action="checkrooms.php">
-    <button class="buttoncal" type="submit" style="float:left;width:270px"><span><i class="fa
-fa-check-circle" style="font-size:24px;color:red;"></i>
-Venue Descriptions</span></button>
-</form>
-        
-<form action="reports.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="	fa fa-table" style="font-size:24px;color:red;"></i>
-Check Reports</span></button>
-</form>
-
     </div>
-
-    </div>
-
+<script>
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-border-red";
+}
+</script>
 
 </body>
 </html>
