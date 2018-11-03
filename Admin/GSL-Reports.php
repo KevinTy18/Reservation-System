@@ -186,6 +186,36 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
                 chart.draw(data, options);  
            }  
            </script>
+
+                    <?php
+  $query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE School_Level_or_Course = 'MAP' OR School_Level_or_Course = 'MLB' OR School_Level_or_Course = 'MAED' GROUP by School_Level_or_Course");
+        
+        
+        ?> 
+           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+           <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChartbyLevel);  
+           function drawChartbyLevel()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['School_Level_or_Course', 'Number'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($query))  
+                          {  
+                               echo "['".$row["School_Level_or_Course"]."', ".$row["Number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Percentage of Reservee of GSL by Course',  
+                      //is3D:true,  
+                      pieHole: 0.4  
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('piechartforSchoolLevel'));  
+                chart.draw(data, options);  
+           } 
+           </script>
     
 <script>
 function openNav() {
@@ -272,7 +302,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
   <div id="Paris" class="w3-container city" style="display:none">
     <h2>Reports by courses</h2>
-      <center><div id="piechart" style="width: 580px; height: 350px;"></div>
+      <center><div id="piechartforSchoolLevel" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
 <button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
