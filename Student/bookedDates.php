@@ -14,6 +14,7 @@ if (isset($_GET['logout'])) {
 }
 
  $query = $db->query("SELECT Id,Department FROM room_department ");
+ $_SESSION['WebpageOrigin'] = "User";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -518,9 +519,7 @@ $db = "cbfosystem";
 
 
 				$con=mysqli_connect($servername,$username,$password,$db);
-				$result = mysqli_query($con,"
-                SELECT 
-                id, eventname, organization,reservee_name,phone,Capacity,start_time, end_time FROM bookingcalendar WHERE designation_id;
+				$result = mysqli_query($con,"SELECT id, eventname, organization,reservee_name,phone,Capacity,start_time, end_time FROM bookingcalendar WHERE designation_id = '". $_SESSION['user']['School_Id'] ."';
                 
                 ");
       
@@ -555,9 +554,11 @@ $id = $row['id'];
     echo "<td style='width:150px;border:1px solid black;'>" . $row['end_time'] . "</td>";
     
     
-echo '<td><form method="post" action="" enctype="multipart/form-data">
+echo '<td><form method="post" action="PDFInvoice/invoice-db.php">
 
-<button id="print_btn" type="submit" class="btn" name="print_btn">Print</button>
+<button id="print_btn" type="submit" class="btn">Print</button>
+
+</button> 
 </td>
 <td>
 
