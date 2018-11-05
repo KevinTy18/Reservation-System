@@ -35,4 +35,18 @@ if (isset($_GET['dateunavailable']) == true) {
     </script>
 <?php
 }
+if (isset($_GET['datealreadyunavailable']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Cancel failed!", "Date is already Unavailable.", "error");
+    </script>
+<?php
+}
+if (isset($_GET['datecancelled']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Cancel Success!", "Date is cancelled!", "success");
+    </script>
+<?php
+}
 ?>

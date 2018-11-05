@@ -114,11 +114,10 @@ VALUES ('$Date', '$Reason')";
 
 
 		if ($affected_rows > 0){
-		      echo "<center><h3>Date is already Unavailable.</h3></center>";
-			
+			echo header('location:../Admin/UnavailableDates.php?datealreadyunavailable=0');
 		}
 		else {
-			echo "<center><h3>Booking cancelled.</h3></center>";
+			echo header('location:../Admin/UnavailableDates.php?datecancelled=0');
             mysqli_query($conn, $sql1);
 		}
 	
