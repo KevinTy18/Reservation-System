@@ -316,7 +316,9 @@ $result1 = mysqli_query($conn, $sql1);
     die(var_dump($item));
     echo '</pre>';*/
 $result2 = mysqli_query($conn, $sql2);
-if(count($errors) == 0){
+if ($_SESSION['user']['user_type']  == "admin") {
+
+  if(count($errors) == 0){
     if (mysqli_num_rows($result2) > 0) {
         
         echo header('location:../Admin/index.php?dateunavailable=0');
@@ -397,8 +399,190 @@ else if ($capacity > $row1["RoomCapacity"]) {
 }
 }
 
+
+}
+
+}
+
+
+if ($_SESSION['user']['user_type']  == "student") {
+
+  if(count($errors) == 0){
+    if (mysqli_num_rows($result2) > 0) {
+        
+        echo header('location:../Student/index.php?dateunavailable=0');
+       
+        goto end;
+    }
+/*echo '<pre>';
+    die(var_dump($result));
+    echo '</pre>';*/
+   if (mysqli_num_rows($result) > 0) {
+    
+    while($row = mysqli_fetch_assoc($result)) {
+    
+    for ($i = $start_epoch; $i <= $end_epoch; $i=$i+600) {
+       /*echo '<pre>';
+    die(var_dump($end_epoch));
+    echo '</pre>';*/
+    if ($i>($row["start_day"]+$row["start_time"]) &&
+    $i<($row["end_day"]+$row["end_time"])) {
+        echo '<pre>';
+    die(var_dump($end_epoch));
+    echo '</pre>';
+        echo header('location:../Student/index.php?hasbooked=0');
+ 
+goto end;
+}
+}
+}
+}
+/*$sql1 = "SELECT * FROM $tablevenue WHERE RoomID='$item'";*/
+/**/
+/*$Roomsql = "SELECT * FROM $tablevenue WHERE room = '$item'";
+$Roomresult = mysqli_query($conn, $Roomsql);
+$RoomName = "";
+if (mysqli_num_rows($Roomresult) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($Roomresult)) {
+       $RoomName = $row['room'];
+     
+     
+    }
+} else {
+  
+    echo "0 results";
+}*/
+
+$sql = "INSERT INTO $tablename (eventname, organization,reservee_name,reservee_type,designation_id,School_Level_or_Course,phone, Room_Department,room,Materials,date_reserved,
+start_day, start_time, end_day, TimeBeginDenum ,
+TimeEndDenum,end_time, canceled, Capacity)
+VALUES ('$eventname','$organization','$reservee','$designation',$Id,'$school_level','$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
+$start_time, $end_day, '$starttime[1]' ,'$endtime[1]',$end_time,0,'$capacity')";
+
+/*
+echo '<pre>';
+    die(var_dump($item));
+    echo '</pre>';*/  
+    
+if (mysqli_num_rows($result1) > 0 ){
+  
+$row1 = mysqli_fetch_assoc($result1);
+if ($row1["RoomCapacity"] == $capacity || $row1["RoomCapacity"] >=
+$capacity && $capacity >= $row1["RoomMinimumCapacity"]){
+if (mysqli_query($conn, $sql)) {
+
+    /*if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
+   echo header('location:../Admin/index.php?success=0');
+}*/
+echo header('location:../Student/index.php?success=0');
+    
+} else {
+echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+}
+else if ($capacity < $row1["RoomMinimumCapacity"]){
+    
+ echo header('location:../Student/index.php?toolow=0');
+    
+}
+else if ($capacity > $row1["RoomCapacity"]) {
+    
+    echo header('location:../Student/index.php?overload=0');
+ 
+}
+}
+}
+    
+}
+
+if ($_SESSION['user']['user_type']  == "employee") {
+
+  if(count($errors) == 0){
+    if (mysqli_num_rows($result2) > 0) {
+        
+        echo header('location:../Employee/index.php?dateunavailable=0');
+       
+        goto end;
+    }
+/*echo '<pre>';
+    die(var_dump($result));
+    echo '</pre>';*/
+   if (mysqli_num_rows($result) > 0) {
+    
+    while($row = mysqli_fetch_assoc($result)) {
+    
+    for ($i = $start_epoch; $i <= $end_epoch; $i=$i+600) {
+       
+    if ($i>($row["start_day"]+$row["start_time"]) &&
+    $i<($row["end_day"]+$row["end_time"])) {
+        echo header('location:../Employee/index.php?hasbooked=0');
+ 
+goto end;
+}
+}
+}
+}
+/*$sql1 = "SELECT * FROM $tablevenue WHERE RoomID='$item'";*/
+/**/
+/*$Roomsql = "SELECT * FROM $tablevenue WHERE room = '$item'";
+$Roomresult = mysqli_query($conn, $Roomsql);
+$RoomName = "";
+if (mysqli_num_rows($Roomresult) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($Roomresult)) {
+       $RoomName = $row['room'];
+     
+     
+    }
+} else {
+  
+    echo "0 results";
+}*/
+
+$sql = "INSERT INTO $tablename (eventname, organization,reservee_name,reservee_type,designation_id,School_Level_or_Course,phone, Room_Department,room,Materials,date_reserved,
+start_day, start_time, end_day, TimeBeginDenum ,
+TimeEndDenum,end_time, canceled, Capacity)
+VALUES ('$eventname','$organization','$reservee','$designation',$Id,'$school_level','$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
+$start_time, $end_day, '$starttime[1]' ,'$endtime[1]',$end_time,0,'$capacity')";
+
+/*
+echo '<pre>';
+    die(var_dump($item));
+    echo '</pre>';*/  
+    
+if (mysqli_num_rows($result1) > 0 ){
+  
+$row1 = mysqli_fetch_assoc($result1);
+if ($row1["RoomCapacity"] == $capacity || $row1["RoomCapacity"] >=
+$capacity && $capacity >= $row1["RoomMinimumCapacity"]){
+if (mysqli_query($conn, $sql)) {
+
+    /*if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
+   echo header('location:../Admin/index.php?success=0');
+}*/
+echo header('location:../Employee/index.php?success=0');
+    
+} else {
+echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+}
+else if ($capacity < $row1["RoomMinimumCapacity"]){
+    
+ echo header('location:../Employee/index.php?toolow=0');
+    
+}
+else if ($capacity > $row1["RoomCapacity"]) {
+    
+    echo header('location:../Employee/index.php?overload=0');
+ 
+}
+}
+
 end:
 mysqli_close($conn);
+}
+    
 }
 
 }

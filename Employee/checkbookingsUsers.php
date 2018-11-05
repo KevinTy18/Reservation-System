@@ -442,8 +442,16 @@ function draw_calendar($month,$year){
     					$calendar .= "Booking start: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br>";
     				}
     				if($current_epoch == $row["end_day"]) {
-    					$calendar .= "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeEndDenum"] ."<br><hr><br>";
-    				}
+                if($row["end_time"]/60/60 > 12){
+                $TimeEnd = $row["end_time"]/60/60 - 12;
+                 $calendar .= "Booking end: " . sprintf("%02d:%02d", $TimeEnd, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeEndDenum"] ."<br><hr><br>";
+              }
+            else {
+              $calendar .= "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeEndDenum"] ."<br><hr><br>";
+            }
+
+            }
+
     				if($current_epoch != $row["start_day"] AND $current_epoch != $row["end_day"]) {
 	    				$calendar .= "Booking: 24h<br><hr><br>";
 	    			}

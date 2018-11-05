@@ -172,8 +172,9 @@ $pdf->Cell(20	,5,'Attendee',1,1);
 
 $pdf->SetFont('Arial','',12);
 
-$tax = 0; //total tax
-$amount = 0; //total amount
+$TotalBookings = 0; //total tax
+$TotalBookingsbyEmployee = 0;
+$TotalBookingsbyStudent = 0; //total amount
 //Cell(width , height , text , border , end line , [align] )
 //display the items
 while($item = mysqli_fetch_array($query)){
@@ -184,12 +185,40 @@ while($item = mysqli_fetch_array($query)){
 	$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["start_time"]/60/60, ($item["start_time"]%(60*60)/60)) ." " . $item["TimeBeginDenum"],1,0);
 	$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["end_time"]/60/60, ($item["end_time"]%(60*60)/60)) ." " . $item["TimeEndDenum"],1,0);
 	$pdf->Cell(20	,5,$item['Capacity'],1,1);
+
+	if($item['reservee_type'] == "Student") {
+		$TotalBookingsbyStudent += 1;
+	}
+	else
+	{
+		$TotalBookingsbyEmployee += 1;
+	}
+	$TotalBookings += 1;
 	//$pdf->Cell(34	,5,($item['date']),1,1,'R');//end of line
 	//accumulate tax and amount
 	//$tax += $item['tax'];
 	
 //	$amount +=  $item['quantity'];
 }
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(80	,5,'',0,0);
+$pdf->Cell(15	,5,'',0,0);
+$pdf->Cell(70	,5,'Total Reservation',1,0);
+$pdf->Cell(20	,5,$TotalBookings,1,1);
+
+
+$pdf->Cell(80	,5,'',0,0);
+$pdf->Cell(15	,5,'',0,0);
+$pdf->Cell(70	,5,'Total Reservation by Students',1,0);
+$pdf->Cell(20	,5,$TotalBookingsbyStudent,1,1);
+
+
+$pdf->Cell(80	,5,'',0,0);
+$pdf->Cell(15	,5,'',0,0);
+$pdf->Cell(70	,5,'Total Reservation by Employee',1,0);
+$pdf->Cell(20	,5,$TotalBookingsbyEmployee,1,1);
 }
 else {
 $pdf->Cell(50	,5,'Room Department',1,0);
