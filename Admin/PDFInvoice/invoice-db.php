@@ -1,4 +1,4 @@
-<?php
+	<?php
 require('fpdf17/fpdf.php');
 include('../../functions.php');
 include('../config.php');
@@ -22,11 +22,38 @@ $db = "cbfosystem";
 				$con=mysqli_connect($servername,$username,$password,$db);
 mysqli_select_db($con,'cbfosystem');
 
-//get invoices data
-//$date =str_replace('/', ',', $_POST['invoiceID']);
+if ($_SESSION['WebpageOrigin'] == "reports"){
 $query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' ORDER BY start_day ASC");
 $invoice = mysqli_fetch_array($query);
-
+}
+else if ($_SESSION['WebpageOrigin'] == "designationreports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar GROUP by reservee_type ORDER BY start_day ASC");
+$invoice = mysqli_fetch_array($query);
+}
+else if ($_SESSION['WebpageOrigin'] == "IBED-GS-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 1 GROUP by reservee_type  ORDER BY start_day ASC");
+$invoice = mysqli_fetch_array($query);
+}
+else if ($_SESSION['WebpageOrigin'] == "IBED-JHS-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 2 GROUP by reservee_type  ORDER BY start_day ASC");
+$invoice = mysqli_fetch_array($query);
+}
+else if ($_SESSION['WebpageOrigin'] == "SHS-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 3 GROUP by reservee_type  ORDER BY start_day ASC");
+$invoice = mysqli_fetch_array($query);
+}
+else if ($_SESSION['WebpageOrigin'] == "CAS-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 4 GROUP by reservee_type  ORDER BY start_day ASC");
+$invoice = mysqli_fetch_array($query);
+}
+else if ($_SESSION['WebpageOrigin'] == "GSL-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 5 GROUP by reservee_type  ORDER BY start_day ASC");
+$invoice = mysqli_fetch_array($query);
+}
+else if ($_SESSION['WebpageOrigin'] == "SOL-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 6 GROUP by reservee_type  ORDER BY start_day ASC");
+$invoice = mysqli_fetch_array($query);
+}
 //A4 width : 219mm
 //default margin : 10mm each side
 //writable horizontal : 219-(10*2)=189mm
@@ -61,7 +88,14 @@ $pdf->Cell(34	,5, date("d/m/Y"),0,1);//end of line
 $pdf->Cell(189	,10,'',0,1);
 $pdf->Cell(100	,5,'Records for Venue:',0,1);
 $pdf->Cell(10	,5,'',0,0);
-$pdf->Cell(90	,5,$_SESSION['FilterResult'],0,1);
+if ($_SESSION['WebpageOrigin'] == 'reports') {
+$pdf->Cell(90	,5,$_SESSION['FilterResult'],0,1);	
+}
+else {
+	$pdf->Cell(90	,5,$invoice['Department'],0,1);	
+}
+
+
 
 //$pdf->Cell(130	,5,'Fax [+12345678]',0,0);
 //$pdf->Cell(25	,5,'Customer ID',0,0);
@@ -90,11 +124,47 @@ $pdf->Cell(189	,10,'',0,1);//end of line
 //invoice contents
 $pdf->SetFont('Arial','B',9);
 
-$pdf->Cell(25	,5,'Event Name',1,0);
-$pdf->Cell(25	,5,'Organization',1,0);
-$pdf->Cell(25	,5,'Phone Number',1,0);
-$pdf->Cell(25	,5,'Start Day',1,0);
-$pdf->Cell(25	,5,'End Day',1,0);
+//Numbers are right-aligned so we give 'R' after new line parameter
+
+//items
+if ($_SESSION['WebpageOrigin'] == "reports"){
+$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' ORDER BY start_day ASC");
+
+}
+else if ($_SESSION['WebpageOrigin'] == "designationreports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar  GROUP by reservee_type ORDER BY start_day ASC");
+
+}
+else if ($_SESSION['WebpageOrigin'] == "IBED-GS-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 1 GROUP by reservee_type  ORDER BY start_day ASC");
+
+}
+else if ($_SESSION['WebpageOrigin'] == "IBED-JHS-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 2 GROUP by reservee_type  ORDER BY start_day ASC");
+
+}
+else if ($_SESSION['WebpageOrigin'] == "SHS-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 3 GROUP by reservee_type  ORDER BY start_day ASC");
+
+}
+else if ($_SESSION['WebpageOrigin'] == "CAS-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 4 GROUP by reservee_type  ORDER BY start_day ASC");
+
+}
+else if ($_SESSION['WebpageOrigin'] == "GSL-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 5 GROUP by reservee_type  ORDER BY start_day ASC");
+
+}
+else if ($_SESSION['WebpageOrigin'] == "SOL-Reports"){
+$query = mysqli_query($con,"SELECT *, count(room) as Number from bookingcalendar INNER JOIN room_department on bookingcalendar.Room_Department = room_department.Id WHERE Room_Department = 6 GROUP by reservee_type  ORDER BY start_day ASC");
+}
+
+
+if ($_SESSION['WebpageOrigin'] == "reports") {
+
+	$pdf->Cell(50	,5,'Event Name',1,0);
+$pdf->Cell(40	,5,'Organization',1,0);
+$pdf->Cell(25	,5,'Day Booked',1,0);
 $pdf->Cell(25	,5,'Time Start',1,0);
 $pdf->Cell(25	,5,'Time End',1,0);
 $pdf->Cell(20	,5,'Attendee',1,1);
@@ -102,32 +172,92 @@ $pdf->Cell(20	,5,'Attendee',1,1);
 
 $pdf->SetFont('Arial','',12);
 
-//Numbers are right-aligned so we give 'R' after new line parameter
-
-//items
-$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' ORDER BY start_day ASC"
-);
-
-$tax = 0; //total tax
-$amount = 0; //total amount
+$TotalBookings = 0; //total tax
+$TotalBookingsbyEmployee = 0;
+$TotalBookingsbyStudent = 0; //total amount
 //Cell(width , height , text , border , end line , [align] )
 //display the items
 while($item = mysqli_fetch_array($query)){
-	$pdf->Cell(25	,5,$item['eventname'],1,0);
+	$pdf->Cell(50	,5,$item['eventname'],1,0);
 	//add thousand separator using number_format function
-	$pdf->Cell(25	,5,$item['organization'],1,0);
-	$pdf->Cell(25	,5,$item['phone'],1,0);
-	$pdf->Cell(25	,5,date('d/m/Y',$item['start_day']),1,0);
+	$pdf->Cell(40	,5,$item['organization'],1,0);
 	$pdf->Cell(25	,5,date('d/m/Y',$item['start_day']),1,0);
 	$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["start_time"]/60/60, ($item["start_time"]%(60*60)/60)) ." " . $item["TimeBeginDenum"],1,0);
 	$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["end_time"]/60/60, ($item["end_time"]%(60*60)/60)) ." " . $item["TimeEndDenum"],1,0);
 	$pdf->Cell(20	,5,$item['Capacity'],1,1);
+
+	if($item['reservee_type'] == "Student") {
+		$TotalBookingsbyStudent += 1;
+	}
+	else
+	{
+		$TotalBookingsbyEmployee += 1;
+	}
+	$TotalBookings += 1;
 	//$pdf->Cell(34	,5,($item['date']),1,1,'R');//end of line
 	//accumulate tax and amount
 	//$tax += $item['tax'];
 	
 //	$amount +=  $item['quantity'];
 }
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(80	,5,'',0,0);
+$pdf->Cell(15	,5,'',0,0);
+$pdf->Cell(70	,5,'Total Reservation',1,0);
+$pdf->Cell(20	,5,$TotalBookings,1,1);
+
+
+$pdf->Cell(80	,5,'',0,0);
+$pdf->Cell(15	,5,'',0,0);
+$pdf->Cell(70	,5,'Total Reservation by Students',1,0);
+$pdf->Cell(20	,5,$TotalBookingsbyStudent,1,1);
+
+
+$pdf->Cell(80	,5,'',0,0);
+$pdf->Cell(15	,5,'',0,0);
+$pdf->Cell(70	,5,'Total Reservation by Employee',1,0);
+$pdf->Cell(20	,5,$TotalBookingsbyEmployee,1,1);
+}
+else {
+$pdf->Cell(50	,5,'Room Department',1,0);
+$pdf->Cell(40	,5,'Student Bookings',1,0);
+$pdf->Cell(40	,5,'Employee Bookings',1,1);
+
+
+
+//end of line
+
+$pdf->SetFont('Arial','',12);
+
+$tax = 0; //total tax
+$amount = 0; //total amount
+//Cell(width , height , text , border , end line , [align] )
+//display the items
+while($item = mysqli_fetch_array($query)){
+	if ($item['reservee_type'] == "Student") {
+		$pdf->Cell(50	,5,$item['Department'],1,0);
+	//add thousand separator using number_format function
+	$pdf->Cell(40	,5,$item['Number'],1,0);
+	$pdf->Cell(40	,5,'0',1,1);
+
+	}
+	else {
+	$pdf->Cell(50	,5,$item['Department'],1,0);
+	//add thousand separator using number_format function
+	$pdf->Cell(40	,5,'0',1,0);
+	$pdf->Cell(40	,5,$item['Number'],1,1);
+
+	}
+	//$pdf->Cell(34	,5,($item['date']),1,1,'R');//end of line
+	//accumulate tax and amount
+	//$tax += $item['tax'];
+	
+//	$amount +=  $item['quantity'];
+}
+}
+
 
 //summary
 

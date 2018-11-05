@@ -754,7 +754,7 @@ autocomplete="off" value="<?php echo $_SESSION['user']['firstname'] ." ". $_SESS
 </tr>
 <tr>
 <!-- <td style="color:black;padding-left:20px">Designation:</td> -->
- <td><input type="text"  name="designation" value="Student" readonly="readonly" autocomplete="off" style="display: none"/>
+ <td><input type="text"  name="designation" value="<?php echo $_SESSION['user']['user_type']  ?>" readonly="readonly" autocomplete="off" style="display: none"/>
  </td>
  </tr>
  <tr>
