@@ -483,46 +483,12 @@ width="14%">  SBCA Booking System</h2>
 
 </div>
     
-<div class="buttons">
-<form action="checkbookings.php">
-    <!--<input type="submit" value="Check Calendar" /> -->
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> Check
-Calendar</span></button>
-</form>
-
-<div class="buttons">
-<form action="UnavailableDates.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left;width:250px"><span><i class="fa fa-gears"
-style="font-size:24px;color:red;" ></i>Manage Unavailable Dates</span></button>
-</form>
-</div>
-
-<form action="addvenue.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa
-fa-plus-circle" style="font-size:24px;color:red;"></i>
-Add Venues</span></button>
-</form>
-
-<form action="checkrooms.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class="fa
-fa-check-circle" style="font-size:24px;color:red;"></i>
-Venue Descriptions</span></button>
-</form>
-
-<form action="reports.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left"><span><i class=" fa fa-table"
-style="font-size:24px;color:red;"></i>
-Check Reports</span></button>
-</form>
 
 
-    </div>
+<?php 
+  include('../includes/navigation.php')  
+    
+?>
 <div class="w3-container">
     <div class="animated fadeIn">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
