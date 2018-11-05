@@ -329,10 +329,6 @@ autocomplete="off"/></td>
 <td>
 <input  name="start_day" required="" placeholder="dd/mm/yy" type="text"
 autocomplete="off" /></td>
-<!--
-<td>-</td>
-<td><input id="to" name="end_day" required="" type="text"
-autocomplete="off"/></td> -->
 </tr>
 
 <tr>
@@ -479,4 +475,4 @@ persons</td>";
 
 
 </body>
-</html>
+</html> 
