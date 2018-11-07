@@ -68,7 +68,7 @@ $pdf->SetFont('Arial','B',14);
 //Cell(width , height , text , border , end line , [align] )
 
 $pdf->Cell(200	,5,'San Beda College Alabang',0,1,'C');
-$pdf->Cell(200	,5,'Event-Room Reservation Records',0,1,'C');//end of line
+$pdf->Cell(200	,5,'Conference Room Reservation Records',0,1,'C');//end of line
 
 //set font to arial, regular, 12pt
 $pdf->SetFont('Arial','',12);

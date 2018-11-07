@@ -40,7 +40,7 @@ $pdf->SetFont('Arial','B',14);
 //Cell(width , height , text , border , end line , [align] )
 
 $pdf->Cell(200	,5,'San Beda College Alabang',0,1,'C');
-$pdf->Cell(200	,5,'Event-Room Reservation Records',0,1,'C');//end of line
+$pdf->Cell(200	,5,'Conference Room Reservation Receipt',0,1,'C');//end of line
 
 //set font to arial, regular, 12pt
 $pdf->SetFont('Arial','',12);
@@ -51,8 +51,8 @@ $pdf->Cell(59	,5,'',0,1);//end of line
 $pdf->Cell(200	,5,'[Muntinlupa City, 1770, Metro Manila]',0,1,'C');
 $pdf->Cell(200	,5,'Phone [236-7222]',0,1,'C');
 $pdf->Cell(34	,5, "",0,1);//end of line
-$pdf->Cell(13	,5,'Date: ',0,0);
-$pdf->Cell(34	,5, date("d/m/Y"),0,1);//end of line
+$pdf->Cell(13	,5,'',0,0);
+$pdf->Cell(34	,5, '',0,1);//end of line
 
 //$pdf->Cell(130	,5,'Phone [236-7222]',0,0);
 //$pdf->Cell(25	,5,'Invoice #',0,0);
@@ -62,7 +62,19 @@ $pdf->Cell(100	,5,'Booking ID:',0,1);
 $pdf->Cell(10	,5,'',0,0);
 
 $pdf->Cell(90	,5,$_POST['venueid'],0,1);	
+$pdf->Cell(100	,5,'Booked By:',0,1);
+$pdf->Cell(10	,5,'',0,0);
 
+$pdf->Cell(90	,5,$invoice['reservee_name'],0,1);
+
+$pdf->Cell(100	,5,'Booking Date:',0,1);
+$pdf->Cell(10	,5,'',0,0);
+ if ($invoice['date_reserved'] == 0 ){
+ 	$pdf->Cell(90	,5,'Unavailable Date',0,1);
+ }
+ else {
+ $pdf->Cell(90	,5,date('d/m/Y',$invoice['date_reserved']),0,1);	
+ }
 
 //$pdf->Cell(130	,5,'Fax [+12345678]',0,0);
 //$pdf->Cell(25	,5,'Customer ID',0,0);
@@ -97,7 +109,7 @@ $pdf->SetFont('Arial','B',9);
 $pdf->Cell(40	,5,'Purpose',1,0);
 $pdf->Cell(30	,5,'Organization',1,0);
 $pdf->Cell(30	,5,'Room',1,0);
-$pdf->Cell(25	,5,'Day Schedule',1,0);
+$pdf->Cell(25	,5,'Scheduled Date',1,0);
 $pdf->Cell(25	,5,'Time Start',1,0);
 $pdf->Cell(25	,5,'Time End',1,0);
 $pdf->Cell(20	,5,'Attendee',1,1);
@@ -116,7 +128,7 @@ while($item = mysqli_fetch_array($query)){
 	//add thousand separator using number_format function
 	$pdf->Cell(30	,5,$item['organization'],1,0);
 	$pdf->Cell(30	,5,$item['room'],1,0);
-	$pdf->Cell(25	,5,date('d/m/Y',$item['start_day']),1,0);
+	$pdf->Cell(25	,5,date('m/d/Y',$item['start_day']),1,0);
 	$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["start_time"]/60/60, ($item["start_time"]%(60*60)/60)) ." " . $item["TimeBeginDenum"],1,0);
 	$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["end_time"]/60/60, ($item["end_time"]%(60*60)/60)) ." " . $item["TimeEndDenum"],1,0);
 	$pdf->Cell(20	,5,$item['Capacity'],1,1);
@@ -125,7 +137,19 @@ while($item = mysqli_fetch_array($query)){
 	//$tax += $item['tax'];
 	
 //	$amount +=  $item['quantity'];
+	$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(20	,5,'Materials:',0,0);
+if (empty($item['Materials'])){
+	$pdf->Cell(20	,5,'None',0,1);
 }
+else {
+$pdf->Cell(20	,5,$item["Materials"],0,1);	
+}
+	
+}
+
 
 
 //summary

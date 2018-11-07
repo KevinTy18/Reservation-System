@@ -672,8 +672,14 @@ width="100%" height="450px">
 </tr>
 <tr>
 <td style="color:black;padding-left:20px">Purpose:</td>
-<td> <input maxlength="50" name="eventname" required="" type="text"
-autocomplete="off"/></td>
+<td> 
+<select id="schedule" name="eventname"style="width: 200px;" >
+            <option selected="selected" value="Meeting">Meeting</option>
+            <option value="Presentation">Presentation</option>
+            <option value="Research">Research</option>
+            </select>
+        
+</td>
 <!-- <td>&nbsp;</td>
 <td>&nbsp;</td> -->
 </tr>
@@ -711,7 +717,7 @@ autocomplete="off" value="<?php echo $_SESSION['user']['Name_or_Course'] ?>" rea
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style="color:black;padding-left:20px">Schedule Day:</td>
+<td style="color:black;padding-left:20px">Scheduled Date:</td>
 <td>
 <input id="from" name="start_day" required="" placeholder="dd/mm/yy" type="text"
 autocomplete="off" /></td>
@@ -722,7 +728,7 @@ autocomplete="off"/></td> -->
 </tr>
 <?php if($_SESSION['user']['Department_Id'] == 1) {?>
 <tr>
-<td style="color:black;padding-left:20px">Schedule Time:</td> 	
+<td style="color:black;padding-left:20px">Scheduled Time:</td> 	
 <td> 
     <ul class="categorychecklist">
         <li><select name="start_hour">
@@ -883,7 +889,7 @@ autocomplete="off" min="0"/></td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style="color:black;padding-left:20px">Borrow Materials:</td>
+<td style="color:black;padding-left:20px">Materials Needed:</td>
 <td>
 <ul class="categorychecklist">
     <li><input type="checkbox" name="material_list[]" value="Remote Control-Smart TV">Remote Control -Smart TV<br></li>
