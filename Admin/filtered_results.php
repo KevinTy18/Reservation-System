@@ -587,7 +587,7 @@ $db = "cbfosystem";
 				$con=mysqli_connect($servername,$username,$password,$db);
 				$_SESSION['FilterResult'] =  $_POST['invoiceID'];
         $_SESSION['FilterMonths'] =  $_POST['filtermonth'];
-        $_SESSION['FilterYear'] =  $_POST['filteryear'];
+        $_SESSION['FilterYears'] =  $_POST['filteryear'];
 
 
 			$result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_POST['invoiceID'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" . $_POST['filtermonth'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_POST['filteryear'] . "' )  ORDER BY start_day ASC"); 
