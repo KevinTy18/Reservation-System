@@ -99,6 +99,33 @@ width="400" align="center"  >
 				?>
 			</select>
 		
+        <select name='filtermonth' style="width:200px">
+        <?php
+  
+    $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
+
+          //show invoices list as options
+          $query = mysqli_query($db,"select *,MONTH(FROM_UNIXTIME(start_day))as month , YEAR(FROM_UNIXTIME(start_day)) from bookingcalendar GROUP by  MONTH(FROM_UNIXTIME(start_day)),YEAR(FROM_UNIXTIME(start_day))");
+          while($invoice = mysqli_fetch_array($query)){ ?>
+            <option style="color:black" value= <?php echo $invoice['month'];?>> <?php  echo date("M",($invoice['start_day'])) ; ?> </option>";          
+          <?php   
+          }
+        ?>
+      </select>
+     <select name='filteryear' style="width:200px">
+        <?php
+  
+    $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
+
+          //show invoices list as options
+          $query = mysqli_query($db,"select * , YEAR(FROM_UNIXTIME(start_day)) as year from bookingcalendar GROUP by YEAR(FROM_UNIXTIME(start_day))");
+          while($invoice = mysqli_fetch_array($query)){ ?>
+            <option style="color:black" value= <?php echo $invoice['year'];?>> <?php  echo date("Y",($invoice['start_day'])) ; ?> </option>";          
+          <?php   
+          }
+        ?>
+      </select>
+
             <button type="submit" value='Generate' class="smallbutton" name="generate_btn">Show Report</button>
 			
 		</form>

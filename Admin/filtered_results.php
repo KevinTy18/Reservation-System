@@ -585,7 +585,11 @@ $db = "cbfosystem";
 
 				$con=mysqli_connect($servername,$username,$password,$db);
 				$_SESSION['FilterResult'] =  $_POST['invoiceID'];
-			$result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_POST['invoiceID'] ."' ORDER BY start_day ASC"); 
+        $_SESSION['FilterMonths'] =  $_POST['filtermonth'];
+        $_SESSION['FilterYear'] =  $_POST['filteryear'];
+
+
+			$result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_POST['invoiceID'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" . $_POST['filtermonth'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_POST['filteryear'] . "' )  ORDER BY start_day ASC"); 
 			
 	$_SESSION['FilterResult'] =  $_POST['invoiceID']; 
  
@@ -604,7 +608,6 @@ echo "<table style='border: solid 1px black; text-align:center;' >";
  </tr>";
  
 while($row = mysqli_fetch_array($result)) {
-
 
     echo "<tr style=color:white;>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['eventname'] . "</td>";
