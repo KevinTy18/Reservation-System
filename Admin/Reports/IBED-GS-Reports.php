@@ -1,9 +1,9 @@
 <?php
-include('../functions.php');
-include('config.php');
+include('../../functions.php');
+include('../config.php');
 if (!isAdmin()) {
 $_SESSION['msg'] = "You must log in first";
-header('location: ../adminlogin.php');
+header('location: ../../adminlogin.php');
 }
 
     if (isset($_GET['logout'])) {
@@ -12,7 +12,7 @@ unset($_SESSION['user']);
 header("location: login.php");
 }
 $_SESSION['WebpageOrigin'] = "IBED-GS-Reports";
-echo $_SESSION['WebpageOrigin'];
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -125,7 +125,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 crossorigin="anonymous">
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../cssforlogin/css/CancelReservation.css">
+<link rel="stylesheet" href="../../cssforlogin/css/CancelReservation.css">
 
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
@@ -211,37 +211,15 @@ function closeNav() {
 
 <body>
 
-<div class="header" id="main">
-  <a class="logo" style="color:white;"> Welcome, <?php  if
-(isset($_SESSION['user'])) : ?>
-<strong><?php echo $_SESSION['user']['username']; ?>!</strong>
-
-
-<?php endif ?></a>
-  <div class="header-right">
-    <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
-          <span class="fa fa-home" style="font-size:20px"></span> Home
-    </a>
-    <a href="index.php?logout='1'" class="smallbutton"
-style="margin-right:10px;color:maroon;">
-          <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
-    </a>
-  </div>
-</div><!-- end header -->
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="designationreports.php">Reservee Reports</a>
-  <a href="IBED-GS-Reports.php">IBED-GS Reports</a>
-  <a href="IBED-JHS-Reports.php">IBED-JHS Reports</a>
-  <a href="SHS-Reports.php">SHS Reports</a>
-  <a href="CAS-Reports.php">CAS Reports</a>
-  <a href="GSL-Reports.php">GSL Reports</a>
-  <a href="SOL-Reports.php">SOL Reports</a>
-</div>
+<!-- end header -->
+<?php
+include('includes/header.php');
+include('includes/nav.php');  
+?>
 <br>
 <div class="divsize" align="center">
 <!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="sbcalogo.png" alt="SBCA Logo"
+<h2 class="fontforlogo"><img src="../../Admin/sbcalogo.png" alt="SBCA Logo"
 width="14%">  SBCA Booking System</h2>
 </div>
 <span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>

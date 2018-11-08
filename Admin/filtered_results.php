@@ -24,11 +24,12 @@ html *
      
 }
 body {
-    background-image: url("site-image.jpg");
+    background-image: url("../cssforlogin/images/site-image.jpg");
     background-repeat: no-repeat, repeat;
     background-color: #cccccc;
-    background-size: 100% 200%;
-    
+    background-size: cover;
+    width: 100%;
+  background-position: center top;
 }
 
 

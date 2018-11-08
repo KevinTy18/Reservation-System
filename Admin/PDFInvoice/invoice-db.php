@@ -18,8 +18,7 @@ $username = "root";
 $password = "";
 $db = "cbfosystem";
 
-
-				$con=mysqli_connect($servername,$username,$password,$db);
+$con=mysqli_connect($servername,$username,$password,$db);
 mysqli_select_db($con,'cbfosystem');
 
 if ($_SESSION['WebpageOrigin'] == "reports"){
@@ -66,7 +65,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',14);
 
 //Cell(width , height , text , border , end line , [align] )
-
+$pdf->Image('SBCA-icon1transparent.png',10,50,190);
 $pdf->Cell(200	,5,'San Beda College Alabang',0,1,'C');
 $pdf->Cell(200	,5,'Conference Room Reservation Records',0,1,'C');//end of line
 

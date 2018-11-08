@@ -1,9 +1,9 @@
 <?php
-include('../functions.php');
-include('config.php');
+include('../../functions.php');
+include('../config.php');
 if (!isAdmin()) {
 $_SESSION['msg'] = "You must log in first";
-header('location: ../adminlogin.php');
+header('location: ../../adminlogin.php');
 }
 
     if (isset($_GET['logout'])) {
@@ -11,7 +11,7 @@ session_destroy();
 unset($_SESSION['user']);
 header("location: login.php");
 }
-$_SESSION['WebpageOrigin'] = "SHS-Reports";
+$_SESSION['WebpageOrigin'] = "SOL-Reports";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -159,12 +159,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	  $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
 
 					//show invoices list as options
-					$query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE Room_Department = 3 GROUP by reservee_type ");
+					$query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE Room_Department = 6 GROUP by reservee_type ");
 				
 				
 				?>
            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
-<script type="text/javascript">  
+           <script type="text/javascript">  
            google.charts.load('current', {'packages':['corechart']});  
            google.charts.setOnLoadCallback(drawChart);  
            function drawChart()  
@@ -179,17 +179,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'Percentage of Reservee of SHS',  
+                      title: 'Percentage of Reservee of SOL',  
                       //is3D:true,  
                       pieHole: 0.4  
                      };  
                 var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
                 chart.draw(data, options);  
            }  
-</script>
-
+        </script>
+        
          <?php
-  $query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE School_Level_or_Course = 'Grade 11 - STEM' OR School_Level_or_Course = 'Grade 12 - STEM' OR School_Level_or_Course = 'Grade 11 - GAS' OR School_Level_or_Course = 'Grade 12 - GAS' OR School_Level_or_Course = 'Grade 11 - HUMMS'  OR School_Level_or_Course = 'Grade 12 - HUMMS' OR School_Level_or_Course = 'Grade 11 - ABM' OR School_Level_or_Course = 'Grade 12 - ABM'  GROUP by School_Level_or_Course");
+  $query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE School_Level_or_Course = 'School of Law' GROUP by School_Level_or_Course");
         
         
         ?> 
@@ -209,7 +209,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'Percentage of Reservee of SHS by Track',  
+                      title: 'Percentage of Reservee of IBED-JHS by Grade Level',  
                       //is3D:true,  
                       pieHole: 0.4  
                      };  
@@ -217,7 +217,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
                 chart.draw(data, options);  
            } 
            </script>
-    
+
 <script>
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -233,25 +233,10 @@ function closeNav() {
 
 <body>
 
-<div class="header" id="main">
-  <a class="logo" style="color:white;"> Welcome, <?php  if
-(isset($_SESSION['user'])) : ?>
-<strong><?php echo $_SESSION['user']['username']; ?>!</strong>
-
-
-<?php endif ?></a>
-  <div class="header-right">
-    <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
-          <span class="fa fa-home" style="font-size:20px"></span> Home
-    </a>
-    <a href="index.php?logout='1'" class="smallbutton"
-style="margin-right:10px;color:maroon;">
-          <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
-    </a>
-  </div>
-</div><!-- end header -->
+<!-- end header -->
 <?php
-include('includes/nav.php')    
+include('includes/header.php');
+include('includes/nav.php');
 ?>
 <br>
 <div class="divsize" align="center">
@@ -272,16 +257,16 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
            <div style="width:950px;height:50px">
                <div class="w3-row">
     <a href="javascript:void(0)" onclick="openCity(event, 'London');">
-      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">SHS Reservees</div>
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">SOL Reservees</div>
     </a>
     <a href="javascript:void(0)" onclick="openCity(event, 'Paris');">
-      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">By Track</div>
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">By Courses</div>
     </a>
   </div>
                
         <div id="London" class="w3-container city" style="display:none">
     
-    <h2>Percentage of Reservee of SHS</h2>  
+    <h2>Percentage of Reservee of SOL</h2>  
                 <center><div id="piechart" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
 <button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
@@ -295,7 +280,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
   </div>
 
   <div id="Paris" class="w3-container city" style="display:none">
-    <h2>Reports by Track</h2>
+    <h2>Reports by courses</h2>
       <center><div id="piechartforSchoolLevel" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
 <button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
