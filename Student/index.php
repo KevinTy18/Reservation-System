@@ -673,7 +673,7 @@ width="100%" height="450px">
 <tr>
 <td style="color:black;padding-left:20px">Purpose:</td>
 <td> 
-<select id="schedule" name="eventname"style="width: 200px;" >
+<select name="eventname"style="width: 200px;" >
             <option selected="selected" value="Meeting">Meeting</option>
             <option value="Presentation">Presentation</option>
             <option value="Research">Research</option>

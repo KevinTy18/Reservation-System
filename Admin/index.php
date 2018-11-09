@@ -240,8 +240,8 @@ name="Roomname" style="width:170px">
     </select>
 </td>
 </tr>
-<tr>
-<td style="color:black;padding-left:20px">Event Name:</td>
+<tr>  
+<td style="color:black;padding-left:20px">Purpose:</td>
 <td> <select id="" name="eventname"style="width: 200px;" >
             <option selected="selected" value="Meeting">Meeting</option>
             <option value="Presentation">Presentation</option>
@@ -362,7 +362,7 @@ autocomplete="off" min="0"/></td>
 <td>&nbsp;</td> -->
 </tr>
 <tr>
-<td style="color:black;padding-left:20px">Borrow Materials:</td>
+<td style="color:black;padding-left:20px">Materials Needed:</td>
 <td>
 <ul class="categorychecklist">
     <li><input type="checkbox" name="material_list[]" value="Remote
