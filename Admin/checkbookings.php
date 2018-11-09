@@ -74,7 +74,7 @@ style="display: none;">Top<span></span></a>
 
     <div class="divlogo"><img src="sbcalogo.png" alt="SBCA Logo"
 width="20%" height="80%" style="margin-left:20px"></div>
-    <div class="divsbcalogo" ><h2 class="fontforlogo">  SBCA Booking
+    <div class="divsbcalogo" ><h2 class="fontforlogo">  LRC Booking
 Calendar</h2></div>
 </div>
 </div>

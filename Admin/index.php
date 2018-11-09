@@ -202,38 +202,8 @@ $(function() {
 <body onload='loadCategories();'>
 <?php
 include('../includes/bookingalerts.php');
-?>
-<div class="header">
-  <a class="logo" style="color:white;"> Welcome, <?php  if
-(isset($_SESSION['user'])) : ?>
-<strong><?php echo $_SESSION['user']['username']; ?>!</strong>
-
-
-<?php endif ?></a>
-  <div class="header-right">
-    <a href="#" class="smallbutton"
-style="margin-right:5px;background-color:white;color:maroon;">
-          <span class="fa fa-home" style="font-size:20px"></span> Home
-    </a>
-    <a href="index.php?logout='1'" class="smallbutton"
-style="margin-right:10px;background-color:white;color:maroon;">
-          <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
-    </a>
-  </div>
-</div>
-
-<div style="margin:1%;">
-</div>
-<div class="divsize" align="center">
-<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="sbcalogo.png" alt="SBCA Logo"
-width="14%"> <b> SBCA BOOKING SYSTEM </b> </h2>
-
-</div>
-
-<?php 
-  include('../includes/navigation.php')  
-    
+include('header.php');
+include('../includes/navigation.php'); 
 ?>
 <div class="w3-container">
     <div class="animated fadeIn">
@@ -270,9 +240,9 @@ name="Roomname" style="width:170px">
     </select>
 </td>
 </tr>
-<tr>
+<tr>  
 <td style="color:black;padding-left:20px">Purpose:</td>
-<td> <select  name="eventname"style="width: 200px;" >
+<td> <select id="" name="eventname"style="width: 200px;" >
             <option selected="selected" value="Meeting">Meeting</option>
             <option value="Presentation">Presentation</option>
             <option value="Research">Research</option>
