@@ -49,4 +49,25 @@ if (isset($_GET['datecancelled']) == true) {
     </script>
 <?php
 }
+if (isset($_GET['updatesuccess']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Update success!", "Updating of room succeeded!", "success");
+    </script>
+<?php
+}
+if (isset($_GET['activated']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Activate success!", "Room activated success!", "success");
+    </script>
+<?php
+}
+if (isset($_GET['deactivated']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Deactivate success!", "Room deactivated successfully!", "success");
+    </script>
+<?php
+}
 ?>

@@ -461,9 +461,10 @@ $(window).resize(function() {
 
     
 <?php
+include('../includes/bookingalerts.php');
 include('header.php');
-include('../includes/navigation.php')  
-    
+include('../includes/navigation.php');
+  
 ?>
 <div class="w3-container">
     <div class="animated fadeIn">
@@ -558,7 +559,7 @@ echo '<td><form method="post" action="" enctype="multipart/form-data">
     <?php
     // Run your query
     
-    echo '<select name="deparment" style="width:200px">'; // Open your drop down box
+    echo '<select name="department" style="width:200px">'; // Open your drop down box
 
 // Loop through the query results, outputing the options one by one
 while ($row = $query->fetch_assoc()) {
