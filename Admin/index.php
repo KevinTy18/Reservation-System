@@ -226,8 +226,6 @@ style="width:100%"></div></div>';
 <form action="index.php" method="post">
 <center><h3 class="fontfortitle">Make a Schedule</h3>
 
-
-
 </center>
 <table>
 <tr>

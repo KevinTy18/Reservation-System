@@ -202,24 +202,11 @@ function closeNav() {
 </head>
 
 <body>
+<?php
+include('header.php')  
+?>
 
-<div class="header" id="main">
-  <a class="logo" style="color:white;"> Welcome, <?php  if
-(isset($_SESSION['user'])) : ?>
-<strong><?php echo $_SESSION['user']['username']; ?>!</strong>
-
-
-<?php endif ?></a>
-  <div class="header-right">
-    <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
-          <span class="fa fa-home" style="font-size:20px"></span> Home
-    </a>
-    <a href="index.php?logout='1'" class="smallbutton"
-style="margin-right:10px;color:maroon;">
-          <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
-    </a>
-  </div>
-</div><!-- end header -->
+<!-- end header -->
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="designationreports.php">Reservee Reports</a>
@@ -231,11 +218,6 @@ style="margin-right:10px;color:maroon;">
   <a href="Reports/SOL-Reports.php">SOL Reports</a>
 </div>
 <br>
-<div class="divsize" align="center">
-<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="sbcalogo.png" alt="SBCA Logo"
-width="14%">  SBCA Booking System</h2>
-</div>
 <span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>
 <br>
 

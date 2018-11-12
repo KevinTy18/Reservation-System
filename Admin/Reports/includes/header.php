@@ -15,3 +15,10 @@ style="margin-right:10px;color:maroon;">
     </a>
   </div>
 </div>
+<div style="margin:1%;">
+</div>
+<div class="divsize" align="center">
+<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
+<h2 class="fontforlogo"><img src="../../sanbedapics/sbcalogo.png" alt="SBCA Logo"
+width="14%"><b> LRC BOOKING SYSTEM</b></h2>
+</div>

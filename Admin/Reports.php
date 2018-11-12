@@ -64,7 +64,7 @@ width="400" align="center"  >
     <td valign="top" style="padding-left:20px">
         <div>
         <form method='post' action='filtered_results.php'>
-			<select name='invoiceID' style="width:200px">
+			<select name='invoiceID' style="width:200px;margin-bottom:10px">
 				<?php
 	
 		$db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
@@ -77,7 +77,6 @@ width="400" align="center"  >
 					}
 				?>
 			</select>
-		
         <select name='filtermonth' style="width:200px">
         <?php
   
