@@ -34,12 +34,13 @@ body {
 
 
 .divsize {
-background: rgba(237, 56, 56,0.5);
     max-width: 500px;
     height: 110px;
     left: 50%;
     margin-left: 35%;
     padding-top: 10px;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 30px;
 }
 #divcon {
 background: rgba(216, 0, 0,0.6);
@@ -279,7 +280,7 @@ code {
 }
 .fontforlogo{
      font-family: Old English Text MT;
-     color:white;
+     color:black;
 }
 .fontfortitle{
     font-family: Lucida Calligraphy;
@@ -535,30 +536,9 @@ $(window).resize(function() {
 </head>
 
 <body>
-<div class="header">
-  <a class="logo" style="color:white;"> Welcome, <?php  if
-(isset($_SESSION['user'])) : ?>
-<strong><?php echo $_SESSION['user']['username']; ?>!</strong>
-
-
-<?php endif ?></a>
-  <div class="header-right">
-    <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
-          <span class="fa fa-home" style="font-size:20px"></span> Home
-    </a>
-    <a href="index.php?logout='1'" class="smallbutton"
-style="margin-right:10px;color:maroon;">
-          <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
-    </a>
-  </div>
-</div>
-<br>
-<div class="divsize" align="center">
-<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="sbcalogo.png" alt="SBCA Logo"
-width="14%">  SBCA Booking System</h2>
-
-</div>
+<?php
+include('header.php')
+?>
     <form method='post' action='PDFInvoice/invoice-db.php'>
 <button type='submit' class="smallbutton"  style="float:right;margin-right:80px"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
 	

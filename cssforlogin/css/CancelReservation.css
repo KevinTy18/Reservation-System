@@ -15,12 +15,13 @@ body {
 
 
 .divsize {
-background: rgba(237, 56, 56,0.5);
     max-width: 500px;
     height: 110px;
     left: 50%;
     margin-left: 35%;
     padding-top: 10px;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 30px;
 }
 #divcon {
 background: rgba(216, 0, 0,0.6);
@@ -243,8 +244,8 @@ code {
   font: inherit;
 }
 .fontforlogo{
-     font-family: Old English Text MT;
-     color:white;
+     font-family: helvetica;
+     color:black;
 }
 .fontfortitle{
     font-family: Lucida Calligraphy;

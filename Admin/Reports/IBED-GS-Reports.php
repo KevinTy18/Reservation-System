@@ -217,11 +217,6 @@ include('includes/header.php');
 include('includes/nav.php');  
 ?>
 <br>
-<div class="divsize" align="center">
-<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="../../Admin/sbcalogo.png" alt="SBCA Logo"
-width="14%">  SBCA Booking System</h2>
-</div>
 <span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>
 <br>
 

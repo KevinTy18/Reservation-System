@@ -239,11 +239,7 @@ include('includes/header.php');
 include('includes/nav.php');  
 ?>
 <br>
-<div class="divsize" align="center">
-<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="../../sanbedapics/sbcalogo.png" alt="SBCA Logo"
-width="14%">  SBCA Booking System</h2>
-</div>
+
 <span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>
 <br>
 
@@ -269,11 +265,11 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
     <h2>Percentage of Reservee of GSL</h2>  
                 <center><div id="piechart" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
-<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
+<!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
 	
 
-</button> 
+</button>--> 
 </form> 
             </center>
                 <br />  
@@ -283,11 +279,11 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
     <h2>Reports by courses</h2>
       <center><div id="piechartforSchoolLevel" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
-<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
+<!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
 	
 
-</button> 
+</button> -->
 </form> 
             </center>
                 <br />
