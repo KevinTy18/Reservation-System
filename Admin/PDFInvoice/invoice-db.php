@@ -21,7 +21,7 @@ $db = "cbfosystem";
 $con=mysqli_connect($servername,$username,$password,$db);
 mysqli_select_db($con,'cbfosystem');
 
-$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" . $_SESSION['FilterMonths'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_SESSION['FilterYears'] . "' )  ORDER BY start_day ASC");
+$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" . $_SESSION['FilterMonths'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_SESSION['FilterYear'] . "' )  ORDER BY start_day ASC");
 $invoice = mysqli_fetch_array($query);
 
 
@@ -99,13 +99,11 @@ $pdf->SetFont('Arial','B',9);
 
 //items
 
-$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" .   $_SESSION['FilterMonths'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_SESSION['FilterYears'] . "' )  ORDER BY start_day ASC");
+$query = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_SESSION['FilterResult'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" .   $_SESSION['FilterMonths'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_SESSION['FilterYear'] . "' )  ORDER BY start_day ASC");
 
 
 
-
-
-
+ if (mysqli_affected_rows($con)  > 0) {
 $pdf->Cell(50	,5,'Event Name',1,0);
 $pdf->Cell(40	,5,'Organization',1,0);
 $pdf->Cell(25	,5,'Day Booked',1,0);
@@ -122,6 +120,7 @@ $TotalBookingsbyStudent = 0; //total amount
 //Cell(width , height , text , border , end line , [align] )
 //display the items
 while($item = mysqli_fetch_array($query)){
+
 	$pdf->Cell(50	,5,$item['eventname'],1,0);
 	//add thousand separator using number_format function
 	$pdf->Cell(40	,5,$item['organization'],1,0);
@@ -158,33 +157,26 @@ $pdf->Cell(15	,5,'',0,0);
 $pdf->Cell(70	,5,'Total Reservation by Students',1,0);
 $pdf->Cell(20	,5,$TotalBookingsbyStudent,1,1);
 
-
 $pdf->Cell(80	,5,'',0,0);
 $pdf->Cell(15	,5,'',0,0);
 $pdf->Cell(70	,5,'Total Reservation by Employee',1,0);
 $pdf->Cell(20	,5,$TotalBookingsbyEmployee,1,1);
-
-
-
-//summary
-
 
 //$pdf->Cell(130	,5,'',0,0);
 //$pdf->Cell(25	,5,'Date Due',0,0);
 //$pdf->Cell(4	,5,'P',1,0);
 //$pdf->Cell(30	,5,number_format($amount + $tax),1,1,'R');//end of line
 
+ }
 
-
-
-
-
-
-
-
-
-
-
+else {
+	$pdf->SetFont('Arial','',24);
+	$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(10	,5,'',0,1);
+$pdf->Cell(60	,5,'',0,0);
+$pdf->Cell(50	,5,'No Records Found',0,0);
+}
 
 
 

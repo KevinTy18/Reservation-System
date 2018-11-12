@@ -24,12 +24,11 @@ html *
      
 }
 body {
-    background-image: url("../cssforlogin/images/site-image.jpg");
+    background-image: url("site-image.jpg");
     background-repeat: no-repeat, repeat;
     background-color: #cccccc;
-    background-size: cover;
-    width: 100%;
-  background-position: center top;
+    background-size: 100% 200%;
+    
 }
 
 
@@ -579,52 +578,57 @@ width="800" class="w3-table w3-centered" >
 				//Table for users
 			
 				$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "cbfosystem";
+        $username = "root";
+        $password = "";
+        $db = "cbfosystem";
 
 
 				$con=mysqli_connect($servername,$username,$password,$db);
 				$_SESSION['FilterResult'] =  $_POST['invoiceID'];
         $_SESSION['FilterMonths'] =  $_POST['filtermonth'];
-        $_SESSION['FilterYears'] =  $_POST['filteryear'];
+           $_SESSION['FilterResult'] =  $_POST['invoiceID']; 
 
+			  $result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_POST['invoiceID'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" . $_POST['filtermonth'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_POST['filteryear'] . "' )  ORDER BY start_day ASC"); 
 
-			$result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_POST['invoiceID'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" . $_POST['filtermonth'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_POST['filteryear'] . "' )  ORDER BY start_day ASC"); 
-			
-	$_SESSION['FilterResult'] =  $_POST['invoiceID']; 
- 
-				
-echo "<table style='border: solid 1px black; text-align:center;' >";
- echo "<tr style=color:white; >
- <th>EventName</th>
- <th>Organization</th> 
- <th>PhoneNum</th>
- <th>Venue</th>
- <th>Start Day</th>
- <th>End Day</th>
- <th>Start Time</th>
- <th>End Time</th>
- <th>Expected Attendee</th>
- </tr>";
- 
-while($row = mysqli_fetch_array($result)) {
+          $_SESSION['FilterYear'] =  $_POST['filteryear'];
 
-    echo "<tr style=color:white;>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['eventname'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['organization'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['phone'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['room'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . date('d/m/Y',$row['start_day']) . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . date('d/m/Y',$row['end_day']) . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) ." " . $row["TimeBeginDenum"]."</td>";
-	echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60))." " .$row["TimeEndDenum"] . "</td>";
-	    echo "<td style='width:150px;border:1px solid black;'>" . $row['Capacity'] . "</td>";
-	
- echo "</tr>";
-}
-echo "</table>";
-?>
+        if (mysqli_affected_rows($con)  > 0) {
+          echo "<table style='border: solid 1px black; text-align:center;' >";
+       echo "<tr style=color:white; >
+       <th>EventName</th>
+       <th>Organization</th> 
+       <th>PhoneNum</th>
+       <th>Venue</th>
+       <th>Start Day</th>
+       <th>End Day</th>
+       <th>Start Time</th>
+       <th>End Time</th>
+       <th>Expected Attendee</th>
+       </tr>";
+       
+       while($row = mysqli_fetch_array($result)) {
+
+          echo "<tr style=color:white;>";
+          echo "<td style='width:150px;border:1px solid black;'>" . $row['eventname'] . "</td>";
+          echo "<td style='width:150px;border:1px solid black;'>" . $row['organization'] . "</td>";
+          echo "<td style='width:150px;border:1px solid black;'>" . $row['phone'] . "</td>";
+          echo "<td style='width:150px;border:1px solid black;'>" . $row['room'] . "</td>";
+          echo "<td style='width:150px;border:1px solid black;'>" . date('d/m/Y',$row['start_day']) . "</td>";
+          echo "<td style='width:150px;border:1px solid black;'>" . date('d/m/Y',$row['end_day']) . "</td>";
+          echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) ." " . $row["TimeBeginDenum"]."</td>";
+        echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60))." " .$row["TimeEndDenum"] . "</td>";
+            echo "<td style='width:150px;border:1px solid black;'>" . $row['Capacity'] . "</td>";
+        
+       echo "</tr>";
+      }
+      echo "</table>";
+        }
+
+        else {
+           ?>
+           <p> No Records Found </p>
+      <?php  }   ?>
+     
 
 </center>
     </div>
