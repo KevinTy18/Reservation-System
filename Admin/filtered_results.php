@@ -24,7 +24,7 @@ html *
      
 }
 body {
-    background-image: url("../images/site-image.jpg");
+    background-image: url("../sanbedapics/site-image.jpg");
     background-repeat: no-repeat, repeat;
     background-color: #cccccc;
     background-size: cover;
