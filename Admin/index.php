@@ -209,7 +209,6 @@ include('../includes/navigation.php');
     <div class="animated fadeIn">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
 width="100%" height="450px">
-<tr>
 <script>
 
     /*function change_picture(imageValue)
@@ -225,9 +224,9 @@ style="width:100%"></div></div>';
 <td valign="top">
 <form action="index.php" method="post">
 <center><h3 class="fontfortitle">Make a Schedule</h3>
-
 </center>
 <table>
+
 <tr>
 <td style="color:black;padding-left:20px">Choose a room:</td>
 <td>
@@ -295,7 +294,7 @@ value="Student" />Student
 autocomplete="off"/></td>
 
 </tr>
-
+<tr>
 <td style="color:black;padding-left:20px">Day of Event:</td>
 <td>
 <input  name="start_day" required="" placeholder="dd/mm/yy" type="text"
@@ -338,8 +337,7 @@ autocomplete="off" /></td>
 Reservation:</td>
       <td>
           <ul class="categorychecklist">
-            <li><select name="Duration" id="duration" style="width:200px;">
-            </li>
+              <li><select name="Duration" id="duration" style="width:200px;"></select></li>
           </ul>
  </td>
  </tr>
@@ -382,9 +380,8 @@ type="submit"><span>Reserve</span></button>
             </div>
 </td>
 </tr>
+    
 </table>
-
-
 <!--<input name="book" type="submit" value="Book" /> -->
 </form>
 
@@ -437,9 +434,7 @@ persons</td>";
 ?>
     </table>
 </div>
-</td>
 
-</tr>
 </table>
     </div>
     </div>

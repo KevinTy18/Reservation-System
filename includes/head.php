@@ -2,6 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SBCA Booking Calendar</title>
 <link href="jquery-ui.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="../sanbedapics/sbcalogo.png"/>
 <link rel="stylesheet" href="../cssforlogin/css/w3.css">
 <link rel="stylesheet"
 href="../cssforlogin/css/bootstrap.min.css"

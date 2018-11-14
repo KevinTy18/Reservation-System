@@ -35,6 +35,7 @@ $(document).ready(function(){
 </script>
 <link href="../cssforlogin/css/checkbookings.css" rel="stylesheet">
 </head>
+<link rel="icon" type="image/png" href="../sanbedapics/sbcalogo.png"/>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SBCA Booking Calendar</title>

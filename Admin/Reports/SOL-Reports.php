@@ -265,11 +265,11 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
     <h2>Percentage of Reservee of SOL</h2>  
                 <center><div id="piechart" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
-<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
+<!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
 	
 
-</button> 
+</button>--> 
 </form> 
             </center>
                 <br />  
@@ -279,11 +279,11 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
     <h2>Reports by courses</h2>
       <center><div id="piechartforSchoolLevel" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
-<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
+<!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
 	
 
-</button> 
+</button> -->
 </form> 
             </center>
                 <br />

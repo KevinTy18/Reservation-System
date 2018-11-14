@@ -24,11 +24,13 @@ html *
      
 }
 body {
-    background-image: url("site-image.jpg");
+    background-image: url("../images/site-image.jpg");
     background-repeat: no-repeat, repeat;
     background-color: #cccccc;
-    background-size: 100% 200%;
-    
+    background-size: cover;
+    width: 100%;
+
+  background-position: center top;
 }
 
 
@@ -606,7 +608,7 @@ width="800" class="w3-table w3-centered" >
 
         else {
            ?>
-           <p> No Records Found </p>
+           <h2><b>No Records Found</b></h2>
       <?php  }   ?>
      
 
@@ -619,7 +621,7 @@ width="800" class="w3-table w3-centered" >
     </table>
 
     
-    <div class="buttons">
+<div class="buttons" style="margin-left:80px">
 <form action="checkbookings.php">
     <!--<input type="submit" value="Check Calendar" /> -->
     <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
@@ -628,21 +630,21 @@ Calendar</span></button>
 </form>
 
 <div class="buttons">
-<form action="BookingOptions.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Cancel Reservation</span></button>
+<form action="UnavailableDates.php">
+    <button class="buttoncal" type="submit" style="float:left;width:340px"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Manage Unavailable Dates</span></button>
 </form>
 </div>
     
 <form action="addvenue.php">
     <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
 fa-plus-circle" style="font-size:24px;color:red;"></i>
-Add Venues</span></button>
+Add Rooms</span></button>
 </form>
     
 <form action="checkrooms.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
+    <button class="buttoncal" type="submit" style="float:left;width:270px"><span><i class="fa
 fa-check-circle" style="font-size:24px;color:red;"></i>
-Venue Descriptions</span></button>
+Room Descriptions</span></button>
 </form>
         
 <form action="reports.php">
@@ -650,8 +652,6 @@ Venue Descriptions</span></button>
 Check Reports</span></button>
 </form>
 
-
-	
     </div>
     </div>
 
