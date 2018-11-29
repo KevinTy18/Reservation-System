@@ -421,15 +421,12 @@ if ($_SESSION['user']['user_type']  == "student") {
     
     while($row = mysqli_fetch_assoc($result)) {
     
-    for ($i = $start_epoch; $i <= $end_epoch; $i=$i+600) {
+    for ($i = $start_epoch ; $i <= $end_epoch; $i=$i+600) {
        /*echo '<pre>';
     die(var_dump($end_epoch));
     echo '</pre>';*/
-    if ($i>($row["start_day"]+$row["start_time"]) &&
-    $i<($row["end_day"]+$row["end_time"])) {
-        echo '<pre>';
-    die(var_dump($end_epoch));
-    echo '</pre>';
+    if ($i>($row["start_day"]+$row["start_time"]) && $i<($row["end_day"]+$row["end_time"])) {
+
         echo header('location:../Student/index.php?hasbooked=0');
  
 goto end;
@@ -644,11 +641,12 @@ if ($conn->query($sql) === TRUE) {
 
 function updatevenue (){
         $id            =  e($_POST['venueid']);
-        $department_id =  e($_POST['department']);
-        $venuename     =  e($_POST['venuename']);
+        $department_id =  e($_POST['department_id']);
+        $venuename     =  e($_POST['name']);
 		$capacity      =  e($_POST['capacity']);
 		$mincapacity   =  e($_POST['mincapacity']);
         $image         =  $_FILES['venueimage']['name'];
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -667,8 +665,11 @@ if ($conn->connect_error) {
 	$sql = "UPDATE venues SET RoomName = '$venuename',Department_Id = '$department_id',RoomCapacity = '$capacity',RoomMinimumCapacity= '$mincapacity', VenueImage = '$image'   WHERE RoomID = $id"; 
 	
 	if ($conn->query($sql) === TRUE) {
-    
-        echo header('location:../Admin/checkrooms.php?updatesuccess=0');
+    ?>
+    <script>
+         alert("Room updated successfully")
+    </script>
+<?php
     
     $_SESSION['venuename'] =  "";
     $_SESSION['department_id'] =  "";
@@ -720,9 +721,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "UPDATE  venues SET Availability = 'Unavailable' WHERE RoomID = '$id'";
 
 if ($conn->query($sql) === TRUE) {
-    
-    echo header('location:../Admin/checkrooms.php?deactivated=0');
-    
+    ?>
+    <script>
+         alert("Venue deactivated successfully")
+    </script>
+<?php
 } else {
     echo "Error deleting venue: " . $conn->error;
 }
@@ -743,7 +746,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "UPDATE  venues SET Availability = 'Available' WHERE RoomID = '$id'";
 
 if ($conn->query($sql) === TRUE) {
-    echo header('location:../Admin/checkrooms.php?activated=0');
+    ?>
+    <script>
+         alert("Venue activated successfully")
+    </script>
+<?php
 } else {
     echo "Error restoring venue: " . $conn->error;
 }
