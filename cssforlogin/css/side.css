@@ -1,0 +1,22 @@
+.side{
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%)
+}
+.side a{
+    background: #d44233de;
+    color:white;
+    font-size:22px;
+    display:block;
+    width:250px;
+    padding:12px;
+    text-decoration:none;
+    margin: 8px 0;
+    color:white;
+    border-radius: 6px;
+    margin-left: -100px;
+    transition: 0.6s all;
+} 
+.side a:hover{
+    margin-left:0;
+}
