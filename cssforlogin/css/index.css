@@ -419,3 +419,8 @@
       max-height: 350px;
       overflow-y: scroll;
   }
+@media (min-width: 600px){
+    body{
+        font-size:0.5rem;
+    }
+}
