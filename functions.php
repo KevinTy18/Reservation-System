@@ -595,7 +595,11 @@ echo $errors .'<br>';
 
 }
 }
-
+function test_progress($date) {
+   echo '<pre>';
+        die(var_dump($date));
+        echo '</pre>';
+}
 function createvenue(){
     global $db, $errors;
     

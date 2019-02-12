@@ -147,14 +147,30 @@ function draw_calendar($month,$year){
 			/** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
 			$calendar.= str_repeat('<p> </p>',2);
 			$current_epoch = mktime(0,0,0,$month,$list_day,$year);
+			$Cancelled_Date_Epoch = intval(strtotime(htmlspecialchars($current_epoch)));
 			
 			$sql = "SELECT * FROM $tablename WHERE $current_epoch BETWEEN start_day AND end_day AND canceled = 0 ORDER BY start_time ASC";
-						
+			
+			$CancelledDates = "SELECT * FROM unavailable_dates WHERE date = $current_epoch";
+
 			$result = mysqli_query($conn, $sql);
-    		
+    		$result_of_Cancelled_Dates = mysqli_query($conn, $CancelledDates);
+    		//test_progress($result_of_Cancelled_Dates);
     		if (mysqli_num_rows($result) > 0) {
     			// output data of each row
     			while($row = mysqli_fetch_assoc($result)) {
+
+
+    				if (mysqli_num_rows($result_of_Cancelled_Dates) > 0) {
+					while($row = mysqli_fetch_assoc($result_of_Cancelled_Dates)) {
+					$calendar .= "<div style=background-color:black>";
+					$calendar .= "<font color=white><b>";
+					$calendar .= "Closed" . "<br>";
+					$calendar .= "Reason: " . $row["reason"];
+					$calendar .= "</div>";
+					}
+				}
+					else { 
 					if($row["canceled"] == 1) $calendar .= "<font color=\"grey\"><s>";
     				$calendar .= "<b>" . "Room: ". $row["room"] . "</b><br>ID: " . $row["id"] . "<br>" ."Event Name: " . $row["eventname"] . "<br>". "Organization: ". $row["organization"] . "<br>". "Reservee name: ". $row["reservee_name"] . "<br>" ."Phone Num: " . $row["phone"] . "<br>" ."Capacity: " .$row["Capacity"] . "<br>";
     				if($current_epoch == $row["start_day"] AND $current_epoch != $row["end_day"]) {
@@ -178,7 +194,9 @@ function draw_calendar($month,$year){
 	    			}
 					if($row["canceled"] == 1) $calendar .= "</s></font>";
     			}
-			} else {
+			} 
+		}
+			else {
     			$calendar .= "OPEN";
 			}
 			
