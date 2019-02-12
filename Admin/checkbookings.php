@@ -196,6 +196,15 @@ function draw_calendar($month,$year){
     			}
 			} 
 		}
+		if (mysqli_num_rows($result_of_Cancelled_Dates) > 0) {
+					while($row = mysqli_fetch_assoc($result_of_Cancelled_Dates)) {
+					$calendar .= "<div style=background-color:black>";
+					$calendar .= "<font color=white><b>";
+					$calendar .= "Closed" . "<br>";
+					$calendar .= "Reason: " . $row["reason"];
+					$calendar .= "</div>";
+					}
+				}
 			else {
     			$calendar .= "OPEN";
 			}
