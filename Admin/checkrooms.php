@@ -464,7 +464,7 @@ $(window).resize(function() {
 include('../includes/bookingalerts.php');
 include('header.php');
 include('../includes/navigation.php');
-  
+include('../includes/checkroomsalerts.php');  
 ?>
 <div class="w3-container">
     <div class="animated fadeIn">

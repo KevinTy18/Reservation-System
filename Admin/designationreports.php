@@ -124,7 +124,7 @@ crossorigin="anonymous">
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../cssforlogin/css/CancelReservation.css">
-
+<link rel="stylesheet" href="../cssforlogin/css/side.css">
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="jquery-1.10.2.js"></script>
@@ -207,7 +207,7 @@ include('header.php')
 ?>
 
 <!-- end header -->
-<div id="mySidenav" class="sidenav">
+<!--<div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="designationreports.php">Reservee Reports</a>
   <a href="Reports/IBED-GS-Reports.php">IBED-GS Reports</a>
@@ -216,9 +216,18 @@ include('header.php')
   <a href="Reports/CAS-Reports.php">CAS Reports</a>
   <a href="Reports/GSL-Reports.php">GSL Reports</a>
   <a href="Reports/SOL-Reports.php">SOL Reports</a>
-</div>
+</div>-->
 <br>
-<span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>
+<!--<span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>-->
+<div class="side">
+  <a href="designationreports.php" style="background:;">Reservee Reports</a>
+  <a href="Reports/IBED-GS-Reports.php" style="background:;">IBED-GS Reports</a>
+  <a href="Reports/IBED-JHS-Reports.php" style="background:;">IBED-JHS Reports</a>
+  <a href="Reports/SHS-Reports.php" style="background:;">SHS Reports</a>
+  <a href="Reports/CAS-Reports.php" style="background:;">CAS Reports</a>
+  <a href="Reports/GSL-Reports.php" style="background:;">GSL Reports</a>
+  <a href="Reports/SOL-Reports.php" style="background:;">SOL Reports</a>
+</div>
 <br>
 
 <div class="w3-container" >

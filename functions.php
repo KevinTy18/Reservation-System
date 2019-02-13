@@ -725,11 +725,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "UPDATE  venues SET Availability = 'Unavailable' WHERE RoomID = '$id'";
 
 if ($conn->query($sql) === TRUE) {
-    ?>
+    /*?>
     <script>
          alert("Venue deactivated successfully")
     </script>
-<?php
+<?php*/
+    echo header('location:../Admin/checkrooms.php?venuedeactivated=0');
 } else {
     echo "Error deleting venue: " . $conn->error;
 }
@@ -750,11 +751,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 	$sql = "UPDATE  venues SET Availability = 'Available' WHERE RoomID = '$id'";
 
 if ($conn->query($sql) === TRUE) {
-    ?>
+   /* ?>
     <script>
          alert("Venue activated successfully")
     </script>
-<?php
+<?php*/
+    echo header('location:../Admin/checkrooms.php?venueactivated=0');
 } else {
     echo "Error restoring venue: " . $conn->error;
 }
