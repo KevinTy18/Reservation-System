@@ -431,21 +431,36 @@ function draw_calendar($month,$year){
 			
 			$sql = "SELECT * FROM $tablename WHERE $current_epoch BETWEEN start_day AND end_day AND canceled = 0 ORDER BY start_time ASC";
 						
-			$result = mysqli_query($conn, $sql);
-    		
-    		if (mysqli_num_rows($result) > 0) {
-    			// output data of each row
-    			while($row = mysqli_fetch_assoc($result)) {
-					if($row["canceled"] == 1) $calendar .= "<font color=\"grey\"><s>";
-    				$calendar .= "<b>" . "Room: ". $row["room"] . "</b><br>ID: " . $row["id"] . "<br>" ."Event Name: " . $row["eventname"] . "<br>". "Organization: ". $row["organization"] . "<br>". "Reservee name: ". $row["reservee_name"] . "<br>" ."Phone Num: " . $row["phone"] . "<br>" ."Capacity: " .$row["Capacity"] . "<br>";
-    				if($current_epoch == $row["start_day"] AND $current_epoch != $row["end_day"]) {
-    					$calendar .= "Booking starts: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . "<br><hr><br>";
-    				}
-    				if($current_epoch == $row["start_day"] AND $current_epoch == $row["end_day"]) {
-    					$calendar .= "Booking start: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br>";
-    				}
-    				if($current_epoch == $row["end_day"]) {
-                if($row["end_time"]/60/60 > 12){
+			$CancelledDates = "SELECT * FROM unavailable_dates WHERE date = $current_epoch";
+
+      $result = mysqli_query($conn, $sql);
+        $result_of_Cancelled_Dates = mysqli_query($conn, $CancelledDates);
+        
+        if (mysqli_num_rows($result) > 0) {
+            if (mysqli_num_rows($result_of_Cancelled_Dates) > 0) {
+          while($row = mysqli_fetch_assoc($result_of_Cancelled_Dates)) {
+          $calendar .= "<div style=background-color:black>";
+          $calendar .= "<font color=white><b>";
+          $calendar .= "Closed" . "<br>";
+          $calendar .= "Reason: " . $row["reason"];
+          $calendar .= "</div>";
+          }
+        }
+        else {
+
+
+          // output data of each row
+          while($row = mysqli_fetch_assoc($result)) {
+          if($row["canceled"] == 1) $calendar .= "<font color=\"grey\"><s>";
+            $calendar .= "<b>" . "Room: ". $row["room"] . "</b><br>ID: " . $row["id"] . "<br>" ."Event Name: " . $row["eventname"] . "<br>". "Organization: ". $row["organization"] . "<br>". "Reservee name: ". $row["reservee_name"] . "<br>" ."Phone Num: " . $row["phone"] . "<br>" ."Capacity: " .$row["Capacity"] . "<br>";
+            if($current_epoch == $row["start_day"] AND $current_epoch != $row["end_day"]) {
+              $calendar .= "Booking starts: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . "<br><hr><br>";
+            }
+            if($current_epoch == $row["start_day"] AND $current_epoch == $row["end_day"]) {
+              $calendar .= "Booking start: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br>";
+            }
+            if($current_epoch == $row["end_day"]) {
+              if($row["end_time"]/60/60 > 12){
                 $TimeEnd = $row["end_time"]/60/60 - 12;
                  $calendar .= "Booking end: " . sprintf("%02d:%02d", $TimeEnd, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeEndDenum"] ."<br><hr><br>";
               }
@@ -455,15 +470,25 @@ function draw_calendar($month,$year){
 
             }
 
-    				if($current_epoch != $row["start_day"] AND $current_epoch != $row["end_day"]) {
-	    				$calendar .= "Booking: 24h<br><hr><br>";
-	    			}
-					if($row["canceled"] == 1) $calendar .= "</s></font>";
-    			}
-			} else {
-    			$calendar .= "OPEN";
-			}
-			
+            if($current_epoch != $row["start_day"] AND $current_epoch != $row["end_day"]) {
+              $calendar .= "Booking: 24h<br><hr><br>";
+            }
+          if($row["canceled"] == 1) $calendar .= "</s></font>";
+          }
+        }
+      } 
+          if (mysqli_num_rows($result_of_Cancelled_Dates) > 0) {
+              while($row = mysqli_fetch_assoc($result_of_Cancelled_Dates)) {
+              $calendar .= "<div style=background-color:black>";
+              $calendar .= "<font color=white><b>";
+              $calendar .= "Closed" . "<br>";
+              $calendar .= "Reason: " . $row["reason"];
+              $calendar .= "</div>";
+          }
+        }
+      else {
+          $calendar .= "OPEN";
+      }
 		$calendar.= '</td>';
 		if($running_day == 6):
 			$calendar.= '</tr>';

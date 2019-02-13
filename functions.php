@@ -778,5 +778,18 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 	
 	return $revenue_pictures;
 }
+function CheckUnavailableDates($result_of_Cancelled_Dates,$calendar){
+					
+					while($row = mysqli_fetch_assoc($result_of_Cancelled_Dates)) {
+					$calendar .= "<div style=background-color:black>";
+					$calendar .= "<font color=white><b>";
+					$calendar .= "Closed" . "<br>";
+					$calendar .= "Reason: " . $row["reason"];
+					$calendar .= "</div>";
+				
+					}
+				
+				
+}
 
 ?>
