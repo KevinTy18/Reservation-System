@@ -45,6 +45,9 @@ session_start();
     if (isset($_POST['deletevenue'])) {
 		deletevenue();
 	}
+	if (isset($_POST['deletestudents'])) {
+		deletestudents();
+	}
     if (isset($_POST['restorevenue'])) {
 		restorevenue();
 	}
@@ -75,7 +78,7 @@ array_push($errors, "Password is required");
 if (count($errors) == 0) {
 
 $query = "SELECT * FROM tbl_student WHERE username='$username' AND
-password='$password' LIMIT 1";
+password='$password' AND deleted_at IS NULL LIMIT 1";
 $results = mysqli_query($db, $query);
 
 if (mysqli_num_rows($results) == 1) { // user found
@@ -112,7 +115,7 @@ array_push($errors, "Password is required");
 if (count($errors) == 0) {
 
 $query = "SELECT * FROM tbl_student WHERE username='$username' AND
-password='$password' LIMIT 1";
+password='$password'AND deleted_at IS NULL LIMIT 1";
 $results = mysqli_query($db, $query);
 
 if (mysqli_num_rows($results) == 1) { // user found
@@ -791,5 +794,30 @@ function CheckUnavailableDates($result_of_Cancelled_Dates,$calendar){
 				
 				
 }
+function deletestudents(){
 
+$id = e($_POST['venueid']);
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cbfosystem";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+
+
+	$sql = "UPDATE  tbl_student SET deleted_at = NOW() WHERE user_type = 'student'";
+
+if ($conn->query($sql) === TRUE) {
+    /*?>
+    <script>
+         alert("Venue deactivated successfully")
+    </script>
+<?php*/
+    echo header('location:../Admin/DeleteStudents.php?StudentDeleted=0');
+} else {
+    echo "Error deleting students: " . $conn->error;
+}
+}
 ?>
