@@ -124,8 +124,7 @@ crossorigin="anonymous">
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../../cssforlogin/css/CancelReservation.css">
-
-
+<link rel="stylesheet" href="../../cssforlogin/css/side.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="jquery-1.10.2.js"></script>
 <script src="jquery-ui.js"></script>
@@ -239,7 +238,9 @@ include('includes/nav.php');
 ?>
 <br>
 
-<span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>
+<?php 
+include('../../includes/SideNavbarDepartmentReports.php');
+  ?>
 <br>
 
 <div class="w3-container" >

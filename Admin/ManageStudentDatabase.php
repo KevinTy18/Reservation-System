@@ -21,14 +21,39 @@ mysqli_select_db($con,'cbfosystem');
 
 if(isset($_POST["submitstudentdb"]))
 {
- if($_FILES['file']['name'])
- {
-  $filename = explode(".", $_FILES['file']['name']);
+	if($_FILES['file']['name'])
+ 		{
+  			$filename = explode(".", $_FILES['file']['name']);
+  
   if($filename[1] == 'csv')
   {
    $handle = fopen($_FILES['file']['tmp_name'], "r");
-   while($data = fgetcsv($handle))
+
+   $rows   = array_map('str_getcsv', file($_FILES['file']['tmp_name']));
+    $header = array_shift($rows);
+    $csv    = array();
+    $BatchInsert = array();
+    $SQLInsert = array();
+    foreach($rows as $row) {
+        $csv[] = array_combine($header, $row);
+    }
+
+    foreach ($csv as $rows) {
+    	$BatchInsert[]=implode("','",$rows);
+    		 
+    	    }
+ 	/*test_progress($BatchInsert);*/
+    foreach ($BatchInsert as $value) {
+    	$query = "INSERT into tbl_student(School_Id,
+firstname,middlename,lastname,Department_Id,School_Level_Id,gender,username,email,password,user_type)
+values('$value')";
+mysqli_query($con, $query);
+    }
+    
+   /*while($data = fgetcsv($handle))
    {
+   	
+   	
 $item1 = mysqli_real_escape_string($con, $data[0]);
 $item2 = mysqli_real_escape_string($con, $data[1]);
 $item3 = mysqli_real_escape_string($con, $data[2]);
@@ -40,16 +65,13 @@ $item8 = mysqli_real_escape_string($con, $data[7]);
 $item9 = mysqli_real_escape_string($con, $data[8]);
 $item10 = mysqli_real_escape_string($con, $data[9]);
 $item11 = mysqli_real_escape_string($con, $data[10]);
-//$item12 = mysqli_real_escape_string($con, $data[11]);
 
-
-//asdasdasd
-
-$query = "INSERT into students(School_Id,
+/*$query = "INSERT into tbl_students(School_Id,
 firstname,middlename,lastname,Department_Id,School_Level_Id,gender,username,email,password,user_type)
 values('$item1','$item2','$item3','$item4','$item5','$item6','$item7','$item8','$item9','$item10','$item11')";
-                mysqli_query($con, $query);
-   }
+mysqli_query($con, $query);
+   }*/
+
    fclose($handle);
    echo "<script>alert('Import done!');</script>";
   }
@@ -126,7 +148,7 @@ width="400" align="center"  style=margin-top: "30%">
 <td valign="top">
 <center>
 <h3 class="fontfortitle">Import student db</h3>
-<form action="ManageStudentDatabase.php" method="post">
+<form action="ManageStudentDatabase.php" method="post" enctype='multipart/form-data'>
 Import a CSV File to be placed
 in the database.
         <input type="file" name="file" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
@@ -135,7 +157,7 @@ in the database.
 
                 <div class="buttons">
 <!--<input name="cancel" type="submit" value="Cancel" /> -->
-               <button type="submit" name='submitstudentdb' class="btn btn-outline-danger btn-lg btn-block">Import</button>               
+               <button type="submit" name='submitstudentdb' Value='Import' class="btn btn-outline-danger btn-lg btn-block">Import</button>               
 
             
             </div>

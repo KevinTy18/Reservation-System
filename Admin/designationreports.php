@@ -203,7 +203,8 @@ function closeNav() {
 
 <body>
 <?php
-include('header.php')  
+include('header.php') 
+
 ?>
 
 <!-- end header -->
@@ -219,15 +220,11 @@ include('header.php')
 </div>-->
 <br>
 <!--<span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>-->
-<div class="side">
-  <a href="designationreports.php" style="background:;">Reservee Reports</a>
-  <a href="Reports/IBED-GS-Reports.php" style="background:;">IBED-GS Reports</a>
-  <a href="Reports/IBED-JHS-Reports.php" style="background:;">IBED-JHS Reports</a>
-  <a href="Reports/SHS-Reports.php" style="background:;">SHS Reports</a>
-  <a href="Reports/CAS-Reports.php" style="background:;">CAS Reports</a>
-  <a href="Reports/GSL-Reports.php" style="background:;">GSL Reports</a>
-  <a href="Reports/SOL-Reports.php" style="background:;">SOL Reports</a>
-</div>
+
+<?php 
+include('../includes/SideNavbarReports.php');
+	?>
+<
 <br>
 
 <div class="w3-container" >
