@@ -847,14 +847,14 @@ if ($DateCancelledResult->num_rows <= 0) {
 VALUES ($unavailable_day,'$reason')";
 
 if ($conn->query($sql) === TRUE) {
-    echo header('location:../Admin/SetUnavailableDates.php?SetUnavailableDate=0');
+    echo header('location:../Admin/checkbookings.php?SetUnavailableDate=0');
 }
 else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
     }
  else {
-   echo header('location:../Admin/SetUnavailableDates.php?SetUnavailableDateError=0');
+   echo header('location:../Admin/checkbookings.php?SetUnavailableDateError=0');
 }
 
 

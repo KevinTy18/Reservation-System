@@ -11,6 +11,50 @@ session_destroy();
 unset($_SESSION['user']);
 header("location: login.php");
 }
+
+?>
+<?php
+
+$con = mysqli_connect('localhost','root','');
+mysqli_select_db($con,'cbfosystem');
+
+
+if(isset($_POST["submitstudentdb"]))
+{
+ if($_FILES['file']['name'])
+ {
+  $filename = explode(".", $_FILES['file']['name']);
+  if($filename[1] == 'csv')
+  {
+   $handle = fopen($_FILES['file']['tmp_name'], "r");
+   while($data = fgetcsv($handle))
+   {
+$item1 = mysqli_real_escape_string($con, $data[0]);
+$item2 = mysqli_real_escape_string($con, $data[1]);
+$item3 = mysqli_real_escape_string($con, $data[2]);
+$item4 = mysqli_real_escape_string($con, $data[3]);
+$item5 = mysqli_real_escape_string($con, $data[4]);
+$item6 = mysqli_real_escape_string($con, $data[5]);
+$item7 = mysqli_real_escape_string($con, $data[6]);
+$item8 = mysqli_real_escape_string($con, $data[7]);
+$item9 = mysqli_real_escape_string($con, $data[8]);
+$item10 = mysqli_real_escape_string($con, $data[9]);
+$item11 = mysqli_real_escape_string($con, $data[10]);
+//$item12 = mysqli_real_escape_string($con, $data[11]);
+
+
+//asdasdasd
+
+$query = "INSERT into students(School_Id,
+firstname,middlename,lastname,Department_Id,School_Level_Id,gender,username,email,password,user_type)
+values('$item1','$item2','$item3','$item4','$item5','$item6','$item7','$item8','$item9','$item10','$item11')";
+                mysqli_query($con, $query);
+   }
+   fclose($handle);
+   echo "<script>alert('Import done!');</script>";
+  }
+ }
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -60,6 +104,14 @@ $(function() {
 <?php
 include('../includes/bookingalerts.php');
 include('header.php');
+    
+    if (isset($_GET['ImportSuccess']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Import Sucess!", "Importing student database complete!", "success");
+    </script>
+<?php
+}
 ?>
 
 <br>
@@ -73,24 +125,17 @@ width="400" align="center"  style=margin-top: "30%">
 
 <td valign="top">
 <center>
-<h3 class="fontfortitle">Cancel Date</h3>
+<h3 class="fontfortitle">Import student db</h3>
 <form action="ManageStudentDatabase.php" method="post">
-<table>
-<tr>  
-    <td>Day:</td> 
-<td><input id="from" name="unavailable_day" required="" placeholder="dd/mm/yy" type="text"
-autocomplete="off"/></td>
-</tr>    
-<tr>
-    <td>Reason:</td> 
-<td><input  name="Reason" required="" type="text"
-           autocomplete="off"/></td>
-</tr>           
-</table>
+Import a CSV File to be placed
+in the database.
+        <input type="file" name="file" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
+        <label for="file-7"><span></span> <strong><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> Choose a file&hellip;</strong></label>
+
+
                 <div class="buttons">
 <!--<input name="cancel" type="submit" value="Cancel" /> -->
-               <button name="cancel" type="submit"
-class="smallbutton1">Cancel</button>
+               <button type="submit" name='submitstudentdb' class="btn btn-outline-danger btn-lg btn-block">Import</button>               
 
             
             </div>

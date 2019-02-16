@@ -17,7 +17,9 @@ $Image;
 ?>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<?php
+include ('../includes/datepicker.php'); 
+?>
 <script type="text/javascript">
 $(document).ready(function(){
     $(window).scroll(function(){
@@ -34,6 +36,15 @@ $(document).ready(function(){
 });
 </script>
 <link href="../cssforlogin/css/checkbookings.css" rel="stylesheet">
+<style>
+    
+.containerer {
+  display: flex;
+}
+.containerer > div {
+  flex: 1; /*grow*/
+}    
+</style>
 </head>
 <link rel="icon" type="image/png" href="../sanbedapics/sbcalogo.png"/>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -44,7 +55,40 @@ $(document).ready(function(){
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<script>
+$(function() {
+  $('input[name="unavailable_day"]').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    maxYear: parseInt(moment().format('YYYY'),10)
+  });
+});
+</script>
 <body>
+<?php
+    include('../includes/bookingalerts.php');
+    
+?>
+    <?php
+  
+    
+    //dasdadad
+  if (isset($_GET['SetUnavailableDate']) == true) {
+    ?>
+    <script type="text/javascript">
+  swal("Date cancelled!", "Date successfully cancelled!", "success");
+    </script>
+<?php
+}
+if (isset($_GET['SetUnavailableDateError']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Date Cancel Failed", "Unfortunately the date has already been cancelled", "error");
+    </script>
+<?php
+}
+?>
  <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
 (isset($_SESSION['user'])) : ?>
@@ -79,7 +123,7 @@ width="20%" height="80%" style="margin-left:20px"></div>
 Calendar</h2></div>
 </div>
 </div>
-<div>
+<div class="containerer">
     <div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
     
 <h3 class="fontfortitle">Cancel Schedule</h3>
@@ -97,8 +141,38 @@ class="smallbuttonnav" style="margin:0 auto;background-color:black">Cancel Sched
 
 
     </div>
-</div>
+    <div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
     
+<center>
+<h3 class="fontfortitle">Cancel Date</h3>
+<form action="checkbookings.php" method="post">
+<table>
+<tr>  
+    <td>Day:</td> 
+<td><input id="from" name="unavailable_day" required="" placeholder="dd/mm/yy" type="text"
+autocomplete="off"/></td>
+</tr>    
+<tr>
+    <td>Reason:</td> 
+<td><input  name="Reason" required="" type="text"
+           autocomplete="off"/></td>
+</tr>           
+</table>
+                <div class="buttons">
+<!--<input name="cancel" type="submit" value="Cancel" /> -->
+               <button name="cancel" type="submit"
+class="smallbuttonnav">Cancel</button>
+
+            
+            </div>
+</form>
+
+</center>
+
+
+    </div>
+
+    </div>
 <div class="divmargin">
     <div class="divcalendar">
         <center>
