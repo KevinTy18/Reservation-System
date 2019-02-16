@@ -60,6 +60,23 @@ $(function() {
 <?php
 include('../includes/bookingalerts.php');
 include('header.php');
+
+
+
+if (isset($_GET['SetUnavailableDate']) == true) {
+    ?>
+    <script type="text/javascript">
+  swal("Date cancelled!", "Date successfully cancelled!", "success");
+    </script>
+<?php
+}
+if (isset($_GET['SetUnavailableDateError']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Date Cancel Failed", "Unfortunately the date has already been cancelled", "error");
+    </script>
+<?php
+}
 ?>
 
 <br>
@@ -74,7 +91,7 @@ width="400" align="center"  style=margin-top: "30%">
 <td valign="top">
 <center>
 <h3 class="fontfortitle">Cancel Date</h3>
-<form action="AddUnavailableDates.php" method="post">
+<form action="SetUnavailableDates.php" method="post">
 <table>
 <tr>  
     <td>Day:</td> 
@@ -89,7 +106,7 @@ autocomplete="off"/></td>
 </table>
                 <div class="buttons">
 <!--<input name="cancel" type="submit" value="Cancel" /> -->
-               <button name="cancel" type="submit"
+               <button name="SetUnavailableDay" type="submit"
 class="smallbutton1">Cancel</button>
 
             
@@ -115,7 +132,7 @@ Calendar</span></button>
 </form>
 
 <div class="buttons">
-<form action="UnavailableDates.php">
+<form action="SetUnavailableDates.php">
     <button class="buttoncal" type="submit" style="float:left;width:340px"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Manage Unavailable Dates</span></button>
 </form>
 </div>

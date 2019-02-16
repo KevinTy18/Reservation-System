@@ -51,6 +51,9 @@ session_start();
     if (isset($_POST['restorevenue'])) {
 		restorevenue();
 	}
+	if (isset($_POST['unavailable_day'])) {
+		AddUnavailableDate();
+	}
     if (isset($_GET['logout'])) {
         session_destroy();
         unset($_SESSION['user']);
@@ -413,7 +416,7 @@ if ($_SESSION['user']['user_type']  == "student") {
   if(count($errors) == 0){
     if (mysqli_num_rows($result2) > 0) {
         
-        echo header('location:../Student/index.php?dateunavailable=0');
+        echo header('location:../Student/index.php?datetilable=0');
        
         goto end;
     }
@@ -781,7 +784,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 	
 	return $revenue_pictures;
 }
-function CheckUnavailableDates($result_of_Cancelled_Dates,$calendar){
+/*function CheckUnavailableDates($result_of_Cancelled_Dates,$calendar){
 					
 					while($row = mysqli_fetch_assoc($result_of_Cancelled_Dates)) {
 					$calendar .= "<div style=background-color:black>";
@@ -793,7 +796,7 @@ function CheckUnavailableDates($result_of_Cancelled_Dates,$calendar){
 					}
 				
 				
-}
+}*/
 function deletestudents(){
 
 $id = e($_POST['venueid']);
@@ -819,5 +822,42 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error deleting students: " . $conn->error;
 }
+}
+function AddUnavailableDate(){
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cbfosystem";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+$unavailable_day = intval(strtotime(htmlspecialchars($_POST["unavailable_day"])));
+$reason = $_POST["Reason"];
+
+$DateCancelled = "SELECT date FROM unavailable_dates where date = $unavailable_day";
+$DateCancelledResult = $conn->query($DateCancelled);
+
+if ($DateCancelledResult->num_rows <= 0) {
+    // output data of each row
+    $sql = "INSERT INTO unavailable_dates (date, reason)
+VALUES ($unavailable_day,'$reason')";
+
+if ($conn->query($sql) === TRUE) {
+    echo header('location:../Admin/SetUnavailableDates.php?SetUnavailableDate=0');
+}
+else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+    }
+ else {
+   echo header('location:../Admin/SetUnavailableDates.php?SetUnavailableDateError=0');
+}
+
+
+$conn->close();
 }
 ?>

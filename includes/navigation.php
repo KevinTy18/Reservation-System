@@ -8,10 +8,10 @@ Calendar</span></button>
 </form>
 
 <div class="buttons">
-<form action="UnavailableDates.php">
+<form action="ManageStudentDatabase.php">
     <button class="smallbuttonnav" type="submit"
 style="float:left;width:250px"><span><i class="fa fa-gears"
-style="font-size:24px;color:red;" ></i>Manage Unavailable Dates</span></button>
+style="font-size:24px;color:red;" ></i>Manage Student Database</span></button>
 </form>
 </div>
 

@@ -61,84 +61,45 @@ $(function() {
 include('../includes/bookingalerts.php');
 include('header.php');
 ?>
-<?php
-    
-$con = mysqli_connect('localhost','root','');
-mysqli_select_db($con,'cbfosystem');
-     
-    
-if(isset($_POST["submitstudentdb"]))
-{  
- if($_FILES['file']['name'])
- {  
-  $filename = explode(".", $_FILES['file']['name']);
-  if($filename[1] == 'csv')
-  { 
-      
-     $csv =  array_map('str_getcsv', file($_FILES['file']['tmp_name']));
-     $records = [];
-      unset($csv[0]);
-      
-      foreach ($csv as $record) {
-          $record = array_map(function ($column) {
-              return '"'.$column.'"';
-          }, $record);
-          
-          $records[] = '('.implode(',', $record).')';
-      }
-      
-    
-      $query = "INSERT into tbl_student(School_Id,firstname,middlename,lastname,Department_Id,School_Level_Id,gender,username,email,password,user_type)
-values ".implode(',', $records);
-   
-  $checker = mysqli_query($con, $query);
-      if ($checker){
-           echo "<script>alert('Import done!');</script>";
-      }else{
-          echo "<script>alert('Import error!');</script>";
-      }
-  }
- }
-}  
-?>
+
 <br>
 
 <div class="w3-container" >
-
 <div class="animated fadeIn">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
-width="400" align="center"  style="margin-top: 0%">
+width="400" align="center"  style=margin-top: "30%">
 <tr>
 
 
 <td valign="top">
 <center>
-<h3 class="fontfortitle">Import Student Database</h3>
-<form method='POST' enctype='multipart/form-data' id="myform">
-                        
-        <input type="file" name="file" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
-        <!--<label for="file-7"><span></span> <strong><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> Choose a file&hellip;</strong></label>-->
+<h3 class="fontfortitle">Cancel Date</h3>
+<form action="ManageStudentDatabase.php" method="post">
+<table>
+<tr>  
+    <td>Day:</td> 
+<td><input id="from" name="unavailable_day" required="" placeholder="dd/mm/yy" type="text"
+autocomplete="off"/></td>
+</tr>    
+<tr>
+    <td>Reason:</td> 
+<td><input  name="Reason" required="" type="text"
+           autocomplete="off"/></td>
+</tr>           
+</table>
+                <div class="buttons">
+<!--<input name="cancel" type="submit" value="Cancel" /> -->
+               <button name="cancel" type="submit"
+class="smallbutton1">Cancel</button>
 
             
-        
-            <table class="table">
-                <tbody>
-                <tr>
-    <p>
-    <button type="submit" name='submitstudentdb' class="">Import</button>
-    </p>
-</tr>
-                </tbody>
-                    </table>
-  
-                                        
+            </div>
+</form>
 
-                                </form>
-
-                                            
 </center>
 
 </td>
+</tr>
 </table>
     </div>
 
