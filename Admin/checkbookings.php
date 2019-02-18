@@ -187,7 +187,7 @@ Calendar</h2></div>
     <div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
     
 <h3 class="fontfortitle">Cancel Schedule</h3>
-<form action="cancel.php" method="post">
+<form action="checkbookings.php" method="post">
 <p></p>
 ID: <input name="id" required="" type="text" autocomplete="off"/><br />
             <p></p>
