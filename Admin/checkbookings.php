@@ -15,6 +15,34 @@ header("location: ../adminlogin.php");
 $Image;
 }
 ?>
+<?php
+
+$con = mysqli_connect('localhost','root','');
+mysqli_select_db($con,'cbfosystem');
+
+
+if(isset($_POST["submitunavailabledates"]))
+{
+ if($_FILES['file']['name'])
+ {
+  $filename = explode(".", $_FILES['file']['name']);
+  if($filename[1] == 'csv')
+  {
+   $handle = fopen($_FILES['file']['tmp_name'], "r");
+   while($data = fgetcsv($handle))
+   {
+				$item1 = mysqli_real_escape_string($connect, $data[0]);  
+                $item2 = mysqli_real_escape_string($connect, $data[1]);
+				
+                $query = "INSERT into unavailable_dates(date,reason) values('$item1','$item2')";
+                mysqli_query($connect, $query);
+   }
+   fclose($handle);
+   echo header('location:../Admin/index.php?ImportDateSuccess=0');
+  }
+ }
+}
+?>
 <html>
 <head>
 <?php
@@ -88,6 +116,14 @@ if (isset($_GET['SetUnavailableDateError']) == true) {
     </script>
 <?php
 }
+if (isset($_GET['ImportDateSuccess']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Import Sucess!", "Importing unavailable dates database complete!", "success");
+    </script>
+<?php
+}    
+    
 ?>
  <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
@@ -158,20 +194,43 @@ autocomplete="off"/></td>
            autocomplete="off"/></td>
 </tr>           
 </table>
-                <div class="buttons">
-<!--<input name="cancel" type="submit" value="Cancel" /> -->
+               <!-- <div class="buttons">
+<input name="cancel" type="submit" value="Cancel" />
                <button name="cancel" type="submit"
 class="smallbuttonnav">Cancel</button>
 
-            
+            </div> -->
+     <div class="buttons">
+               <button name="unavailabledates" type="submit"
+class="smallbuttonnav" style="margin:0 auto;background-color:black">Cancel Date</button>
+
             </div>
+    
 </form>
 
 </center>
 
 
     </div>
+<div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
+    
+<h3 class="fontfortitle">Import Unavailable Dates</h3>
+<form action="cancel.php" method="post" enctype='multipart/form-data'>
+<p></p>
+Import a CSV File to be placed
+in the database.
+        <input type="file" name="file" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple /><br />
+            <p></p>
 
+                <div class="buttons" >
+               <button name="submitunavailabledates" type="submit"
+class="smallbuttonnav" style="margin:0 auto;background-color:black">Import</button>
+
+            </div>
+</form>
+
+
+    </div>
     </div>
 <div class="divmargin">
     <div class="divcalendar">

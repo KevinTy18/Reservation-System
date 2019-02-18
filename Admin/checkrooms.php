@@ -606,8 +606,6 @@ autocomplete="off" min="1" value="<?php echo $_SESSION['mincapacity']?>" /></td>
     
     <input type="hidden" name="venueid" value="<?php echo $_SESSION['venueid']?>"/>
 <tr>
-
-
 </table>
 <p>
             <div class="buttons">
