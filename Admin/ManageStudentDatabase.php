@@ -126,6 +126,7 @@ $(function() {
 <?php
 include('../includes/bookingalerts.php');
 include('header.php');
+include('../includes/navigation.php'); 
     
     if (isset($_GET['ImportStudentsSuccess']) == true) {
     ?>
@@ -173,9 +174,9 @@ in the database.
 
 
 
-    <div class="buttons" style="margin-left:80px">
+   <!-- <div class="buttons" style="margin-left:80px">
 <form action="checkbookings.php">
-    <!--<input type="submit" value="Check Calendar" /> -->
+    <input type="submit" value="Check Calendar" /> 
     <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
 fa-calendar" style="font-size:24px;color:red"></i> Check
 Calendar</span></button>
@@ -204,7 +205,7 @@ Room Descriptions</span></button>
 Check Reports</span></button>
 </form>
 
-    </div>
+    </div>-->
 
     </div>
 
