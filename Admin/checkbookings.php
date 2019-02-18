@@ -29,14 +29,38 @@ if(isset($_POST["submitunavailabledates"]))
   if($filename[1] == 'csv')
   {
    $handle = fopen($_FILES['file']['tmp_name'], "r");
-   while($data = fgetcsv($handle))
+
+     $rows   = array_map('str_getcsv', file($_FILES['file']['tmp_name']));
+    $header = array_shift($rows);
+    $csv    = array();
+    $BatchInsert = array();
+    $SQLInsert = array();
+    foreach($rows as $row) {
+    	$row[0] = intval(strtotime(htmlspecialchars($row[0])));
+        $csv[] = array_combine($header, $row);
+       
+
+    }
+ 	
+    foreach ($csv as $rows) {
+    	$BatchInsert[]=implode("','",$rows);
+    		 
+    	    }
+
+ 	    foreach ($BatchInsert as $value) {
+    	$query = "INSERT into unavailable_dates(date,reason) values ('$value')";
+    	
+mysqli_query($con, $query);
+}
+
+  /* while($data = fgetcsv($handle))
    {
 				$item1 = mysqli_real_escape_string($connect, $data[0]);  
                 $item2 = mysqli_real_escape_string($connect, $data[1]);
 				
                 $query = "INSERT into unavailable_dates(date,reason) values('$item1','$item2')";
                 mysqli_query($connect, $query);
-   }
+   }*/
    fclose($handle);
    echo header('location:../Admin/index.php?ImportDateSuccess=0');
   }
@@ -215,7 +239,7 @@ class="smallbuttonnav" style="margin:0 auto;background-color:black">Cancel Date<
 <div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
     
 <h3 class="fontfortitle">Import Unavailable Dates</h3>
-<form action="cancel.php" method="post" enctype='multipart/form-data'>
+<form action="checkbookings.php" method="post" enctype='multipart/form-data'>
 <p></p>
 Import a CSV File to be placed
 in the database.
