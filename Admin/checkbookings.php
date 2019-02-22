@@ -273,8 +273,10 @@ class="smallbuttonnav" style="margin:0 auto;background-color:black">Import</butt
 </form>
     </div>
     </div>
+    <div>
     <?php include('../includes/CheckCalendarNavigation.php');?>
-<div class="divmargin">
+    </div>
+<div class="divmargin" style="margin-top:100px">
     <div class="divcalendar">
         <center>
 <?php

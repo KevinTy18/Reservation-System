@@ -3,7 +3,7 @@
     <!--<input type="submit" value="Check Calendar" /> -->
     <button class="smallbuttonnav" type="submit" name="AllDepartments"
 style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> All Departments</span></button>
+fa-calendar" style="font-size:15px;color:red"></i> All Departments</span></button>
 </form>
 </div>
 <?php 
@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
     echo  '<div class="buttons">';
     echo  '<form action="checkbookings.php" method="POST">';
     echo  '<button class="smallbuttonnav" type="submit" name='. $row['Department'] . ' style="float:left"><span><i class="fa fa-calendar"
-      style="font-size:24px;color:red"></i>'. $row['Department']  .'</span></button>';
+      style="font-size:15px;color:red"></i>'. $row['Department']  .'</span></button>';
     echo  '</form>';
     echo  '</div>';
     }
