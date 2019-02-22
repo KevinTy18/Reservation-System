@@ -1,12 +1,12 @@
 <div class="buttons">
-<form action="checkbookings.php">
+<form action="checkbookings.php" method="POST">
     <!--<input type="submit" value="Check Calendar" /> -->
-    <button class="smallbuttonnav" type="submit"
+    <button class="smallbuttonnav" type="submit" name="AllDepartments"
 style="float:left"><span><i class="fa
 fa-calendar" style="font-size:24px;color:red"></i> Check
 Calendar</span></button>
 </form>
-
+</div>
 <div class="buttons">
 <form action="ManageStudentDatabase.php">
     <button class="smallbuttonnav" type="submit"

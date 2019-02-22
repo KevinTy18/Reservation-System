@@ -626,9 +626,8 @@ width="14%"> <b> LRC BOOKING SYSTEM </b> </h2>
 </div>
 <div>
 <div class="buttons" style="margin:0 auto;">
-<form action="checkbookingsUsers.php">
-    <!--<input type="submit" value="Check Calendar" /> -->
-    <button class="smallbuttonnav" type="submit"
+<form action="checkbookingsUsers.php" method="POST">
+    <button class="smallbuttonnav" type="submit" name="StudentDepartment"
 style="float:left"><span><i class="fa
 fa-calendar" style="font-size:24px;color:red"></i> Check
 Calendar</span></button>
