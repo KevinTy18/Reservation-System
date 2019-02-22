@@ -346,7 +346,7 @@ Reservation:</td>
 <tr>
 <td style="color:black;padding-left:20px">Contact #:</td>
 <td>
-<input maxlength="10" name="phone" required="" type="text"
+<input maxlength="11" name="phone" required="" type="text"
 autocomplete="off"/></td>
 </tr>
 <tr>

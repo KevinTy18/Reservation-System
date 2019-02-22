@@ -143,7 +143,11 @@ if (isset($_GET['SetUnavailableDateError']) == true) {
 if (isset($_GET['ImportDateSuccess']) == true) {
     ?>
     <script type="text/javascript">
+<<<<<<< HEAD
     swal("Import Success!", "Importing unavailable dates database complete!", "success");
+=======
+    swal("Import success!", "Importing unavailable dates database complete!", "success");
+>>>>>>> f93ea2415ec3cf99d09572221e4f6747b6372de5
     </script>
 <?php
 }

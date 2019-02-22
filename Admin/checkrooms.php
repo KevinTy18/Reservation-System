@@ -385,7 +385,7 @@ code {
     max-height: 450px;
     overflow-y: scroll;
     overflow-x: scroll;
-    
+    font-size:11px;    
 }
     
 </style>
@@ -469,7 +469,7 @@ include('../includes/checkroomsalerts.php');
 <div class="w3-container">
     <div class="animated fadeIn">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
-width="1000px" class="w3-table w3-centered" >
+width="1000px" class="w3-table w3-centered">
 <tr>
 <td valign="top">
 <div class="ex3"> 
