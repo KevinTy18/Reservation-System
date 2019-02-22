@@ -62,7 +62,7 @@ mysqli_query($con, $query);
                 mysqli_query($connect, $query);
    }*/
    fclose($handle);
-   echo header('location:../Admin/index.php?ImportDateSuccess=0');
+   echo header('location:../Admin/checkbookings.php?ImportDateSuccess=0');
   }
  }
 }
@@ -143,7 +143,7 @@ if (isset($_GET['SetUnavailableDateError']) == true) {
 if (isset($_GET['ImportDateSuccess']) == true) {
     ?>
     <script type="text/javascript">
-    swal("Import Sucess!", "Importing unavailable dates database complete!", "success");
+    swal("Import success!", "Importing unavailable dates database complete!", "success");
     </script>
 <?php
 }    
