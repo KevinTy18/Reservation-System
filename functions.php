@@ -641,12 +641,13 @@ if ($conn->query($sql) === TRUE) {
 
 function updatevenue (){
         $id            =  e($_POST['venueid']);
-        $department_id =  e($_POST['department_id']);
-        $venuename     =  e($_POST['name']);
+        $department_id =  e($_POST['department']);
+        $venuename     =  e($_POST['venuename']);
 		$capacity      =  e($_POST['capacity']);
 		$mincapacity   =  e($_POST['mincapacity']);
         $image         =  $_FILES['venueimage']['name'];
 
+	/* test_progress($image);*/
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -661,15 +662,15 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-
-	$sql = "UPDATE venues SET RoomName = '$venuename',Department_Id = '$department_id',RoomCapacity = '$capacity',RoomMinimumCapacity= '$mincapacity', VenueImage = '$image'   WHERE RoomID = $id"; 
+if (empty($image)) {
+    $sql = "UPDATE venues SET RoomName = '$venuename',Department_Id = '$department_id',RoomCapacity = '$capacity',RoomMinimumCapacity= '$mincapacity'   WHERE RoomID = $id"; 
+}
+    else {
+        $sql = "UPDATE venues SET RoomName = '$venuename',Department_Id = '$department_id',RoomCapacity = '$capacity',RoomMinimumCapacity= '$mincapacity', VenueImage = '$image'   WHERE RoomID = $id"; 
+    }
 	
 	if ($conn->query($sql) === TRUE) {
-    ?>
-    <script>
-         alert("Room updated successfully")
-    </script>
-<?php
+    echo header('location:../Admin/checkrooms.php?roomupdated=0');
     
     $_SESSION['venuename'] =  "";
     $_SESSION['department_id'] =  "";

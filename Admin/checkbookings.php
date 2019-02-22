@@ -241,6 +241,7 @@ autocomplete="off"/></td>
 class="smallbuttonnav">Cancel</button>
 
             </div> -->
+    <p></p>
      <div class="buttons">
                <button name="unavailabledates" type="submit"
 class="smallbuttonnav" style="margin:0 auto;background-color:black">Cancel Date</button>
@@ -261,8 +262,9 @@ class="smallbuttonnav" style="margin:0 auto;background-color:black">Cancel Date<
 Import a CSV File to be placed
 in the database.
         <input type="file" name="file" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple /><br />
-            <p></p>
-
+           
+<a href="download.php?file=unavailabedatesample.csv">Download sample csv file.</a>
+    <p></p>
                 <div class="buttons" >
                <button name="submitunavailabledates" type="submit"
 class="smallbuttonnav" style="margin:0 auto;background-color:black">Import</button>

@@ -502,7 +502,7 @@ INNER JOIN room_department ON venues.Department_Id = room_department.Id;
  <th>Room Capacity</th>
  <th>Minimum Capacity</th>
  <th>Room Image</th>
- <th>Availability</th>
+ <th>Status</th>
  <th>Edit</th>
  <th>Deactivate</th>
  <th>Activate</th>
@@ -517,7 +517,7 @@ $id = $row['RoomID'];
     echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomName'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomCapacity'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomMinimumCapacity'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['VenueImage'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'><img src=\"../sanbedapics/{$row['VenueImage']}\" width=\"150\" height=\"100\" /></td>";
        echo "<td style='width:150px;border:1px solid black;'>" . $row['Availability'] . "</td>";
     
     

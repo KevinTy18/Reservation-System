@@ -263,7 +263,7 @@ Calendar</span></button>
 
 <div class="buttons">
 <form action="ManageStudentDatabase.php">
-    <button class="buttoncal" type="submit" style="float:left;width:300px"><span style="font-size:17px;"><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Manage Student Database</span></button>
+    <button class="buttoncal" type="submit" style="float:left;width:300px"><span style="font-size:17px;"><i class="fa fa-gears" style="font-size:17px;color:red;" ></i> Manage Student Database</span></button>
 </form>
 </div>
     

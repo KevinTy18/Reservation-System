@@ -422,8 +422,8 @@ div.ex3 {
 }
 .header {
   overflow: hidden;
-  background-color:rgba(216, 0, 0,0.6)    ;
-  padding: 5px 10px;
+  background-color:#B22222;
+  padding: 0px 10px;
 }
 .header a {
   float: left;

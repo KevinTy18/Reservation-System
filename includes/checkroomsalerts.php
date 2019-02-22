@@ -14,4 +14,11 @@ if (isset($_GET['venueactivated']) == true) {
     </script>
 <?php
 }
+if (isset($_GET['roomupdated']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Updated succeeded!!", "Room updated successfully!", "success");
+    </script>
+<?php
+}
 ?>
