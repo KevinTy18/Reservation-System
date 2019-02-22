@@ -194,10 +194,6 @@ return mysqli_real_escape_string($db, trim($val));
 }
 
 
-if (isset($_POST['cancel'])) {
-   cancel();
-    }
-
 
 function cancel(){
 global $error;
@@ -214,30 +210,28 @@ die("Connection failed: " . mysqli_connect_error());
 }
 
 $id = intval(htmlspecialchars($_POST["id"]));
-        $sql = "SELECT * FROM $tablename  WHERE id = $id";
-$sql1 = "UPDATE $tablename SET canceled = 1 WHERE id = $id";
-$result = $conn->query($sql1);
+$IfBookingExist = "SELECT * FROM $tablename  WHERE id = $id";
+$AlreadyCalled = "SELECT * FROM $tablename  WHERE id = $id AND canceled = 1";
+$CancellBooking = "UPDATE $tablename SET canceled = 1 WHERE id = $id";
+$result = $conn->query($AlreadyCalled);
 $affected_rows = $conn->affected_rows;
-if (mysqli_query($conn, $sql)) {
-
-if ($affected_rows > 0){
-?>
-        <script>
-            alert("Booking cancelled.")
-        </script>
-        <?php
+if (mysqli_affected_rows($conn) >= 1){
+	// test_progress("Cancelled Failed");
+	echo header('location:../Admin/checkbookings.php?BookingCancelledFailed=0');
 }
+$result = $conn->query($IfBookingExist);
+if (mysqli_affected_rows($conn) < 1) {
+ echo header('location:../Admin/checkbookings.php?BookingCancelledFailed=0');
+ }
 else{
-        ?>
-<script>
-            alert("Booking Does Not Exist/Already have been Canceled.")
-        </script>
-        <?php
+	mysqli_query($conn, $CancellBooking);
+	/*test_progress("Cancelled Success");*/
+    echo header('location:../Admin/checkbookings.php?BookingCancelled=0');
             }
 }
-}
+
 else {
-echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
+echo "Error: " . $CancellBooking . "<br>" . mysqli_error($conn);
 }
 mysqli_close($conn);
 }
@@ -638,11 +632,7 @@ $image          = $_FILES['image']['name'];
 ('$venuename',$department_id,'$capacity', '$mincapacity','$image')";
     
 if ($conn->query($sql) === TRUE) {
-    ?>
-    <script>
-         alert("Room added successfully")
-    </script>
-<?php
+    echo header('location:../Admin/addvenue.php?RoomAdded=0');
 } else {
     echo "Error adding record: " . $conn->error;
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2018 at 07:34 AM
+-- Generation Time: Feb 20, 2019 at 12:09 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -97,7 +97,7 @@ INSERT INTO `bookingcalendar` (`id`, `eventname`, `organization`, `reservee_name
 (97, 'saadada', 'dadada', 'dadadada', 'Student', '213131323', 'School of Law', '213131231', '4', 'Achieve', '', '0', 1540677600, 1540677600, 'am', '', 21600, 21630, 0, 7),
 (98, 'saadada', 'dadada', 'dadadada', 'Student', '213131323', 'School of Law', '213131231', '4', 'Achieve', '', '0', 1540677600, 1540677600, 'am', '', 21600, 21630, 0, 7),
 (99, 'saadada', 'dadada', 'dadadada', 'Student', '213131323', 'School of Law', '213131231', '4', 'Achieve', '', '0', 1540677600, 1540677600, 'am', '', 21600, 21630, 0, 7),
-(100, 'saadada', 'dadada', 'dadadada', 'Student', '213131323', 'School of Law', '213131231', '4', 'Achieve', '', '0', 1540677600, 1540677600, 'am', '', 21600, 21630, 0, 7),
+(100, 'saadada', 'dadada', 'dadadada', 'Student', '213131323', 'School of Law', '213131231', '4', 'Achieve', '', '0', 1540677600, 1540677600, 'am', '', 21600, 21630, 1, 7),
 (101, 'saadada', 'dadada', 'dadadada', 'Student', '213131323', 'School of Law', '213131231', '4', 'Achieve', '', '0', 1540677600, 1540677600, 'am', '', 21600, 21630, 0, 7),
 (105, 'asde', 'SHS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', '', '2313131313', '0', 'Create', '', '0', 1540677600, 1540677600, 'am', '', 25200, 25230, 0, 7),
 (106, 'asde', 'SHS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', '', '2131313131', '0', 'Create', '', '0', 1540677600, 1540677600, 'am', '', 25200, 25230, 0, 7),
@@ -114,17 +114,29 @@ INSERT INTO `bookingcalendar` (`id`, `eventname`, `organization`, `reservee_name
 (117, 'MEeting', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11', '1231313131', '0', 'Read', 'Remote Control-Smart TV, Whiteboard Marker, ', '0', 1540767600, 1540767600, 'am', '', 41400, 46800, 0, 14),
 (118, 'Meet', 'BITS', 'Michael Baldevia', 'Employee', '2015300450', 'Bachelor', '1232313131', '0', 'Learn', 'Whiteboard Marker, Eraser, ', '0', 1540767600, 1540767600, 'am', '', 30600, 34200, 0, 11),
 (119, 'Sample', 'Sample', 'Michael Baldevia', 'Student', '2015300450', 'Grade', '1231313131', '0', 'Master', '', '1541458800', 1541113200, 1541113200, '', '', 27000, 28800, 0, 5),
-(120, 'nov5Sample', 'ITRDC', 'Michael Baldevia', 'Student', '2015300450', 'Grade', '1231313131', '2', 'Master', '', '1541458800', 1541372400, 1541372400, '', '', 34200, 37800, 0, 7),
+(120, 'nov5Sample', 'ITRDC', 'Michael Baldevia', 'Student', '2015300450', 'Grade', '1231313131', '2', 'Master', '', '1541458800', 1541372400, 1541372400, '', '', 34200, 37800, 1, 7),
 (121, 'nov5Sample', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2311313131', '1', 'Read', '', '1541458800', 1541372400, 1541372400, 'am', '', 34200, 37800, 0, 7),
 (122, 'nov5Sample', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2311313131', '1', 'Learn', '', '1541458800', 1541372400, 1541372400, 'am', '', 30600, 32400, 0, 7),
-(123, 'nov5Sample', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2131313131', '1', 'Learn', '', '1541458800', 1541372400, 1541372400, 'am', '', 27000, 30600, 0, 7),
+(123, 'nov5Sample', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2131313131', '1', 'Learn', '', '1541458800', 1541372400, 1541372400, 'am', '', 27000, 30600, 1, 7),
 (124, 'nov5Sample', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '3113131313', '1', 'Learn', '', '1541458800', 1541372400, 1541372400, 'am', '', 32400, 34200, 0, 7),
 (125, 'nov5Sample', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2131313131', '1', 'Learn', '', '1541458800', 1541372400, 1541372400, 'am', '', 36000, 37800, 0, 7),
 (126, 'Nov5Sample', 'IBED-JHS', 'Leo Francis Acuesta Dayao', 'Student', '2015333111', 'Grade', '1111111111', '1', 'PGS', '', '1541458800', 1541372400, 1541372400, '', '', 30600, 32400, 0, 30),
 (127, 'Nov5Sample', 'IBED-JHS', 'Leo Francis Acuesta Dayao', 'employee', '2015333111', 'Grade', '1313131313', '1', 'MGS', '', '1541458800', 1541372400, 1541372400, '', '', 45000, 50400, 0, 50),
 (128, 'Nov5Sample', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2313131313', '1', 'Read', 'Whiteboard Marker, Eraser, qqqq', '1541458800', 1541458800, 1541458800, 'am', '', 25200, 27000, 0, 7),
 (129, 'Meeting', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2131313131', '1', 'Learn', 'Whiteboard Marker, Eraser, qqqq', '1525989600', 1541545200, 1541545200, 'pm', '', 7200, 9000, 0, 7),
-(130, 'Meeting', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2131313131', '1', 'Read', 'Remote Control-Smart TV, Whiteboard Marker, Eraser, Table', '1525989600', 1541631600, 1541631600, 'am', '', 30600, 32400, 0, 7);
+(130, 'Meeting', 'IBED-GS', 'Kevin Gonzalessss Ty', 'Student', '2015300444', 'Grade 11 - STEM', '2131313131', '1', 'Read', 'Remote Control-Smart TV, Whiteboard Marker, Eraser, Table', '1525989600', 1541631600, 1541631600, 'am', '', 30600, 32400, 0, 7),
+(131, 'Presentation', 'BITS', 'Michael Baldevia', 'Student', '2015300450', 'Bachelor in Elementary Education', '0915828282', '5', 'Collaborate', '', '1575241200', 1550098800, 1550098800, '', '', 3600, 16200, 0, 3),
+(132, 'Presentation', 'eqweqweq', 'qwewqe', 'Student', '2131231231', 'Bachelor in Elementary Education', '2131321321', '2', 'Innovate', '', '1575241200', 1550530800, 1550530800, '', '', 18000, 32400, 1, 6),
+(133, 'Meeting', 'IBED-GS', 'Jose Mari Gonzales Santillan', 'Student', '2015300112', 'Grade 11 - STEM', '099999999', '1', 'Read', '', '0', 1551654000, 1551654000, 'am', '', 25200, 27000, 1, 7),
+(134, 'Meeting', 'BITS', 'Kev', 'Student', '2015300112', 'Bachelor in Elementary Education', '0012031031', '4', 'Achieve', '', '0', 1552258800, 1552258800, '', '', 25200, 27000, 1, 7),
+(135, 'Meeting', 'BITS', 'Kev', 'Student', '2015300112', 'Bachelor in Elementary Education', '3129313912', '4', 'Achieve', '', '0', 1550617200, 1550617200, '', '', 25200, 27000, 1, 7),
+(136, 'Meeting', 'BITS', 'Kev', 'Student', '2102301023', 'Bachelor in Elementary Education', '0210391023', '4', 'Achieve', '', '0', 1550617200, 1550617200, '', '', 25200, 27000, 1, 7),
+(137, 'Presentation', 'BITS', 'Michael', 'Student', '23112313213', 'Bachelor of Science in Accountancy', '2312131313', '4', 'Achieve', '', '0', 1552345200, 1552345200, '', '', 18000, 19800, 1, 7),
+(138, 'Meeting', 'BITS', 'Kevin', 'Student', '123123113', 'Bachelor in Elementary Education', '2131313131', '4', 'Achieve', '', '0', 1553036400, 1553036400, '', '', 39600, 41400, 1, 7),
+(139, 'Meeting', 'asdsa', 'Kevin', 'Student', '2113123', 'Bachelor of Arts in Psychology', '2131313131', '4', 'Achieve', '', '0', 1553727600, 1553727600, '', '', 36000, 37800, 1, 7),
+(140, 'Meeting', 'asdaasdas', 'sadsa', 'Student', '123231131', 'Bachelor in Elementary Education', '1123131313', '4', 'Achieve', '', '0', 1553036400, 1553036400, '', '', 3600, 5400, 1, 7),
+(141, 'Meeting', 'asd', 'ads', 'Student', '1231312', 'Bachelor in Elementary Education', '1231313131', '4', 'Achieve', '', '0', 1553036400, 1553036400, '', '', 10800, 12600, 1, 7),
+(142, 'Meeting', 'asdasd', 'ads', 'Student', '1231313131', 'Bachelor in Elementary Education', '1231313131', '4', 'Achieve', '', '0', 1553036400, 1553036400, '', '', 3600, 5400, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -354,17 +366,28 @@ CREATE TABLE `tbl_student` (
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `user_type` varchar(100) NOT NULL
+  `user_type` varchar(100) NOT NULL,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_student`
 --
 
-INSERT INTO `tbl_student` (`id`, `School_Id`, `firstname`, `middlename`, `lastname`, `Department_Id`, `School_Level_Id`, `gender`, `username`, `email`, `password`, `user_type`) VALUES
-(1, 2015300450, 'Michael', 'Berania', 'Baldevia', 0, 0, 'Male', 'Admin', 'baldeviamichael1@gmail.com', '123', 'admin'),
-(2, 2015300444, 'Kevin', 'Gonzalessss', 'Ty', 1, 8, 'Male', 'User', 'kevingty@gmail.com', '123', 'student'),
-(3, 2015333111, 'Leo Francis', 'Acuesta', 'Dayao', 2, 0, 'Male', 'Employee', 'Employee@gmail.com', '123', 'employee');
+INSERT INTO `tbl_student` (`id`, `School_Id`, `firstname`, `middlename`, `lastname`, `Department_Id`, `School_Level_Id`, `gender`, `username`, `email`, `password`, `user_type`, `deleted_at`) VALUES
+(1, 2015300450, 'Michael', 'Berania', 'Baldevia', 0, 0, 'Male', 'Admin', 'baldeviamichael1@gmail.com', '123', 'admin', NULL),
+(2, 2015300444, 'Kevin', 'Gonzalessss', 'Ty', 4, 8, 'Male', 'User', 'kevingty@gmail.com', '123', 'student', '2019-02-14 16:50:10'),
+(3, 2015333111, 'Leo Francis', 'Acuesta', 'Dayao', 2, 0, 'Male', 'Employee', 'Employee@gmail.com', '123', 'employee', NULL),
+(4, 2015300400, 'John', 'Doe', 'Doe', 1, 2, 'Male', 'student', 'student@gmail.com', 'student', 'student', NULL),
+(5, 2015300112, 'Jose Mari', 'Gonzales', 'Santillan', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL),
+(6, 2015300113, 'Jose', 'Gonzale', 'Santilla', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL),
+(7, 2015300112, 'Jose Mari', 'Gonzales', 'Santillan', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL),
+(8, 2015300113, 'Jose', 'Gonzale', 'Santilla', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL),
+(9, 2015300112, 'Jose Mari', 'Gonzales', 'Santillan', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL),
+(10, 2015300112, 'Jose Mari', 'Gonzales', 'Santillan', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL),
+(11, 2015300113, 'Jose', 'Gonzale', 'Santilla', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL),
+(12, 2015300112, 'Jose Mari', 'Gonzales', 'Santillan', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL),
+(13, 2015300113, 'Jose', 'Gonzale', 'Santilla', 1, 8, 'Male ', 'User', 'jmsantillan@gmail.com', '123', 'student', NULL);
 
 -- --------------------------------------------------------
 
@@ -398,7 +421,27 @@ INSERT INTO `unavailable_dates` (`id`, `date`, `reason`) VALUES
 (13, '1540504800', 'asde'),
 (14, '1540591200', 'asde'),
 (15, '1540940400', 'No Classes'),
-(16, '1541372400', 'No classes');
+(16, '1548975600', 'No classes'),
+(17, '1549926000', 'Asdewafawe'),
+(18, '1550012400', 'Storm'),
+(19, '1550098800', 'NO CLASSES'),
+(20, '1550271600', 'Storm'),
+(21, '1550185200', 'No Classes'),
+(22, '1549234800', 'Storm'),
+(23, '1549407600', 'Wala lang Trip lang'),
+(24, '1551394800', 'Birthday ni Gulapa'),
+(25, '1546297200', 'New Year'),
+(26, '1546297200', 'Year New'),
+(27, '1548111600', 'Wala lang'),
+(28, '1548889200', 'Sample'),
+(29, '1549062000', 'Sample'),
+(30, '1549321200', 'Chinese New Year'),
+(31, '1549321200', 'Chinese New Year'),
+(32, '1551049200', 'People Power Revolution'),
+(33, '1551394800', 'Muntinlupa Day'),
+(34, '1549321200', 'Chinese New Year'),
+(35, '1551049200', 'People Power Revolution'),
+(36, '1551394800', 'Muntinlupa Day');
 
 -- --------------------------------------------------------
 
@@ -412,6 +455,7 @@ CREATE TABLE `venues` (
   `Department_Id` int(11) NOT NULL,
   `RoomCapacity` int(100) NOT NULL,
   `RoomMinimumCapacity` int(100) NOT NULL,
+  `Faculty_Booking_Only` int(10) NOT NULL DEFAULT '0',
   `VenueImage` varchar(500) NOT NULL,
   `Availability` varchar(100) NOT NULL DEFAULT 'Available'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -420,28 +464,30 @@ CREATE TABLE `venues` (
 -- Dumping data for table `venues`
 --
 
-INSERT INTO `venues` (`RoomID`, `RoomName`, `Department_Id`, `RoomCapacity`, `RoomMinimumCapacity`, `VenueImage`, `Availability`) VALUES
-(1, 'Read', 1, 15, 6, 'Sample1.png', 'Available'),
-(2, 'Learn', 1, 20, 6, 'Sample2.png', 'Available'),
-(3, 'Master', 2, 7, 4, 'Sample3.png', 'Available'),
-(4, 'Innovate', 2, 7, 4, 'Sample4.png', 'Available'),
-(5, 'Inspire', 3, 6, 4, 'Inspire.jpg', 'Available'),
-(6, 'Create', 3, 10, 6, 'Sample6.png', 'Available'),
-(7, 'Cooperate', 3, 10, 6, 'Sample7.png', 'Available'),
-(8, 'Conference', 3, 10, 6, 'conference.jpg', 'Available'),
-(9, 'Makerspace', 3, 10, 6, 'Makerspace.jpg', 'Available'),
-(10, 'Achieve', 4, 10, 6, 'Sample10.png', 'Available'),
-(11, 'Lead', 4, 10, 6, 'Sample11.png', 'Available'),
-(12, 'Conference', 4, 10, 6, 'Sample12.png', 'Available'),
-(13, 'Collaborate', 5, 5, 2, 'Collaborate.jpg', 'Available'),
-(14, 'Connect', 5, 4, 2, 'Connect.jpg', 'Available'),
-(15, 'Communicate', 5, 5, 2, 'Communicate.jpg', 'Available'),
-(16, 'Excellence', 6, 10, 6, 'Excellence.jpg', 'Available'),
-(17, 'Virtue', 6, 10, 6, 'Virtue.jpg', 'Available'),
-(18, 'Dream', 3, 6, 4, 'Dream.jpg', 'Available'),
-(19, 'asdada', 2, 10, 5, 'Sample19.png', 'Available'),
-(20, 'MGS', 1, 100, 20, 'MGS.jpg', 'Available'),
-(21, 'PGS', 1, 80, 20, 'PGS.jpg', 'Available');
+INSERT INTO `venues` (`RoomID`, `RoomName`, `Department_Id`, `RoomCapacity`, `RoomMinimumCapacity`, `Faculty_Booking_Only`, `VenueImage`, `Availability`) VALUES
+(1, 'Read', 1, 15, 6, 0, 'IBED-GS_Read.jpg', 'Available'),
+(2, 'Learn', 1, 20, 6, 0, 'IBED-GS_Learn.jpg', 'Available'),
+(3, 'Master', 2, 7, 4, 0, 'Sample3.png', 'Available'),
+(4, 'Innovate', 2, 7, 4, 0, 'Sample4.png', 'Available'),
+(5, 'Inspire', 3, 6, 4, 0, 'SHS_Inspire.jpg', 'Available'),
+(6, 'Create', 3, 10, 6, 0, 'SHS_Create.jpg', 'Available'),
+(7, 'Cooperate', 3, 10, 6, 0, 'SHS_Cooperate_1.jpg', 'Available'),
+(8, 'SHS-Conference', 3, 10, 6, 1, 'SHS_Conference.jpg', 'Available'),
+(9, 'Makerspace', 3, 10, 6, 0, 'SHS_Makerspace.jpg', 'Available'),
+(10, 'Achieve', 4, 10, 6, 0, 'CAS_Achieve.jpg', 'Available'),
+(11, 'Lead', 4, 10, 6, 0, 'CAS_Lead.jpg', 'Available'),
+(12, 'CAS-Conference', 4, 10, 6, 1, 'CAS_Conference.jpg', 'Available'),
+(13, 'Collaborate', 5, 5, 2, 0, 'GSL_Collaborate.jpg', 'Available'),
+(14, 'Connect', 5, 4, 2, 0, 'GSL_Connect.jpg', 'Available'),
+(15, 'Communicate', 5, 5, 2, 0, 'GSL_Communicate.jpg', 'Available'),
+(16, 'Excellence', 6, 10, 6, 0, 'SOL_Excellence.jpg', 'Available'),
+(17, 'Virtue', 6, 10, 6, 0, 'SOL_Virtue.jpg', 'Available'),
+(18, 'Dream', 3, 6, 4, 0, 'SHS_Dream.jpg', 'Available'),
+(19, 'asdada', 2, 10, 5, 0, 'Sample19.png', 'Available'),
+(20, 'MGS', 1, 100, 20, 1, 'IBED-GS_MGS.jpg', 'Available'),
+(21, 'PGS', 1, 80, 20, 1, 'IBED-GS_PGS.jpg', 'Available'),
+(22, 'Michael Baldevia Hall', 1, 20, 10, 0, '51727835_1968997576531300_8797854744778375168_n.jpg', 'Unavailable'),
+(23, 'Michael Baldevia', 1, 20, 6, 0, '31635.jpg', 'Available');
 
 --
 -- Indexes for dumped tables
@@ -503,7 +549,7 @@ ALTER TABLE `venues`
 -- AUTO_INCREMENT for table `bookingcalendar`
 --
 ALTER TABLE `bookingcalendar`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT for table `department_duration`
@@ -533,19 +579,19 @@ ALTER TABLE `school_level`
 -- AUTO_INCREMENT for table `tbl_student`
 --
 ALTER TABLE `tbl_student`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `unavailable_dates`
 --
 ALTER TABLE `unavailable_dates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `venues`
 --
 ALTER TABLE `venues`
-  MODIFY `RoomID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `RoomID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

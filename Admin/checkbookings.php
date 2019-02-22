@@ -62,7 +62,7 @@ mysqli_query($con, $query);
                 mysqli_query($connect, $query);
    }*/
    fclose($handle);
-   echo header('location:../Admin/index.php?ImportDateSuccess=0');
+   echo header('location:../Admin/checkbookings.php?ImportDateSuccess=0');
   }
  }
 }
@@ -136,18 +136,31 @@ $(function() {
 if (isset($_GET['SetUnavailableDateError']) == true) {
     ?>
     <script type="text/javascript">
-    swal("Date Cancel Failed", "Unfortunately the date has already been cancelled", "error");
+    swal("Date Cancel Failed!", "Unfortunately the date has already been cancelled", "error");
     </script>
 <?php
 }
 if (isset($_GET['ImportDateSuccess']) == true) {
     ?>
     <script type="text/javascript">
-    swal("Import Sucess!", "Importing unavailable dates database complete!", "success");
+    swal("Import Success!", "Importing unavailable dates database complete!", "success");
     </script>
 <?php
-}    
-    
+}
+if (isset($_GET['BookingCancelled']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Booking cancelled!", "Booking successfully cancelled!", "success");
+    </script>
+<?php
+}     
+if (isset($_GET['BookingCancelledFailed']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Booking cancelled Failed!", "Booking Does Not Exist/Already have been Canceled!", "error");
+    </script>
+<?php
+}     
 ?>
  <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if

@@ -125,7 +125,6 @@ crossorigin="anonymous">
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../cssforlogin/css/CancelReservation.css">
 <link rel="stylesheet" href="../cssforlogin/css/side.css">
-
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="jquery-1.10.2.js"></script>
 <script src="jquery-ui.js"></script>
@@ -258,30 +257,30 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 <form action="checkbookings.php">
     <!--<input type="submit" value="Check Calendar" /> -->
     <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> Check
+fa-calendar" style="font-size:17px;color:red"></i> Check
 Calendar</span></button>
 </form>
 
 <div class="buttons">
-<form action="BookingOptions.php">
-    <button class="buttoncal" type="submit" style="float:left;width:275px"><span><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Cancel Reservation</span></button>
+<form action="ManageStudentDatabase.php">
+    <button class="buttoncal" type="submit" style="float:left;width:300px"><span style="font-size:17px;"><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Manage Student Database</span></button>
 </form>
 </div>
     
 <form action="addvenue.php">
     <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-plus-circle" style="font-size:24px;color:red;"></i>
+fa-plus-circle" style="font-size:17px;color:red;"></i>
 Add Venues</span></button>
 </form>
     
 <form action="checkrooms.php">
     <button class="buttoncal" type="submit" style="float:left;width:270px"><span><i class="fa
-fa-check-circle" style="font-size:24px;color:red;"></i>
+fa-check-circle" style="font-size:17px;color:red;"></i>
 Venue Descriptions</span></button>
 </form>
         
 <form action="reports.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="	fa fa-table" style="font-size:24px;color:red;"></i>
+    <button class="buttoncal" type="submit" style="float:left"><span><i class="	fa fa-table" style="font-size:17px;color:red;"></i>
 Check Reports</span></button>
 </form>
 

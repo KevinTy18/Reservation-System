@@ -303,6 +303,36 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 </table>
 
     </div>
+    <div class="buttons" style="margin-left:80px">
+<!-- <form action="checkbookings.php"> -->
+    <!--<input type="submit" value="Check Calendar" /> -->
+    <a href="../checkbookings.php" class="buttoncal" type="submit" style="float:left"><span><i class="fa
+fa-calendar" style="font-size:17px;color:red"></i> Check
+Calendar</span></a>
+<!-- </form> -->
+
+<div class="buttons">
+<!-- <form action="ManageStudentDatabase.php"> -->
+    <a href="../ManageStudentDatabase.php" class="buttoncal" type="submit" style="float:left;width:300px"><span style="font-size:17px;"><i class="fa fa-gears" style="font-size:24px;color:red;" ></i> Manage Student Database</span></a>
+<!-- </form> -->
+</div>
+    
+<!-- <form action="addvenue.php"> -->
+    <a href="../addvenue.php" class="buttoncal" type="submit" style="float:left"><span><i class="fa
+fa-plus-circle" style="font-size:17px;color:red;"></i>
+Add Venues</span></a>
+<!-- </form> -->
+    
+<!-- <form action="checkrooms.php"> -->
+    <a href="../checkrooms.php" class="buttoncal" type="submit" style="float:left;width:270px"><span><i class="fa
+fa-check-circle" style="font-size:17px;color:red;"></i>
+Venue Descriptions</span></a>
+<!-- </form> -->
+        
+<!-- <form action="reports.php"> -->
+    <a href="../report.php" class="buttoncal" type="submit" style="float:left"><span><i class=" fa fa-table" style="font-size:17px;color:red;"></i>
+Check Reports</span></a>
+<!-- </form> -->
 <script>
 function openCity(evt, cityName) {
   var i, x, tablinks;

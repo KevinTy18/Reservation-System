@@ -429,7 +429,8 @@ function customInput (el) {
   }
 }
 </script>
-    
+    <script src="../cssforlogin/js/sweetalert.js"></script>
+    <link rel="stylesheet" href="../cssforlogin/css/sweetalert.css">
     <link href="../cssforlogin/css/addvenue.css" rel="stylesheet">
 </head>
 
@@ -438,7 +439,15 @@ function customInput (el) {
 
 <?php 
 include('header.php');    
-include('../includes/navigation.php');  
+include('../includes/navigation.php');
+
+if (isset($_GET['RoomAdded']) == true) {
+    ?>
+    <script type="text/javascript">
+  swal("Room added successfully!", "New discussion room added in the database!", "success");
+    </script>
+<?php
+}  
 ?>
    
     

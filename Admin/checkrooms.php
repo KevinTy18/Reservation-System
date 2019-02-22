@@ -284,7 +284,7 @@ code {
 
 
 .btn {
-  padding: 20px 50px;
+  padding: 5px 20px;
   display: inline-block;
   background: #EF233C;
   color: white;
