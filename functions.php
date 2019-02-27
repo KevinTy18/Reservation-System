@@ -960,7 +960,9 @@ function draw_calendar($month,$year){
               if($row["end_time"]/60/60 > 12){
                 $TimeEnd = $row["end_time"]/60/60 - 12;
                  $calendar .= "<b>" . "Booking end: " . sprintf("%02d:%02d", $TimeEnd, ($row["end_time"]%(60*60)/60)) . " " . "Pm" ."<br></b>" .
-					'<div class="dropdown">
+					'
+                    <center>
+                    <div class="dropdown">
  					<button class="dropbtn">Information</button>
   					<div class="dropdown-content">
   					<p>' . "Reservation ID: " . $row['id']  . '</p>
@@ -970,13 +972,16 @@ function draw_calendar($month,$year){
   					<p>' . "Purpose: " . $row['eventname']  . '</p>
   					<p>' . "School Level or Course: " . $row['School_Level_or_Course']  . '</p>
   					</div>
-					</div>'
+					</div>
+                    </center>'
 					. "<hr><br>";
               }
     				else {
               $calendar .= "<b>". "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br></b>"  .
-					'<div class="dropdown">
- 					<button class="dropbtn">Information</button>
+					'
+                    <center>
+                    <div class="dropdown">
+ 					<center><button class="dropbtn">Information</button></center>
   					<div class="dropdown-content">
   					<p>' . "Reservation ID: " . $row['id']  . '</p>
   					<p>' . "School ID: " . $row['designation_id']  . '</p>
@@ -985,7 +990,8 @@ function draw_calendar($month,$year){
   					<p>' . "Purpose: " . $row['eventname']  . '</p>
   					<p>' . "School Level or Course: " . $row['School_Level_or_Course']  . '</p>
   					</div>
-					</div>'
+					</div>
+                    </center>'
 					. "<hr><br>";
             }
 
