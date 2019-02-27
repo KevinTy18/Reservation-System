@@ -271,7 +271,8 @@ $conn = mysqli_connect($servername, $username, $password,  $dbname);
 
 $start_day = intval(strtotime(htmlspecialchars($_POST["start_day"])));
 $date_reserved = intval(strtotime(htmlspecialchars(date("d/m/Y"))));
-$start_time = (60*60*intval(htmlspecialchars($_POST["start_hour"]))) +
+$starttime = explode(" ",$_POST["start_hour"]);
+$start_time = (60*60*intval(htmlspecialchars($starttime[0]))) +
 (60*intval(htmlspecialchars($_POST["start_minute"])));
 $end_day = intval(strtotime(htmlspecialchars($_POST["start_day"])));
 $end_time = $start_time + (intval(htmlspecialchars($_POST["Duration"])));
@@ -286,7 +287,6 @@ $RoomDepartment = htmlspecialchars($_POST["RoomDepartment"]);
 $item = htmlspecialchars($_POST["Roomname"]);
 $Materials = htmlspecialchars(join(", ",$_POST['material_list']));
 $designation = htmlspecialchars($_POST["designation"]);
-$starttime = explode(" ",$_POST["start_hour"]);
 $endtime = $end_time;
 $start_epoch = $start_day + $start_time;
 $end_epoch = $end_day + $end_time;
@@ -386,7 +386,7 @@ if (mysqli_num_rows($Roomresult) > 0) {
 $sql = "INSERT INTO $tablename (eventname, organization,reservee_name,reservee_type,designation_id,School_Level_or_Course,phone, Room_Department,room,Materials,date_reserved,
 start_day, start_time, end_day, TimeBeginDenum ,
 TimeEndDenum,end_time, canceled, Capacity)
-VALUES ('$eventname','$organization','$reservee','$designation',$Id,'$school_level','$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
+VALUES ('$eventname','$organization','$reservee','$designation','$Id','$school_level','$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
 $start_time, $end_day, '$starttime[1]' ,'$endtime[1]',$end_time,0,'$capacity')";
 
 /*
@@ -477,7 +477,7 @@ if (mysqli_num_rows($Roomresult) > 0) {
 $sql = "INSERT INTO $tablename (eventname, organization,reservee_name,reservee_type,designation_id,School_Level_or_Course,phone, Room_Department,room,Materials,date_reserved,
 start_day, start_time, end_day, TimeBeginDenum ,
 TimeEndDenum,end_time, canceled, Capacity)
-VALUES ('$eventname','$organization','$reservee','$designation',$Id,'$school_level','$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
+VALUES ('$eventname','$organization','$reservee','$designation','$Id','$school_level','$phone','$RoomDepartment', '$item','$Materials',$date_reserved, $start_day,
 $start_time, $end_day, '$starttime[1]' ,'$endtime[1]',$end_time,0,'$capacity')";
 
 /*
@@ -927,8 +927,7 @@ function draw_calendar($month,$year){
 			$current_epoch = mktime(0,0,0,$month,$list_day,$year);
 			$Cancelled_Date_Epoch = intval(strtotime(htmlspecialchars($current_epoch)));
 			
-			$sql = "SELECT * FROM $tablename WHERE $current_epoch BETWEEN start_day AND end_day AND canceled = 0 {$_SESSION['Department']} ORDER BY start_time ASC";
-			/*test_progress($sql);*/
+			$sql = "SELECT * FROM $tablename WHERE $current_epoch BETWEEN start_day AND end_day AND canceled = 0 {$_SESSION['Department']} ORDER BY TimeBeginDenum ASC,room ASC, start_time ASC";
 			$CancelledDates = "SELECT * FROM unavailable_dates WHERE date = $current_epoch";
 
 			$result = mysqli_query($conn, $sql);
@@ -950,20 +949,44 @@ function draw_calendar($month,$year){
 				}
 					else { 
 					if($row["canceled"] == 1) $calendar .= "<font color=\"grey\"><s>";
-    				$calendar .= "<b>" . "Room: ". $row["room"] . "</b><br>ID: " . $row["id"] . "<br>" ."Event Name: " . $row["eventname"] . "<br>". "Organization: ". $row["organization"] . "<br>". "Reservee name: ". $row["reservee_name"] . "<br>" ."Phone Num: " . $row["phone"] . "<br>" ."Capacity: " .$row["Capacity"] . "<br>";
+    				$calendar .= "<b>" . "Room: ". $row["room"] . "</b><br>";
     				if($current_epoch == $row["start_day"] AND $current_epoch != $row["end_day"]) {
-    					$calendar .= "Booking starts: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . "<br><hr><br>";
+    					$calendar .= "<b>". "Booking starts: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . "<br><hr><br></b>";
     				}
     				if($current_epoch == $row["start_day"] AND $current_epoch == $row["end_day"]) {
-    					$calendar .= "Booking start: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br>";
+    					$calendar .= "<b>" . "Booking start: " . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br></b>";
     				}
     				if($current_epoch == $row["end_day"]) {
               if($row["end_time"]/60/60 > 12){
                 $TimeEnd = $row["end_time"]/60/60 - 12;
-                 $calendar .= "Booking end: " . sprintf("%02d:%02d", $TimeEnd, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeEndDenum"] ."<br><hr><br>";
+                 $calendar .= "<b>" . "Booking end: " . sprintf("%02d:%02d", $TimeEnd, ($row["end_time"]%(60*60)/60)) . " " . "Pm" ."<br></b>" .
+					'<div class="dropdown">
+ 					<button class="dropbtn">Information</button>
+  					<div class="dropdown-content">
+  					<p>' . "Reservation ID: " . $row['id']  . '</p>
+  					<p>' . "School ID: " . $row['designation_id']  . '</p>
+  					<p>' . "Name: " . $row['reservee_name']  . '</p>
+  					<p>' . "Organization: " . $row['organization']  . '</p>
+  					<p>' . "Purpose: " . $row['eventname']  . '</p>
+  					<p>' . "School Level or Course: " . $row['School_Level_or_Course']  . '</p>
+  					</div>
+					</div>'
+					. "<hr><br>";
               }
     				else {
-              $calendar .= "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeEndDenum"] ."<br><hr><br>";
+              $calendar .= "<b>". "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br></b>"  .
+					'<div class="dropdown">
+ 					<button class="dropbtn">Information</button>
+  					<div class="dropdown-content">
+  					<p>' . "Reservation ID: " . $row['id']  . '</p>
+  					<p>' . "School ID: " . $row['designation_id']  . '</p>
+  					<p>' . "Name: " . $row['reservee_name']  . '</p>
+  					<p>' . "Organization: " . $row['organization']  . '</p>
+  					<p>' . "Purpose: " . $row['eventname']  . '</p>
+  					<p>' . "School Level or Course: " . $row['School_Level_or_Course']  . '</p>
+  					</div>
+					</div>'
+					. "<hr><br>";
             }
 
     				}
