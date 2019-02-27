@@ -521,7 +521,7 @@ $id = $row['RoomID'];
        echo "<td style='width:150px;border:1px solid black;'>" . $row['Availability'] . "</td>";
     
     
-echo '<td><form method="post" action="" enctype="multipart/form-data">
+echo '<td><form method="post" action="checkrooms.php" enctype="multipart/form-data">
 
 <button id="edit_btn" type="submit" class="btn" name="selectvenue" >Select</button>
 </td>

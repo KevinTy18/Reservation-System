@@ -731,7 +731,8 @@ $id = e($_POST['venueid']);
     $_SESSION['mincapacity'] =  $row['RoomMinimumCapacity'];
     $_SESSION['venueimagee'] =  $row['VenueImage'];
      
-    echo header('location:../Admin/checkrooms.php?');
+   
+    /*echo header('location:../Admin/checkrooms.php?');*/
 }
 
 function deletevenue(){
