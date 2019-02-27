@@ -111,6 +111,15 @@ mysqli_query($con, $query);
   });
   </script>
 <link href="../cssforlogin/css/UnavailableDates.css" rel="stylesheet">
+<style>
+    
+.containerer {
+  display: flex;
+}
+.containerer > div {
+  flex: 1; /*grow*/
+}    
+</style>
 </head>
   <script>
 $(function() {
@@ -144,8 +153,8 @@ include('../includes/navigation.php');
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
 width="400" align="center">
 <tr>
-<td valign="top">
-<center>
+<div class="containerer">
+<div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
 <h3 class="fontfortitle">Import student database</h3>
 <form action="ManageStudentDatabase.php" method="post" enctype='multipart/form-data'>
 Import a CSV File to be placed
@@ -155,6 +164,9 @@ in the database.
 <div>
 <a href="download.php?file=studentdbsample.csv">Download sample csv file.</a>    
 </div>
+<div>
+<a href="download.php?file=LRClegend.xlsx">Download LRC Legend for IDs.</a>    
+</div>    
 
                 <div class="buttons">
 <!--<input name="cancel" type="submit" value="Cancel" /> -->
@@ -164,14 +176,47 @@ in the database.
             </div>
 </form>
 
-</center>
+    </div>
+    <div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
+    
 
-</td>
+<h3 class="fontfortitle">Delete students</h3>
+<form action="ManageStudentDatabase.php" method="post">
+    This deletes the all of the students stored in the database.
+<p></p>
+     <div class="buttons">
+               <button name="deletestudents" type="submit" class="smallbutton1">Delete Students</button>  
+            </div>
+    
+</form>
+
+
+
+    </div>
+</div>
+<!--<div style="background-color:rgba(255,255,255,0.8);text-align:center;max-width:500px;margin:0 auto;border-radius:20px">
+    <center>
+<form action="DeleteStudents.php" method="post">
+<table>
+<tr>  
+<td>Delete students in the database</td>
+</tr>           
+</table>
+                
+
+             <div class="buttons">
+               <button name="deletestudents" type="submit" class="smallbutton1">Delete Students</button>  
+            </div>
+</form> 
+    </center>
+    
+    </div>-->
+
 </tr>
 </table>
     </div>
 
-
+    
 
 
    <!-- <div class="buttons" style="margin-left:80px">
