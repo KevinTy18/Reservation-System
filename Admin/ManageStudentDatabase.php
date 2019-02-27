@@ -140,7 +140,14 @@ include('../includes/navigation.php');
     if (isset($_GET['ImportStudentsSuccess']) == true) {
     ?>
     <script type="text/javascript">
-    swal("Import Sucess!", "Importing student database complete!", "success");
+    swal("Import Success!", "Importing student database complete!", "success");
+    </script>
+<?php
+}
+ if (isset($_GET['StudentDeleted']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Delete Success!", "Deleting student database complete!", "success");
     </script>
 <?php
 }

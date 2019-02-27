@@ -838,7 +838,7 @@ if ($conn->query($sql) === TRUE) {
          alert("Venue deactivated successfully")
     </script>
 <?php*/
-    echo header('location:../Admin/DeleteStudents.php?StudentDeleted=0');
+    echo header('location:../Admin/ManageStudentDatabase.php?StudentDeleted=0');
 } else {
     echo "Error deleting students: " . $conn->error;
 }
