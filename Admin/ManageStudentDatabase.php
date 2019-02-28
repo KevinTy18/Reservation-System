@@ -110,7 +110,7 @@ mysqli_query($con, $query);
     });
   });
   </script>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="../cssforlogin/css/UnavailableDates.css" rel="stylesheet">
 <!--<link rel="stylesheet"
 href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -284,7 +284,47 @@ class="btn btn-primary">Yes, delete all students</button>
 </div>
     </form>
 
+   <!-- <div class="buttons" style="margin-left:80px">
+<form action="checkbookings.php">
+    <input type="submit" value="Check Calendar" />
+    <button class="buttoncal" type="submit"
+style="float:left"><span><i class="fa
+fa-calendar" style="font-size:24px;color:red"></i> Check
+Calendar</span></button>
+</form>
 
+<div class="buttons">
+<form action="UnavailableDates.php">
+    <button class="buttoncal" type="submit"
+style="float:left;width:340px"><span><i class="fa fa-gears"
+style="font-size:24px;color:red;" ></i> Manage Unavailable
+Dates</span></button>
+</form>
+</div>
+
+<form action="addvenue.php">
+    <button class="buttoncal" type="submit"
+style="float:left"><span><i class="fa
+fa-plus-circle" style="font-size:24px;color:red;"></i>
+Add Rooms</span></button>
+</form>
+
+<form action="checkrooms.php">
+    <button class="buttoncal" type="submit"
+style="float:left;width:270px"><span><i class="fa
+fa-check-circle" style="font-size:24px;color:red;"></i>
+Room Descriptions</span></button>
+</form>
+
+<form action="reports.php">
+    <button class="buttoncal" type="submit"
+style="float:left"><span><i class=" fa fa-table"
+style="font-size:24px;color:red;"></i>
+Check Reports</span></button>
+</form>
+
+    </div>-->
+<!-- asd -->
     </div>
 
  <script src="../cssforlogin/js/jquery-3.2.1.slim.min.js"></script>
