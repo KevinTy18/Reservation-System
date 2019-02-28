@@ -310,7 +310,7 @@ array_push($errors, "Capacity must be numeric");
 if (!preg_match("/^[a-zA-Z0-9 .\-]*$/",$organization)) {
 array_push($errors, "Organization must contain only letters");
 }
-if (!preg_match("/^[a-zA-Z , . \s]+$/",$reservee)) {
+if (!preg_match("/^[a-zA-ZÀ-ž\- , . \s]+$/",$reservee)) {
 array_push($errors, "Name must be Valid");
 }
 if (!preg_match("/^[a-z0-9 .\-]+$/i",$Id)) {
@@ -979,9 +979,9 @@ function draw_calendar($month,$year){
     				else {
               $calendar .= "<b>". "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br></b>"  .
 					'
-                    <center>
+                  <center>
                     <div class="dropdown">
- 					<center><button class="dropbtn">Information</button></center>
+ 					<button class="dropbtn">Information</button>
   					<div class="dropdown-content">
   					<p>' . "Reservation ID: " . $row['id']  . '</p>
   					<p>' . "School ID: " . $row['designation_id']  . '</p>

@@ -89,44 +89,7 @@ $(document).ready(function(){
 </script>
 <link href="../cssforlogin/css/checkbookings.css" rel="stylesheet">
 <style>   
-.containerer {
-  display: flex;
-}
-.containerer > div {
-  flex: 1; /*grow*/
-}   
-.dropbtn {
-  background-color: #4CAF50;
-  color: black;
-  padding: 10px;
-  font-size: 12px;
-  border: none;
-  height: 30px;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  color: #efefef;
-  display: none;
-  position: absolute;
-  background-color: #d23b3b;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdown-content a:hover {background-color: #ddd;}
 
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #3e8e41;} 
 </style>
 </head>
 <link rel="icon" type="image/png" href="../sanbedapics/sbcalogo.png"/>
