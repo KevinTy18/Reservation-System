@@ -434,7 +434,24 @@ function customInput (el) {
     <link href="../cssforlogin/css/addvenue.css" rel="stylesheet">
 </head>
 
-<body>
+<script type="text/javascript"> 
+function refresh(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('time()',refresh)
+}
+
+function time() {
+var x = new Date()
+var x1=x.toUTCString();// changing the display to UTC string
+document.getElementById('ct').innerHTML = x1;
+refresh();
+ }
+    function startall(){
+        time();
+        loadCategories();
+    }
+</script>
+<body onload=startall();>
 
 
 <?php 

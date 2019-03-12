@@ -70,4 +70,32 @@ if (isset($_GET['deactivated']) == true) {
     </script>
 <?php
 }
+if (isset($_GET['levelAdded']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Added success!", "Level/Course added successfully!", "success");
+    </script>
+<?php
+}
+if (isset($_GET['levelupdate']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Update success!", "Updating of level/course succeeded!", "success");
+    </script>
+<?php
+}
+if (isset($_GET['levelactivated']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Activate success!", "Level/Course activated success!", "success");
+    </script>
+<?php
+}
+if (isset($_GET['leveldeactivated']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Deactivate success!", "Level/Course deactivated successfully!", "success");
+    </script>
+<?php
+}
 ?>

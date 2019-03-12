@@ -39,7 +39,7 @@
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
+						Admin Log in
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">

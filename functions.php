@@ -7,6 +7,9 @@ session_start();
     $_SESSION['mincapacity'] =  "";
     $_SESSION['venueimagee'] =  "";
 
+
+    $_SESSION['levelcourse'] =  "";
+
 	// connect to database
 	$db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
 
@@ -84,6 +87,21 @@ session_start();
     if (isset($_POST['StudentDepartment'])) {
     	$_SESSION['Department'] = "AND Room_Department =" . $_SESSION['user']['Department_Id'];
     }
+    if (isset($_POST['createlevel'])) {
+		createlevel();
+	}
+    if (isset($_POST['editlevel'])) {
+		updatelevel();
+	}
+    if (isset($_POST['selectlevel'])) {
+		selectlevel();
+	}
+    if (isset($_POST['deletelevel'])) {
+		deletelevel();
+	}
+    if (isset($_POST['restorelevel'])) {
+		restorelevel();
+	}
 // LOGIN USER
 function adminlogin(){
 global $db, $username, $errors;
@@ -787,7 +805,142 @@ if ($conn->query($sql) === TRUE) {
     echo "Error restoring venue: " . $conn->error;
 }
 }
+function createlevel(){
+    global $db, $errors;
+    
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cbfosystem";
 
+$levelcourse      = e($_POST['levelcourse']);
+
+
+    
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+	$sql = "INSERT INTO school_level (Name_or_Course) VALUES
+('$levelcourse')";
+
+
+        
+    
+if ($conn->query($sql) === TRUE) {
+    echo header('location:../Admin/checkschoollevel.php?levelAdded=0');
+} else {
+    echo "Error adding record: " . $conn->error;
+}
+
+}
+function selectlevel() {
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cbfosystem";
+
+
+$id = e($_POST['levelid']);
+
+	$con=mysqli_connect($servername,$username,$password,$dbname);
+	$result = mysqli_query($con,"SELECT Id,Name_or_Course FROM school_level WHERE Id = $id"); 
+	$row = mysqli_fetch_array($result);
+	
+	$_SESSION['levelid'] =  $id;
+    $_SESSION['levelcourse'] =  $row['Name_or_Course'];
+    
+     
+   
+    /*echo header('location:../Admin/checkrooms.php?');*/
+}
+function updatelevel (){
+        $id            =  e($_POST['levelid']);
+        $levelcourse =  e($_POST['levelcourse']);
+        
+
+	/* test_progress($image);*/
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cbfosystem";
+
+
+$id = e($_POST['levelid']);
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+
+    $sql = "UPDATE school_level SET Name_or_Course = '$levelcourse'  WHERE Id = $id"; 
+
+    
+	
+	if ($conn->query($sql) === TRUE) {
+    echo header('location:../Admin/checkschoollevel.php?levelupdate=0');
+    
+    $_SESSION['levelcourse'] =  "";
+   
+	 
+}
+ else {
+    echo "Error updating venue: " . $conn->error;
+}
+}
+function deletelevel(){
+
+$id = e($_POST['levelid']);
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cbfosystem";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+
+
+	$sql = "UPDATE  school_level SET Status = 1 WHERE Id = '$id'";
+
+if ($conn->query($sql) === TRUE) {
+    /*?>
+    <script>
+         alert("Venue deactivated successfully")
+    </script>
+<?php*/
+    echo header('location:../Admin/checkschoollevel.php?leveldeactivated=0');
+} else {
+    echo "Error deleting venue: " . $conn->error;
+}
+}
+function restorelevel(){
+
+$id = e($_POST['levelid']);
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cbfosystem";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+
+
+	$sql = "UPDATE  school_level SET Status = 0 WHERE Id = '$id'";
+
+if ($conn->query($sql) === TRUE) {
+   /* ?>
+    <script>
+         alert("Venue activated successfully")
+    </script>
+<?php*/
+    echo header('location:../Admin/checkschoollevel.php?levelactivated=0');
+} else {
+    echo "Error restoring venue: " . $conn->error;
+}
+}
 function getRevenues() {
 	
 	$servername = "localhost";
@@ -918,7 +1071,8 @@ function draw_calendar($month,$year){
 
 	/* keep going with days.... */
 	for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-		$calendar.= '<td class="calendar-day">';
+		$calendar.= '<td class="calendar-day">
+        <div style="max-width:200px;max-height:400px;overflow-y:scroll;overflow-x:hidden;">';
 			/* add in the day number */
 			$calendar.= '<div class="day-number">'.$list_day.'</div>';
 
@@ -940,7 +1094,7 @@ function draw_calendar($month,$year){
 
     				if (mysqli_num_rows($result_of_Cancelled_Dates) > 0) {
 					while($row = mysqli_fetch_assoc($result_of_Cancelled_Dates)) {
-					$calendar .= "<div style=background-color:black>";
+					$calendar .= "<div style=background-color:black;>";
 					$calendar .= "<font color=white><b>";
 					$calendar .= "Closed" . "<br>";
 					$calendar .= "Reason: " . $row["reason"];
@@ -970,7 +1124,7 @@ function draw_calendar($month,$year){
   					<p>' . "Name: " . $row['reservee_name']  . '</p>
   					<p>' . "Organization: " . $row['organization']  . '</p>
   					<p>' . "Purpose: " . $row['eventname']  . '</p>
-  					<p>' . "School Level or Course: " . $row['School_Level_or_Course']  . '</p>
+  					<p>' . "School Level/Course: " . $row['School_Level_or_Course']  . '</p>
   					</div>
 					</div>
                     </center>'
@@ -983,12 +1137,12 @@ function draw_calendar($month,$year){
                     <div class="dropdown">
  					<button class="dropbtn">Information</button>
   					<div class="dropdown-content">
-  					<p>' . "Reservation ID: " . $row['id']  . '</p>
-  					<p>' . "School ID: " . $row['designation_id']  . '</p>
-  					<p>' . "Name: " . $row['reservee_name']  . '</p>
-  					<p>' . "Organization: " . $row['organization']  . '</p>
-  					<p>' . "Purpose: " . $row['eventname']  . '</p>
-  					<p>' . "School Level or Course: " . $row['School_Level_or_Course']  . '</p>
+  					<p>' . "<b>Reservation ID: </b>" . $row['id']  . '</p>
+  					<p>' . "<b>School ID: </b>" . $row['designation_id']  . '</p>
+  					<p>' . "<b>Name: </b>" . $row['reservee_name']  . '</p>
+  					<p>' . "<b>Organization: </b>" . $row['organization']  . '</p>
+  					<p>' . "<b>Purpose: </b>" . $row['eventname']  . '</p>
+  					<p>' . "<b>School Level/Course: </b>" . $row['School_Level_or_Course']  . '</p>
   					</div>
 					</div>
                     </center>'
@@ -1016,7 +1170,7 @@ function draw_calendar($month,$year){
     			$calendar .= "OPEN";
 			}
 			
-		$calendar.= '</td>';
+		$calendar.= '</div></td>';
 		if($running_day == 6):
 			$calendar.= '</tr>';
 			if(($day_counter+1) != $days_in_month):

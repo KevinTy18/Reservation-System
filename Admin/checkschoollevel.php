@@ -381,7 +381,7 @@ code {
   float: right;
 }
     .tablesize{
-    width:950px;
+    width:650px;
     max-height: 450px;
     overflow-y: scroll;
     overflow-x: scroll;
@@ -456,24 +456,8 @@ $(window).resize(function() {
 }).resize(); // Trigger resize handler    
 </script>
 </head>
-<script type="text/javascript"> 
-function refresh(){
-var refresh=1000; // Refresh rate in milli seconds
-mytime=setTimeout('time()',refresh)
-}
 
-function time() {
-var x = new Date()
-var x1=x.toUTCString();// changing the display to UTC string
-document.getElementById('ct').innerHTML = x1;
-refresh();
- }
-    function startall(){
-        time();
-        loadCategories();
-    }
-</script>
-<body onload=startall();>
+<body>
 
     
 <?php
@@ -501,9 +485,8 @@ $db = "cbfosystem";
 
 				$con=mysqli_connect($servername,$username,$password,$db);
 				$result = mysqli_query($con,"
-                SELECT venues.RoomID,venues.RoomName,venues.Department_Id,venues.RoomCapacity,venues.RoomMinimumCapacity,venues.VenueImage,venues.Availability,room_department.Department 
-FROM venues
-INNER JOIN room_department ON venues.Department_Id = room_department.Id;
+                SELECT school_level.Id,school_level.Name_or_Course,school_level.Status
+FROM school_level;
                 
                 ");
       
@@ -512,12 +495,8 @@ INNER JOIN room_department ON venues.Department_Id = room_department.Id;
 <div class="tablesize">
  <table style='border: solid 1px black;' >
   <tr style=color:black, text-align:right;>
- <th>Room ID</th>
- <th>Department</th>
- <th>Room Name</th>
- <th>Room Capacity</th>
- <th>Minimum Capacity</th>
- <th>Room Image</th>
+ <th>School Level ID</th>
+ <th>Level or Course</th>
  <th>Status</th>
  <th>Edit</th>
  <th>Deactivate</th>
@@ -525,30 +504,35 @@ INNER JOIN room_department ON venues.Department_Id = room_department.Id;
  </tr>
  <?php
 while($row = mysqli_fetch_array($result)) {
-$id = $row['RoomID'];
+$id = $row['Id'];
 
     echo "<tr style=color:black;>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomID'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['Department'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomName'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomCapacity'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['RoomMinimumCapacity'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'><img src=\"../sanbedapics/{$row['VenueImage']}\" width=\"150\" height=\"100\" /></td>";
-       echo "<td style='width:150px;border:1px solid black;'>" . $row['Availability'] . "</td>";
-    
-    
-echo '<td><form method="post" action="checkrooms.php" enctype="multipart/form-data">
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['Id'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['Name_or_Course'] . "</td>";
+    if ($row['Status'] == 0){
+        echo "<td style='width:150px;border:1px solid black;'>Active</td>";
 
-<button id="edit_btn" type="submit" class="btn" name="selectvenue" >Select</button>
+    }
+    else{
+    echo "<td style='width:150px;border:1px solid black;'>Inactive</td>";
+    }
+        
+    
+    
+    
+    
+echo '<td><form method="post" action="checkschoollevel.php" enctype="multipart/form-data">
+
+<button id="edit_btn" type="submit" class="btn" name="selectlevel" >Select</button>
 </td>
 <td>
-<button type="submit" class="btn" name="deletevenue">Deactivate</button>
+<button type="submit" class="btn" name="deletelevel">Deactivate</button>
 </td>
 <td>
-<button type="submit" class="btn" name="restorevenue">Activate</button>
+<button type="submit" class="btn" name="restorelevel">Activate</button>
 </td>
 <td>
-<input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
+<input type="hidden" name="levelid" value="' . $id . '"/></td></form>';
  echo "</tr>";
 }
 ?>
@@ -561,72 +545,60 @@ echo '<td><form method="post" action="checkrooms.php" enctype="multipart/form-da
 
 
 </td>
-
 <td valign="top">
-<form action="checkrooms.php" method="post" enctype="multipart/form-data">
-<h3 class="fontfortitle">Edit Rooms</h3>
+<form action="checkschoollevel.php" method="post" enctype="multipart/form-data">
+<h3 class="fontfortitle">Create</h3>
 
 
 
 <table style="width: 10%">
-<tr>
-<td style="color:black;padding-left:20px;text-align:right">Department:</td>
-<td> 
-    <?php
-    // Run your query
-    
-    echo '<select name="department" style="width:200px">'; // Open your drop down box
 
-// Loop through the query results, outputing the options one by one
-while ($row = $query->fetch_assoc()) {
-   echo '<option value='.$row['Id'].'>'.$row['Department'].'</option>';
-}
+<tr>
+<td style=color:black>Level/Course:</td>
+<td> <input maxlength="50" name="levelcourse" required="" type="text"
+autocomplete="off"/></td>
+<!-- <td>&nbsp;</td>
+<td>&nbsp;</td> -->
+</tr>
 
-echo '</select>';// Close your drop down box
-?>
-</td>
-<!-- <td>&nbsp;</td>
-<td>&nbsp;</td> -->
-</tr>
-<tr>
-<td style=color:black>Room Name:</td>
-<td> <input maxlength="50" name="venuename" required="" type="text"
-autocomplete="off" value="<?php echo $_SESSION['venuename']?>" /></td>
-<!-- <td>&nbsp;</td>
-<td>&nbsp;</td> -->
-</tr>
-<tr>
-<td style=color:black>Room Capacity:</td>
-<td> <input maxlength="50" name="capacity" required="" type="number"
-autocomplete="off" min="1" value="<?php echo $_SESSION['capacity']?>" /></td>
-<!-- <td>&nbsp;</td>
-<td>&nbsp;</td> -->
-</tr>
-<tr>
-<td style=color:black>Minimun Room Capacity:</td>
-<td>
-<input maxlength="20" name="mincapacity" required="" type="number"
-autocomplete="off" min="1" value="<?php echo $_SESSION['mincapacity']?>" /></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<td style=color:black>Room Image:</td>
-<td>
     
-    <input type="hidden" value="<?php echo $_SESSION['venueimagee']?>">
-    <input class="btn" type="file"  name="venueimage"  >  
-    
-</td>
-</tr>
-    
-    <input type="hidden" name="venueid" value="<?php echo $_SESSION['venueid']?>"/>
+    <!--<input type="hidden" name="levelid" value="<?php echo $_SESSION['levelid']?>"/>-->
 <tr>
 </table>
 <p>
             <div class="buttons">
-                <button class="button" name="editvenue"
-                        type="submit"><i class="fa fa-pencil-square-o"></i>Edit venue</button>
+                <button class="button" name="createlevel"
+                        type="submit"><i class="fa fa-pencil-square-o"></i>Create</button>
+            </div>
+    
+    
+<!--<input name="book" type="submit" value="Book" /> -->
+</form>
+</td>
+<td valign="top">
+<form action="checkschoollevel.php" method="post" enctype="multipart/form-data">
+<h3 class="fontfortitle">Edit</h3>
+
+
+
+<table style="width: 10%">
+
+<tr>
+<td style=color:black>Level/Course:</td>
+<td> <input maxlength="50" name="levelcourse" required="" type="text"
+autocomplete="off" value="<?php echo $_SESSION['levelcourse']?>" /></td>
+<!-- <td>&nbsp;</td>
+<td>&nbsp;</td> -->
+</tr>
+
+    
+    <input type="hidden" name="levelid" value="<?php echo $_SESSION['levelid']?>"/>
+<tr>
+</table>
+<p>
+            <div class="buttons">
+                <button class="button" name="editlevel"
+                        type="submit"><i class="fa fa-pencil-square-o"></i>Edit Level</button>
             </div>
     
     

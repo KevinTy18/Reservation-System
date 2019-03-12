@@ -5,6 +5,7 @@
 
 
 <?php endif ?></a>
+     <a style="color:white;background-color:#000000b0;left:50%">Current Date and Time: <span id='ct'></span></a>
   <div class="header-right">
     <a href="../../Admin/index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
           <span class="fa fa-home" style="font-size:20px"></span> Home

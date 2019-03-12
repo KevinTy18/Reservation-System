@@ -13,7 +13,6 @@ Calendar</span></button>
 style="float:left;width:250px"><span><i class="fa fa-gears"
 style="font-size:24px;color:red;" ></i>Manage Student Database</span></button>
 </form>
-</div>
 
 <form action="addvenue.php">
     <button class="smallbuttonnav" type="submit"
@@ -28,6 +27,12 @@ style="float:left;"><span><i class="fa
 fa-check-circle" style="font-size:24px;color:red;"></i>
 Room Descriptions</span></button>
 </form>
+<form action="checkschoollevel.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left;"><span><i class="fa
+fa-check-circle" style="font-size:24px;color:red;"></i>
+Levels/Courses</span></button>
+</form>
 
 <form action="reports.php">
     <button class="smallbuttonnav" type="submit"
@@ -36,4 +41,5 @@ style="font-size:24px;color:red;"></i>
 Check Reports</span></button>
 </form>
 
-    </div>
+</div>
+    

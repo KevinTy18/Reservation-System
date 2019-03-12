@@ -229,8 +229,24 @@ function closeNav() {
 }
 </script>
 </head>
+<script type="text/javascript"> 
+function refresh(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('time()',refresh)
+}
 
-<body>
+function time() {
+var x = new Date()
+var x1=x.toUTCString();// changing the display to UTC string
+document.getElementById('ct').innerHTML = x1;
+refresh();
+ }
+    function startall(){
+        time();
+        loadCategories();
+    }
+</script>
+<body onload=startall();>
 <!-- end header -->
 <?php
 include('includes/header.php');
