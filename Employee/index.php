@@ -663,7 +663,12 @@ style="float:left"><span><i class="fa
 fa-calendar" style="font-size:24px;color:red"></i> Check
 Calendar</span></button>
 </form>
-
+<form action="EmployeeBookedDates.php" method="POST">
+    <button class="smallbuttonnav" type="submit" name="AllDepartment"
+style="float:left"><span><i class="fa
+fa-calendar" style="font-size:24px;color:red"></i> Check
+Bookings</span></button>
+</form>
 
     </div>
 </div>
@@ -885,8 +890,8 @@ $db = "cbfosystem";
 
 
         $con=mysqli_connect($servername,$username,$password,$db);
-        $result = mysqli_query($con,"SELECT RoomName,RoomCapacity,RoomMinimumCapacity FROM venues ORDER BY RoomName ASC"); 
-        
+        $result = mysqli_query($con,"SELECT RoomName,RoomCapacity,RoomMinimumCapacity FROM venues WHERE Availability = 'Available' ORDER BY RoomName ASC"); 
+   
    ?>
 <div class="tablesize">   
     <table style='border: solid 1px black;'>

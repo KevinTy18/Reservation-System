@@ -1,18 +1,20 @@
 <?php
 include('../functions.php');
 include('config.php');
-if (!isAdmin()) {
-$_SESSION['msg'] = "You must log in first";
-header('location: ../adminlogin.php');
+
+if (!isEmployee()) {
+	$_SESSION['msg'] = "You must log in first";
+	header('location: ../userlogin.php');
 }
 
-    if (isset($_GET['logout'])) {
-session_destroy();
-unset($_SESSION['user']);
-header("location: login.php");
+if (isset($_GET['logout'])) {
+	session_destroy();
+	unset($_SESSION['user']);
+	header("location: ../userlogin.php");
 }
 
  $query = $db->query("SELECT Id,Department FROM room_department ");
+ $_SESSION['WebpageOrigin'] = "User";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -284,7 +286,7 @@ code {
 
 
 .btn {
-  padding: 5px 20px;
+  padding: 20px 50px;
   display: inline-block;
   background: #EF233C;
   color: white;
@@ -381,11 +383,11 @@ code {
   float: right;
 }
     .tablesize{
-    width:650px;
+    width:2050px;
     max-height: 450px;
     overflow-y: scroll;
-    overflow-x: scroll;
-    font-size:11px;    
+    
+    
 }
     
 </style>
@@ -457,34 +459,52 @@ $(window).resize(function() {
 </script>
 </head>
 
-    <script type="text/javascript"> 
-function refresh(){
-var refresh=1000; // Refresh rate in milli seconds
-mytime=setTimeout('time()',refresh)
-}
+<body>
+<div class="header">
+  <a class="logo" style="color:white;"> Welcome, <?php  if
+(isset($_SESSION['user'])) : ?>
+<strong><?php echo $_SESSION['user']['username']; ?>!</strong>
 
-function time() {
-var x = new Date()
-var x1=x.toUTCString();// changing the display to UTC string
-document.getElementById('ct').innerHTML = x1;
-refresh();
- }
-    function startall(){
-        time();
-    }
-</script>
-<body onload=startall();>
+
+<?php endif ?></a>
+  <div class="header-right">
+    <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
+          <span class="fa fa-home" style="font-size:20px"></span> Home
+    </a>
+    <a href="index.php?logout='1'" class="smallbutton"
+style="margin-right:10px;color:maroon;">
+          <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
+    </a>
+  </div>
+</div>
+<br>
+<div class="divsize" align="center">
+<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
+<h2 class="fontforlogo"><img src="../sanbedapics/sbcalogo.png" alt="SBCA Logo"
+width="14%">  SBCA Booking System</h2>
+
+</div>
     
-<?php
-include('../includes/bookingalerts.php');
-include('header.php');
-include('../includes/navigation.php');
-include('../includes/checkroomsalerts.php');  
-?>
+<div class="buttons">
+<form action="checkbookingsUsers.php">
+    <!--<input type="submit" value="Check Calendar" /> -->
+    <button class="smallbuttonnav" type="submit"
+style="float:left"><span><i class="fa
+fa-calendar" style="font-size:24px;color:red"></i> Check
+Calendar</span></button>
+</form>
+
+<form action="bookedDates.php">
+    <button class="smallbuttonnav" type="submit"
+style="float:left;"><span><i class="fa fa-gears"
+style="font-size:24px;color:red;" ></i>Booked Dates</span></button>
+</form>
+
+    </div>
 <div class="w3-container">
     <div class="animated fadeIn">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
-width="1000px" class="w3-table w3-centered">
+width="1000px" class="w3-table w3-centered" >
 <tr>
 <td valign="top">
 <div class="ex3"> 
@@ -499,56 +519,62 @@ $db = "cbfosystem";
 
 
 				$con=mysqli_connect($servername,$username,$password,$db);
-				$result = mysqli_query($con,"
-                SELECT school_level.Id,school_level.Name_or_Course,school_level.Status
-FROM school_level;
+				$result = mysqli_query($con,"SELECT id, eventname, organization,reservee_name,phone,Capacity,start_time, end_time FROM bookingcalendar WHERE designation_id = '". $_SESSION['user']['School_Id'] ."';
                 
                 ");
       
 				
    ?>
 <div class="tablesize">
- <table style='border: solid 1px black;' >
-  <tr style=color:black, text-align:right;>
- <th>School Level ID</th>
- <th>Level or Course</th>
- <th>Status</th>
- <th>Edit</th>
- <th>Deactivate</th>
- <th>Activate</th>
- </tr>
+ 
  <?php
+if (mysqli_fetch_array($result) === NULL){
+echo "<P style=color:black;text-align:center;>";
+    echo "No Booking Mades";
+ echo "</P>";
+}
+else {
 while($row = mysqli_fetch_array($result)) {
-$id = $row['Id'];
-
+  
+ 
+    $id = $row['id'];
+echo "<table style='border: solid 1px black;' >
+  <tr style=color:black, text-align:right;>
+ <th>ID</th>
+ <th>Event Name</th>
+ <th>Organization</th>
+ <th>Reservee name</th>
+ <th>Phone Num</th>
+ <th>Attendees</th>
+ <th>Time Start</th>
+ <th>Time End</th>
+ <th>Print</th>
+ 
+ </tr>";
     echo "<tr style=color:black;>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['Id'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['Name_or_Course'] . "</td>";
-    if ($row['Status'] == 0){
-        echo "<td style='width:150px;border:1px solid black;'>Active</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['id'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['eventname'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['organization'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['reservee_name'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['phone'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['Capacity'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['start_time'] . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['end_time'] . "</td>";
+    
+    
+echo '<td><form method="post" action="PDFInvoice/invoice-db.php">
 
-    }
-    else{
-    echo "<td style='width:150px;border:1px solid black;'>Inactive</td>";
-    }
-        
-    
-    
-    
-    
-echo '<td><form method="post" action="checkschoollevel.php" enctype="multipart/form-data">
+<button id="print_btn" type="submit" class="btn">Print</button>
 
-<button id="edit_btn" type="submit" class="btn" name="selectlevel" >Select</button>
+</button> 
 </td>
 <td>
-<button type="submit" class="btn" name="deletelevel">Deactivate</button>
-</td>
+
 <td>
-<button type="submit" class="btn" name="restorelevel">Activate</button>
-</td>
-<td>
-<input type="hidden" name="levelid" value="' . $id . '"/></td></form>';
+<input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
  echo "</tr>";
+
+}
 }
 ?>
 </table>
@@ -560,66 +586,8 @@ echo '<td><form method="post" action="checkschoollevel.php" enctype="multipart/f
 
 
 </td>
-<td valign="top">
-<form action="checkschoollevel.php" method="post" enctype="multipart/form-data">
-<h3 class="fontfortitle">Create</h3>
 
 
-
-<table style="width: 10%">
-
-<tr>
-<td style=color:black>Level/Course:</td>
-<td> <input maxlength="50" name="levelcourse" required="" type="text"
-autocomplete="off"/></td>
-<!-- <td>&nbsp;</td>
-<td>&nbsp;</td> -->
-</tr>
-
-    
-    <!--<input type="hidden" name="levelid" value="<?php echo $_SESSION['levelid']?>"/>-->
-<tr>
-</table>
-<p>
-            <div class="buttons">
-                <button class="button" name="createlevel"
-                        type="submit"><i class="fa fa-pencil-square-o"></i>Create</button>
-            </div>
-    
-    
-<!--<input name="book" type="submit" value="Book" /> -->
-</form>
-</td>
-<td valign="top">
-<form action="checkschoollevel.php" method="post" enctype="multipart/form-data">
-<h3 class="fontfortitle">Edit</h3>
-
-
-
-<table style="width: 10%">
-
-<tr>
-<td style=color:black>Level/Course:</td>
-<td> <input maxlength="50" name="levelcourse" required="" type="text"
-autocomplete="off" value="<?php echo $_SESSION['levelcourse']?>" /></td>
-<!-- <td>&nbsp;</td>
-<td>&nbsp;</td> -->
-</tr>
-
-    
-    <input type="hidden" name="levelid" value="<?php echo $_SESSION['levelid']?>"/>
-<tr>
-</table>
-<p>
-            <div class="buttons">
-                <button class="button" name="editlevel"
-                        type="submit"><i class="fa fa-pencil-square-o"></i>Edit Level</button>
-            </div>
-    
-    
-<!--<input name="book" type="submit" value="Book" /> -->
-</form>
-</td>
 </tr>
 </table>
     </div>

@@ -510,6 +510,7 @@ width="1000px" class="w3-table w3-centered" >
 <div class="ex3"> 
 <?php
 				
+		
 				//Table for users
 				
 				$servername = "localhost";
@@ -526,7 +527,19 @@ $db = "cbfosystem";
 				
    ?>
 <div class="tablesize">
- <table style='border: solid 1px black;' >
+ 
+ <?php
+if (mysqli_fetch_array($result) === NULL){
+echo "<P style=color:black;text-align:center;>";
+    echo "No Booking Mades";
+ echo "</P>";
+}
+else {
+while($row = mysqli_fetch_array($result)) {
+  
+ 
+    $id = $row['id'];
+echo "<table style='border: solid 1px black;' >
   <tr style=color:black, text-align:right;>
  <th>ID</th>
  <th>Event Name</th>
@@ -538,11 +551,7 @@ $db = "cbfosystem";
  <th>Time End</th>
  <th>Print</th>
  
- </tr>
- <?php
-while($row = mysqli_fetch_array($result)) {
-$id = $row['id'];
-
+ </tr>";
     echo "<tr style=color:black;>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['id'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['eventname'] . "</td>";
@@ -565,6 +574,8 @@ echo '<td><form method="post" action="PDFInvoice/invoice-db.php">
 <td>
 <input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
  echo "</tr>";
+
+}
 }
 ?>
 </table>

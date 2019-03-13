@@ -372,6 +372,7 @@ body {
 .dropdown:hover .dropbtn {background-color: #3e8e41;} 
 </style>
 <link href="jquery-ui.css" rel="stylesheet">
+<link href="../cssforlogin/css/checkbookings.css" rel="stylesheet">
 </head>
 
 <body>
