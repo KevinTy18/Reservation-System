@@ -271,6 +271,7 @@ code {
   font: inherit;
 }
 .fontforlogo {
+    font-weight: bold;
     font-family: helvetica;
     color: black;
 }
@@ -383,7 +384,7 @@ code {
   float: right;
 }
     .tablesize{
-    width:2050px;
+    width:1400px;
     max-height: 450px;
     overflow-y: scroll;
     
@@ -530,7 +531,11 @@ $db = "cbfosystem";
  <?php
 if (mysqli_fetch_array($result) === NULL){
 echo "<P style=color:black;text-align:center;>";
-    echo "No Booking Mades";
+    echo "It looks like you haven't made a booking yet.";
+    echo "<br>";
+    echo "Go back to Home to create a schedule.";
+    echo "<br>";
+    echo '<img src="../sanbedapics/noeventimg.png" alt="No Event" width="200px" align="center" >';
  echo "</P>";
 }
 else {
@@ -571,13 +576,13 @@ echo '<td><form method="post" action="PDFInvoice/invoice-db.php">
 <td>
 
 <td>
+</table>
 <input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
  echo "</tr>";
 
 }
 }
 ?>
-</table>
     </div>
 </div>
 

@@ -381,7 +381,7 @@ code {
   float: right;
 }
     .tablesize{
-    width:950px;
+    width:850px;
     max-height: 450px;
     overflow-y: scroll;
     overflow-x: scroll;

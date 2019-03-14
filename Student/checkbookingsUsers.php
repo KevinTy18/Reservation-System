@@ -48,11 +48,13 @@ table.calendar {
 tr.calendar-row {
 }
 td.calendar-day {
-	min-height: 80px;
+	min-height: 10px;
 	font-size: 14px;
 	position: relative;
 	vertical-align: top;
     padding-left:90px;
+    width:1200px;
+
 }
 * html div.calendar-day {
 	height: 80px;
@@ -110,7 +112,7 @@ button {
     cursor: pointer;
     display:block;
     height: 60px;
-    /*line-height: 60px;*/
+   /* line-height: 60px;*/
     padding: 0 30px 0 25px;
     position: relative;
     transition: all .3s;
@@ -205,7 +207,7 @@ button.right::before {
     }
 .parallax {
     /* The image used */
-    background-image: url('../sanbedapics/site-imagecropped.jpg');
+    background-image: url('../sanbedapics/site-image.jpg');
 
     /* Full height */
     height: 100%;
@@ -216,25 +218,18 @@ button.right::before {
 
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-    position: relative;
-    z-index: 1;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
     
     overflow: hidden;
     background-color: #B22222;
-    
+    padding: 0px 10px;
    
-    
-    
-      
+    margin-left: -17px;
+    margin-right: -10px;
 }
 body {
     color:black;
     
-    background-color: #e89c9c;
+    background-color: #b22222d4;
     
     
 
@@ -338,7 +333,13 @@ body {
     float: none;
   }
 }
-    .dropbtn {
+.containerer {
+  display: flex;
+}
+.containerer > div {
+  flex: 1; /*grow*/
+}   
+.dropbtn {
   background-color: #4CAF50;
   color: black;
   padding: 10px;
@@ -355,7 +356,8 @@ body {
   display: none;
   position: absolute;
   background-color: #d23b3b;
-  min-width: 160px;
+  min-width: 110px;
+  max-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
