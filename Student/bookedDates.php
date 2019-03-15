@@ -530,7 +530,7 @@ $db = "cbfosystem";
 <div class="tablesize">
  
  <?php
-if (mysqli_fetch_array($result) === NULL){
+if (mysqli_num_rows($result) === NULL){
 echo "<P style=color:black;text-align:center;>";
     echo "It looks like you haven't made a booking yet.";
     echo "<br>";
@@ -540,11 +540,8 @@ echo "<P style=color:black;text-align:center;>";
  echo "</P>";
 }
 else {
-while($row = mysqli_fetch_array($result)) {
-  
- 
-    $id = $row['id'];
-echo "<table style='border: solid 1px black;' >
+  ?>
+  <table style='border: solid 1px black;' >
   <tr style=color:black, text-align:right;>
  <th>ID</th>
  <th>Event Name</th>
@@ -556,7 +553,13 @@ echo "<table style='border: solid 1px black;' >
  <th>Time End</th>
  <th>Print</th>
  
- </tr>";
+ </tr>
+ <?php
+while($row = mysqli_fetch_array($result)) {
+
+
+    $id = $row['id'];
+
     echo "<tr style=color:black;>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['id'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['eventname'] . "</td>";
@@ -576,14 +579,15 @@ echo '<td><form method="post" action="PDFInvoice/invoice-db.php">
 </td>
 <td>
 
-<td>
-<input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
- echo "</tr>";
+<td>';
+
 
 }
+echo '</table>
+<input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
+ echo "</tr>";
 }
 ?>
-</table>
     </div>
 </div>
 

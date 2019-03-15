@@ -1081,7 +1081,7 @@ function draw_calendar($month,$year){
 			$current_epoch = mktime(0,0,0,$month,$list_day,$year);
 			$Cancelled_Date_Epoch = intval(strtotime(htmlspecialchars($current_epoch)));
 			
-			$sql = "SELECT * FROM $tablename WHERE $current_epoch BETWEEN start_day AND end_day AND canceled = 0 {$_SESSION['Department']} ORDER BY TimeBeginDenum ASC,room ASC, start_time ASC";
+			$sql = "SELECT * FROM $tablename WHERE $current_epoch BETWEEN start_day AND end_day AND canceled = 0 {$_SESSION['Department']} ORDER BY room ASC,TimeBeginDenum ASC, start_time ASC";
 			$CancelledDates = "SELECT * FROM unavailable_dates WHERE date = $current_epoch";
 
 			$result = mysqli_query($conn, $sql);
