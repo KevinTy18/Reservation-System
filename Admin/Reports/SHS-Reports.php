@@ -237,7 +237,7 @@ mytime=setTimeout('time()',refresh)
 
 function time() {
 var x = new Date()
-var x1=x.toUTCString();// changing the display to UTC string
+var x1=x.toLocaleDateString() + " " + x.toLocaleTimeString();// changing the display to UTC string
 document.getElementById('ct').innerHTML = x1;
 refresh();
  }
@@ -317,9 +317,9 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
 
 </table>
-<div class="buttons" style="margin-left:80px">
+<!--<div class="buttons" style="margin-left:80px">
 <form action="checkbookings.php">
-    <!--<input type="submit" value="Check Calendar" /> -->
+    <input type="submit" value="Check Calendar" /> 
     <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
 fa-calendar" style="font-size:17px;color:red"></i> Check
 Calendar</span></button>
@@ -348,7 +348,7 @@ Venue Descriptions</span></button>
 Check Reports</span></button>
 </form>
 
-    </div>
+    </div>-->
     </div>
  
 <!-- </form> -->

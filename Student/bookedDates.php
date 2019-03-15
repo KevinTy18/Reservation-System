@@ -459,14 +459,30 @@ $(window).resize(function() {
 }).resize(); // Trigger resize handler    
 </script>
 </head>
+<script type="text/javascript"> 
+function refresh(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('time()',refresh)
+}
 
-<body>
+function time() {
+var x = new Date()
+var x1=x.toLocaleDateString() + " " + x.toLocaleTimeString();// changing the display to UTC string
+document.getElementById('ct').innerHTML = x1;
+refresh();
+ }
+    function startall(){
+        time();
+        loadCategories();
+    }
+</script>
+<body onload='startall();'>
 <div class="header">
   <a class="logo" style="color:white;"> Welcome, <?php  if
 (isset($_SESSION['user'])) : ?>
 <strong><?php echo $_SESSION['user']['username']; ?>!</strong>
 
-
+<a style="color:white;background-color:#000000b0;left:50%">Current Date and Time: <span id='ct'></span></a>
 <?php endif ?></a>
   <div class="header-right">
     <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
@@ -482,7 +498,7 @@ style="margin-right:10px;color:maroon;">
 <div class="divsize" align="center">
 <!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
 <h2 class="fontforlogo"><img src="../sanbedapics/sbcalogo.png" alt="SBCA Logo"
-width="14%">  SBCA Booking System</h2>
+width="14%">  LRC Booking System</h2>
 
 </div>
     

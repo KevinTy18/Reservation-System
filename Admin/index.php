@@ -206,7 +206,7 @@ mytime=setTimeout('time()',refresh)
 
 function time() {
 var x = new Date()
-var x1=x.toUTCString();// changing the display to UTC string
+var x1=x.toLocaleDateString() + " " + x.toLocaleTimeString();// changing the display to UTC string
 document.getElementById('ct').innerHTML = x1;
 refresh();
  }

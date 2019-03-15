@@ -592,9 +592,25 @@ $(function() {
   });
 });
 </script>
+<script type="text/javascript"> 
+function refresh(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('time()',refresh)
+}
 
+function time() {
+var x = new Date()
+var x1=x.toLocaleDateString() + " " + x.toLocaleTimeString();// changing the display to UTC string
+document.getElementById('ct').innerHTML = x1;
+refresh();
+ }
+    function startall(){
+        time();
+        loadCategories();
+    }
+</script>
 
-<body onload='loadCategories()'>
+<body onload='startall();'>
 <?php
 include('../includes/bookingalerts.php');
 ?>
@@ -603,7 +619,7 @@ include('../includes/bookingalerts.php');
 (isset($_SESSION['user'])) : ?>
 <strong><?php echo $_SESSION['user']['username']; ?>!</strong>
 
-
+<a style="color:white;background-color:#000000b0;left:50%">Current Date and Time: <span id='ct'></span></a>
 <?php endif ?></a>
   <div class="header-right">
     <a href="#" class="smallbutton" style="margin-right:5px;background-color:white;color:maroon;">
@@ -876,7 +892,7 @@ autocomplete="off"/></td> -->
 <tr>
 <td style="color:black;padding-left:20px">Contact #:</td>
 <td>
-<input maxlength="10" name="phone" required="" type="text"
+<input maxlength="11" name="phone" required="" type="text"
 autocomplete="off"/></td>
 </tr>
 <tr>
