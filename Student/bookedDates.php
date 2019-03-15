@@ -546,7 +546,7 @@ $db = "cbfosystem";
 <div class="tablesize">
  
  <?php
-if (mysqli_num_rows($result) === NULL){
+if (empty(mysqli_num_rows($result))){
 echo "<P style=color:black;text-align:center;>";
     echo "It looks like you haven't made a booking yet.";
     echo "<br>";
