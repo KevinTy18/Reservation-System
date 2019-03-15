@@ -954,7 +954,7 @@ $db = "cbfosystem";
 
 
 				$con=mysqli_connect($servername,$username,$password,$db);
-				$result = mysqli_query($con,"SELECT RoomName,RoomCapacity,RoomMinimumCapacity FROM venues ORDER BY RoomName ASC"); 
+				$result = mysqli_query($con,"SELECT RoomName,RoomCapacity,RoomMinimumCapacity FROM venues where Availability = 'Available' ORDER BY RoomName ASC"); 
 				
    ?>
 <div class="tablesize">   
