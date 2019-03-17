@@ -39,7 +39,7 @@ $row['RoomID'], "val" => $row['VenueImage']);
   }
 
 
-   $query = "SELECT Duration_Description,Duration_Value, Department_Id FROM department_duration INNER JOIN room_department ON department_duration.Department_Id = room_department.Id";
+   $query = "SELECT Duration_Description,Duration_Value, Department_Id FROM department_duration INNER JOIN room_department ON department_duration.Department_Id = room_department.Id Order by Duration_Value";
   $result = $db->query($query);
 
   while($row = $result->fetch_assoc()){

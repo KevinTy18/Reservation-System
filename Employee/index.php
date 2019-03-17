@@ -45,7 +45,7 @@ room_department.Department";
     $venues_images_categories[$row['RoomID']][] = array("id" => $row['RoomID'], "val" => $row['VenueImage']);
   }
 
-    $query = "SELECT Duration_Description,Duration_Value, Department_Id FROM department_duration INNER JOIN room_department ON department_duration.Department_Id = room_department.Id";
+    $query = "SELECT Duration_Description,Duration_Value, Department_Id,Admin_Only FROM department_duration INNER JOIN room_department ON department_duration.Department_Id = room_department.Id where Admin_Only = 0 Order BY Duration_Value";
   $result = $db->query($query);
 
   while($row = $result->fetch_assoc()){
