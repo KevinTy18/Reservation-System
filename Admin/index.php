@@ -216,7 +216,7 @@ refresh();
     }
 </script>
 <body onload=startall();>
-    
+
 <?php
 include('../includes/bookingalerts.php');
 include('header.php');
@@ -459,3 +459,4 @@ persons</td>";
 
 </body>
 </html> 
+    
