@@ -425,6 +425,7 @@ $result = mysqli_query($con,"SELECT
 RoomName,RoomCapacity,RoomMinimumCapacity FROM venues WHERE Availability = 'Available' ORDER BY RoomName ASC");
    ?>
 <div class="tablesize">
+    <div class="table-responsive">
     <table style='border: solid 1px black;'>
         <tr style=color:black, text-align:right;>
 
@@ -451,6 +452,7 @@ persons</td>";
 ?>
     </table>
 </div>
+    </div>
 
 </table>
     </div>

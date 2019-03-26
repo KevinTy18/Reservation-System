@@ -114,7 +114,7 @@ include('../includes/navigation.php');
 include('../includes/checkroomsalerts.php');  
 ?>
 <div class="w3-container">
-    <div class="animated fadeIn">
+    <div class="table-responsive">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
 width="1000px" class="w3-table w3-centered">
 <tr>

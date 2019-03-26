@@ -114,7 +114,7 @@ $_SESSION['WebpageOrigin'] = "designationreports";
 </style>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SBCA Booking Calendar</title>
+<title>LRC Booking System</title>
 <link href="jquery-ui.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
