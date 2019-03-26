@@ -14,13 +14,20 @@ html *
    font-family: Arial ; /* !important */
 }
 body {
-    background-image: url("../images/site-image.jpg");
-    background-repeat: no-repeat, repeat;
-    background-color: #cccccc;
-    background-size: cover;
+        background-image: -webkit-linear-gradient(bottom,#ea00009e, #e97a7a4f,transparent),url("../images/site-image.jpg");
     width: 100%;
-
-  background-position: center top;
+    min-height: 100vh;
+ 
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    z-index: 1;
+      
 }
 
 

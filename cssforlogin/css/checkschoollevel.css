@@ -14,7 +14,7 @@ html *
    font-family: Arial ; /* !important */
 }
 body {
-    background-image: -webkit-linear-gradient(bottom,#ea00009e, #e97a7a4f,transparent),url("../images/site-image.jpg");
+   background-image: -webkit-linear-gradient(bottom,#ea00009e, #e97a7a4f,transparent),url("../images/site-image.jpg");
     width: 100%;
     min-height: 100vh;
  
@@ -28,6 +28,8 @@ body {
     position: relative;
     z-index: 1;
 }
+
+
 
 #divcon {
 background-color: rgba(255,255,255,0.8);
@@ -119,7 +121,7 @@ select {
   text-align: center;
   font-size: 20px;
   padding: 20px;
-  width: 130px;
+  width: 190px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -137,32 +139,19 @@ select {
   cursor: pointer;
   margin: 5px;
 }
-.smallbutton {
-    border-radius: 4px;
-    background-color: #f13434;
-    border: none;
-    color: white;
-    text-align: center;
-    font-size: 17px;
-    padding: 6px;
-    width: 120px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-  }
 .smallbuttonnav {
-    border-radius: 4px;
-    background-color: white;
-    border: none;
-    color: crimson;
-    text-align: center;
-    font-size: 17px;
-    padding: 6px;
-    width: 200px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-  }
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: crimson;
+  text-align: center;
+  font-size: 17px;
+  padding: 6px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
 .buttoncal {
   border-radius: 4px;
   background-color: white;
@@ -171,18 +160,18 @@ select {
   text-align: center;
   font-size: 20px;
   padding: 20px;
+  width: 280px;
   transition: all 0.5s;
   cursor: pointer;
-    margin: 2px;
-    padding-top: 28px;
-    width: 262px;
-    margin-top: 79px;
+  margin: 5px;
 }
 .button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
+  width: 250px;
+    margin-left: -80px;
 }
 .buttoncal span {
   cursor: pointer;
@@ -279,7 +268,7 @@ code {
 
 
 .btn {
-  padding: 20px 50px;
+  padding: 5px 20px;
   display: inline-block;
   background: #EF233C;
   color: white;
@@ -375,38 +364,11 @@ code {
 .header-right {
   float: right;
 }
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
+    .tablesize{
+    width:650px;
+    max-height: 450px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    font-size:11px;    
 }
-
-.tooltip .tooltiptext {
     
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: 150%;
-    left: 50%;
-    margin-left: -60px;
-}
-
-.tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent black transparent;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-}
