@@ -1131,7 +1131,8 @@ function draw_calendar($month,$year){
 					. "<hr><br>";
               }
     				else {
-              $calendar .= "<b>". "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br></b>"  .
+    					if ($row["end_time"] / 60 / 60 == 12) {
+    						$calendar .= "<b>". "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " nn"  ."<br></b>"  .
 					'
                   <center>
                     <div class="dropdown">
@@ -1147,6 +1148,26 @@ function draw_calendar($month,$year){
 					</div>
                     </center>'
 					. "<hr><br>";
+    					}
+    					else {
+    						$calendar .= "<b>". "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br></b>"  .
+					'
+                  <center>
+                    <div class="dropdown">
+ 					<button class="dropbtn">Information</button>
+  					<div class="dropdown-content">
+  					<p>' . "<b>Reservation ID: </b>" . $row['id']  . '</p>
+  					<p>' . "<b>School ID: </b>" . $row['designation_id']  . '</p>
+  					<p>' . "<b>Name: </b>" . $row['reservee_name']  . '</p>
+  					<p>' . "<b>Organization: </b>" . $row['organization']  . '</p>
+  					<p>' . "<b>Purpose: </b>" . $row['eventname']  . '</p>
+  					<p>' . "<b>School Level/Course: </b>" . $row['School_Level_or_Course']  . '</p>
+  					</div>
+					</div>
+                    </center>'
+					. "<hr><br>";
+    					}
+              
             }
 
     				}

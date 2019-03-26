@@ -128,64 +128,43 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="jquery-1.10.2.js"></script>
 <script src="jquery-ui.js"></script>
-
-
-<!--<script src="lang/datepicker-fi.js"></script>-->
-<script>
-    $(function() {
-<!--$.datepicker.setDefaults($.datepicker.regional['fi']);-->
-    $( "#from" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#to" ).datepicker({
-      defaultDate: "+1w",
-  regional: "fi",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-  });
-  </script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
    <?php
 	  $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
-
 					//show invoices list as options
-					$query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar GROUP by reservee_type");
-				
-				
+          $result = $db->query("select *, count(room) as Number from bookingcalendar GROUP by reservee_type");
 				?>
-           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
-           <script type="text/javascript">  
-           google.charts.load('current', {'packages':['corechart']});  
-           google.charts.setOnLoadCallback(drawChart);  
-           function drawChart()  
-           {  
-                var data = google.visualization.arrayToDataTable([  
-                          ['reservee_type', 'Number'],  
-                          <?php  
-                          while($row = mysqli_fetch_array($query))  
-                          {  
-                               echo "['".$row["reservee_type"]."', ".$row["Number"]."],";  
-                          }  
-                          ?>  
-                     ]);  
-                var options = {  
-                      title: 'Percentage of Reservee',  
-                      //is3D:true,  
-                      pieHole: 0.4  
-                     };  
-                var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
-                chart.draw(data, options);  
-           }  
-           </script> 
+                      
+                    <script type="text/javascript">
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+
+                        var data = google.visualization.arrayToDataTable([
+                          ['reservee_typer', 'Total'],
+                          <?php
+                          if($result->num_rows > 0){
+                              while($row = $result->fetch_assoc()){
+                                echo "['".$row['reservee_type']."', ".$row['Number']."],";
+                              }
+                          }
+                          ?>
+                        ]);
+                        
+                        var options = {
+                            title: 'Percentage of Reservees',
+                            width: 500,
+                            height: 300,
+                            is3D: true,
+                        };
+                        
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                        
+                        chart.draw(data, options);
+                    }
+                    </script>
     
 <script>
 function openNav() {
@@ -214,6 +193,7 @@ refresh();
     function startall(){
         time();
         loadCategories();
+    
     }
 </script>
 <body onload=startall();>
@@ -252,11 +232,12 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
            <div style="width:950px;height:50px">  
                 <h2>Percentage of Reservee</h2>   
                 <br />  
-                <center><div id="piechart" style="width: 580px; height: 350px;"></div>  </center>
+                <center><div id="piechart"></div></center>
            </div>
 
 
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<div id="chartContainer" style="height: 370px; width: 100%;">
+</div>
 <button class="btn invisible" id="backButton"> Back</button>
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -265,43 +246,6 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
 
 </table>
-
-
-
-
-<!--<div class="buttons" style="margin-left:80px">
-<form action="checkbookings.php">
-    <input type="submit" value="Check Calendar" /> 
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-calendar" style="font-size:17px;color:red"></i> Check
-Calendar</span></button>
-</form>
-
-<div class="buttons">
-<form action="ManageStudentDatabase.php">
-    <button class="buttoncal" type="submit" style="float:left;width:300px"><span style="font-size:17px;"><i class="fa fa-gears" style="font-size:17px;color:red;" ></i> Manage Student Database</span></button>
-</form>
-</div>
-    
-<form action="addvenue.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="fa
-fa-plus-circle" style="font-size:17px;color:red;"></i>
-Add Venues</span></button>
-</form>
-    
-<form action="checkrooms.php">
-    <button class="buttoncal" type="submit" style="float:left;width:270px"><span><i class="fa
-fa-check-circle" style="font-size:17px;color:red;"></i>
-Venue Descriptions</span></button>
-</form>
-        
-<form action="reports.php">
-    <button class="buttoncal" type="submit" style="float:left"><span><i class="	fa fa-table" style="font-size:17px;color:red;"></i>
-Check Reports</span></button>
-</form>
-
-    </div>-->
-
     </div>
 
 

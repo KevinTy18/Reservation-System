@@ -130,69 +130,78 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="jquery-1.10.2.js"></script>
 <script src="jquery-ui.js"></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <?php
 	  $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
 
 					//show invoices list as options
-					$ReserveeQuery = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE Room_Department = 1 GROUP by reservee_type ");
-				
+				$result = $db->query("select *, count(room) as Number from bookingcalendar WHERE Room_Department = 1 GROUP by reservee_type ");
 				
 				?>
-           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
-           <script type="text/javascript">  
-           google.charts.load('current', {'packages':['corechart']});  
-           google.charts.setOnLoadCallback(drawChart);  
-           function drawChart()  
-           {  
-                var data = google.visualization.arrayToDataTable([  
-                          ['reservee_type', 'Number'],  
-                          <?php  
-                          while($row = mysqli_fetch_array($ReserveeQuery))  
-                          {  
-                               echo "['".$row["reservee_type"]."', ".$row["Number"]."],";  
-                          }  
-                          ?>  
-                     ]);  
-                var options = {  
-                      title: 'Percentage of Reservee of IBED-GS',  
-                      //is3D:true,  
-                      pieHole: 0.4  
-                     };  
-                var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
-                chart.draw(data, options);  
-           } 
-           </script>   
+          <script type="text/javascript">
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+
+                        var data = google.visualization.arrayToDataTable([
+                          ['Reservee Type', 'Total'],
+                          <?php
+                          if($result->num_rows > 0){
+                              while($row = $result->fetch_assoc()){
+                                echo "['".$row['reservee_type']."', ".$row['Number']."],";
+                              }
+                          }
+                          ?>
+                        ]);
+                        
+                        var options = {
+                            title: 'Percentage of Reservees',
+                            width: 500,
+                            height: 300,
+                            is3D: true,
+                        };
+                        
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                        
+                        chart.draw(data, options);
+                    }
+                    </script>
+             
 
 <?php
-  $query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE School_Level_or_Course = 'Grade 4' OR School_Level_or_Course = 'Grade 5' OR School_Level_or_Course = 'Grade 6' GROUP by School_Level_or_Course");
-        
+  $result = $db->query("select *, count(room) as Number from bookingcalendar WHERE School_Level_or_Course = 'Grade 4' OR School_Level_or_Course = 'Grade 5' OR School_Level_or_Course = 'Grade 6' GROUP by School_Level_or_Course");     
         
         ?> 
-           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
-           <script type="text/javascript">  
-           google.charts.load('current', {'packages':['corechart']});  
-           google.charts.setOnLoadCallback(drawChartbyLevel);  
-           function drawChartbyLevel()  
-           {  
-                var data = google.visualization.arrayToDataTable([  
-                          ['School_Level_or_Course', 'Number'],  
-                          <?php  
-                          while($row = mysqli_fetch_array($query))  
-                          {  
-                               echo "['".$row["School_Level_or_Course"]."', ".$row["Number"]."],";  
-                          }  
-                          ?>  
-                     ]);  
-                var options = {  
-                      title: 'Percentage of Reservee of IBED-GS by Grade Level',  
-                      //is3D:true,  
-                      pieHole: 0.4  
-                     };  
-                var chart = new google.visualization.PieChart(document.getElementById('piechartforSchoolLevel'));  
-                chart.draw(data, options);  
-           } 
+              <script type="text/javascript">
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChartbyLevel);
+
+                    function drawChartbyLevel() {
+
+                        var data = google.visualization.arrayToDataTable([
+                          ['School Level', 'Total'],
+                          <?php
+                          if($result->num_rows > 0){
+                              while($row = $result->fetch_assoc()){
+                                echo "['".$row['School_Level_or_Course']."', ".$row['Number']."],";
+                              }
+                          }
+                          ?>
+                        ]);
+                        
+                        var options = {
+                            title: 'Percentage of Levels',
+                            width: 500,
+                            height: 300,
+                            is3D: true,
+                        };
+                        
+                        var chart = new google.visualization.PieChart(document.getElementById('piechartforSchoolLevel'));
+                        
+                        chart.draw(data, options);
+                    }
            </script>  
     
 <script>
