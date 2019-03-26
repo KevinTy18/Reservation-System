@@ -155,7 +155,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
                         
                         var options = {
                             title: 'Percentage of Reservees',
-                            width: 500,
+                            width: 700,
                             height: 300,
                             is3D: true,
                         };

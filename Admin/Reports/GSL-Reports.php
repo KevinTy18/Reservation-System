@@ -159,7 +159,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
                         
                         var options = {
                             title: 'Percentage of Reservees',
-                            width: 500,
+                            width: 700,
                             height: 300,
                             is3D: true,
                         };
@@ -267,7 +267,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
         <div id="London" class="w3-container city" style="display:none">
     
     <h2>Percentage of Reservee of GSL</h2>  
-                <center><div id="piechart" style="width: 580px; height: 350px;"></div>
+                <div id="piechart" style="width: 580px; height: 350px;margin-left:100px"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
 <!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
@@ -275,13 +275,13 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
 </button>--> 
 </form> 
-            </center>
+            
                 <br />  
   </div>
 
   <div id="Paris" class="w3-container city" style="display:none">
     <h2>Reports by courses</h2>
-      <center><div id="piechartforSchoolLevel" style="width: 580px; height: 350px;"></div>
+      <div id="piechartforSchoolLevel" style="width: 580px; height: 350px;margin-left:100px"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
 <!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
@@ -289,7 +289,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
 </button> -->
 </form> 
-            </center>
+            
                 <br />
   </div>       
                
