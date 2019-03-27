@@ -3,14 +3,14 @@ include('../functions.php');
 include('config.php');
 
 if (!isStudent()) {
-	$_SESSION['msg'] = "You must log in first";
-	header('location: ../userlogin.php');
+  $_SESSION['msg'] = "You must log in first";
+  header('location: ../userlogin.php');
 }
 
 if (isset($_GET['logout'])) {
-	session_destroy();
-	unset($_SESSION['user']);
-	header("location: ../userlogin.php");
+  session_destroy();
+  unset($_SESSION['user']);
+  header("location: ../userlogin.php");
 }
 
 $cancelleddatestoast = "SELECT * FROM `unavailable_dates` WHERE date between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 month')))));
@@ -276,7 +276,7 @@ select {
   color: crimson;
   text-align: center;
   font-size: 17px;
-  padding: 6px;
+  padding: 11px 20px;
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;
@@ -647,9 +647,10 @@ style="margin-right:10px;background-color:white;color:maroon;">
 width="14%"> <b> LRC BOOKING SYSTEM </b> </h2>
 
 </div>
+    <br>
 <div>
 <div class="buttons" style="margin:0 auto;">
-  <a href="checkbookingsUsers.php" class="smallbuttonnav" >
+  <a href="checkbookingsUsers.php" class="smallbuttonnav" style="" >
           <span><i class="fa fa-calendar" style="font-size:24px;color:red"></i> Check
 Calendar</span>
     </a>
@@ -660,10 +661,11 @@ Calendar</span>
 
     </div>
 </div>
+    <br>
 <div>
  <?php while($row = mysqli_fetch_assoc($toastresult)) { ?>
 
-   <div class="toast" data-autohide="false">
+   <div class="toast" data-autohide="false" style="position:absolute;z-index:1;right:0%;top:10%;">
     <div class="toast-header">
       <strong class="mr-auto text-primary">Reminders for Cancelled Dates this month</strong>
       <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
@@ -674,7 +676,7 @@ Calendar</span>
   </div>
       <?php  } ?>
  <?php while($row = mysqli_fetch_assoc($toastresultbookeddates)) { ?>
-   <div class="toast" data-autohide="false">
+   <div class="toast" data-autohide="false" style="position:absolute;z-index:1;right:0%;top:20%;">
     <div class="toast-header">
       <strong class="mr-auto text-primary">Reminders for Booking for this week</strong>
       <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
@@ -691,6 +693,7 @@ $(document).ready(function(){
   $('.toast').toast('show');
 });
 </script>
+
 
 
 <div class="animated fadeIn">
@@ -773,7 +776,7 @@ autocomplete="off"/></td> -->
 </tr>
 <?php if($_SESSION['user']['Department_Id'] == 1) {?>
 <tr>
-<td style="color:black;padding-left:20px">Scheduled Time:</td> 	
+<td style="color:black;padding-left:20px">Scheduled Time:</td>  
 <td> 
     <ul class="categorychecklist">
         <li><select name="start_hour">
@@ -974,18 +977,18 @@ type="submit"><span>Reserve</span></button>
 
 
 <?php
-				
-			
-				
+        
+      
+        
 $servername = "localhost";
 $username = "root";
 $password = "";
 $db = "cbfosystem";
 
 
-				$con=mysqli_connect($servername,$username,$password,$db);
-				$result = mysqli_query($con,"SELECT RoomName,RoomCapacity,RoomMinimumCapacity FROM venues where Availability = 'Available' ORDER BY RoomName ASC"); 
-				
+        $con=mysqli_connect($servername,$username,$password,$db);
+        $result = mysqli_query($con,"SELECT RoomName,RoomCapacity,RoomMinimumCapacity FROM venues where Availability = 'Available' ORDER BY RoomName ASC"); 
+        
    ?>
 <div class="tablesize">   
     <table style='border: solid 1px black;'>
