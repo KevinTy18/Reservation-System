@@ -649,23 +649,20 @@ width="14%"> <b> LRC BOOKING SYSTEM </b> </h2>
 </div>
 <div>
 <div class="buttons" style="margin:0 auto;">
-<form action="checkbookingsUsers.php" method="POST">
-    <button class="smallbuttonnav" type="submit" name="StudentDepartment"
-style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> Check
-Calendar</span></button>
-</form>
+  <a href="checkbookingsUsers.php" class="smallbuttonnav" >
+          <span><i class="fa fa-calendar" style="font-size:24px;color:red"></i> Check
+Calendar</span>
+    </a>
 
-<form action="bookedDates.php">
-    <button class="smallbuttonnav" type="submit"
-style="float:left;"><span><i class="fa fa-gears"
-style="font-size:24px;color:red;" ></i>Booked Dates</span></button>
-</form>
+<a href="bookedDates.php" class="smallbuttonnav" >
+          <span><i class="fa fa-gears" style="font-size:24px;color:red"></i> Booked Dates</span>
+    </a>
 
     </div>
 </div>
+<div>
  <?php while($row = mysqli_fetch_assoc($toastresult)) { ?>
-<tr>
+
    <div class="toast" data-autohide="false">
     <div class="toast-header">
       <strong class="mr-auto text-primary">Reminders for Cancelled Dates this month</strong>
@@ -677,7 +674,6 @@ style="font-size:24px;color:red;" ></i>Booked Dates</span></button>
   </div>
       <?php  } ?>
  <?php while($row = mysqli_fetch_assoc($toastresultbookeddates)) { ?>
-<tr>
    <div class="toast" data-autohide="false">
     <div class="toast-header">
       <strong class="mr-auto text-primary">Reminders for Booking for this week</strong>
@@ -689,11 +685,11 @@ style="font-size:24px;color:red;" ></i>Booked Dates</span></button>
     </div>
   </div>
       <?php  } ?>
+    </div>
 <script>
 $(document).ready(function(){
   $('.toast').toast('show');
 });
-</script>
 </script>
 
 
