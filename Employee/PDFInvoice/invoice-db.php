@@ -38,6 +38,8 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',14);
 
 //Cell(width , height , text , border , end line , [align] )
+$pdf->Image('SBCA-icon1transparent.png',10,50,190);
+$pdf->Image('sbcalogo.png',40,8,20,25);
 
 $pdf->Cell(200	,5,'San Beda College Alabang',0,1,'C');
 $pdf->Cell(200	,5,'Conference Room Reservation Receipt',0,1,'C');//end of line

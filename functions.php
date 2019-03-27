@@ -451,7 +451,7 @@ if ($_SESSION['user']['user_type']  == "student") {
   if(count($errors) == 0){
     if (mysqli_num_rows($result2) > 0) {
         
-        echo header('location:../Student/index.php?datetilable=0');
+        echo header('location:../Student/index.php?dateunavailable=0');
        
         goto end;
     }

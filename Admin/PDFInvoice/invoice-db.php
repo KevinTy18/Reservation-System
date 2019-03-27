@@ -34,11 +34,17 @@ $pdf = new FPDF('P','mm','A4');
 $pdf->AddPage();
 
 //set font to arial, bold, 14pt
-$pdf->SetFont('Arial','B',14);
+
 
 //Cell(width , height , text , border , end line , [align] )
 $pdf->Image('SBCA-icon1transparent.png',10,50,190);
+$pdf->Image('sbcalogo.png',40,8,20,25);
+
+/*$pdf->AddFont('OldEnglish','','OLDENGL.php');
+$pdf->SetFont('OldEnglish','B',36);*/
 $pdf->Cell(200	,5,'San Beda College Alabang',0,1,'C');
+
+$pdf->SetFont('Arial','B',14);
 $pdf->Cell(200	,5,'Conference Room Reservation Records',0,1,'C');//end of line
 
 //set font to arial, regular, 12pt
