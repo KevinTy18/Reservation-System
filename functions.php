@@ -288,7 +288,7 @@ $conn = mysqli_connect($servername, $username, $password,  $dbname);
     }
 
 $start_day = intval(strtotime(htmlspecialchars($_POST["start_day"])));
-$date_reserved = intval(strtotime(htmlspecialchars(date("d/m/Y"))));
+$date_reserved = intval(strtotime(htmlspecialchars(date("d-m-Y"))));
 $starttime = explode(" ",$_POST["start_hour"]);
 $start_time = (60*60*intval(htmlspecialchars($starttime[0]))) +
 (60*intval(htmlspecialchars($_POST["start_minute"])));

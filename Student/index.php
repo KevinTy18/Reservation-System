@@ -13,6 +13,13 @@ if (isset($_GET['logout'])) {
 	header("location: ../userlogin.php");
 }
 
+$cancelleddatestoast = "SELECT * FROM `unavailable_dates` WHERE date between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 month')))));
+/*test_progress($cancelleddatestoast);*/
+$toastresult = mysqli_query($db, $cancelleddatestoast);
+$reservingName = $_SESSION['user']['firstname'] ." ". $_SESSION['user']['middlename']." " . $_SESSION['user']['lastname'];
+$bookeddatestoast = "SELECT * FROM `bookingcalendar` WHERE reservee_name = '$reservingName' AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
+/*test_progress($_SESSION['user']);*/
+$toastresultbookeddates = mysqli_query($db, $bookeddatestoast);
 
 $query = "SELECT * FROM tbl_student INNER JOIN room_department on tbl_student.Department_Id = room_department.Id INNER JOIN school_level on tbl_student.School_Level_Id = school_level.Id WHERE username=  '". $_SESSION['user']['username'] . "'  AND
 password= '". $_SESSION['user']['password'] . "' LIMIT 1";
@@ -559,7 +566,6 @@ img {
 <?php
   include '../includes/head.php'; 
 ?>
-<!--<script src="lang/datepicker-fi.js"></script>-->
 <script>
     $(function() {
 <!--$.datepicker.setDefaults($.datepicker.regional['fi']);-->
@@ -609,7 +615,8 @@ refresh();
         loadCategories();
     }
 </script>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <body onload='startall();'>
 <?php
 include('../includes/bookingalerts.php');
@@ -622,7 +629,7 @@ include('../includes/bookingalerts.php');
 <a style="color:white;background-color:#000000b0;left:50%">Current Date and Time: <span id='ct'></span></a>
 <?php endif ?></a>
   <div class="header-right">
-    <a href="#" class="smallbutton" style="margin-right:5px;background-color:white;color:maroon;">
+    <a href="index.php" class="smallbutton" style="margin-right:5px;background-color:white;color:maroon;">
           <span class="fa fa-home" style="font-size:20px"></span> Home
     </a>
     <a href="index.php?logout='1'" class="smallbutton"
@@ -657,15 +664,42 @@ style="font-size:24px;color:red;" ></i>Booked Dates</span></button>
 
     </div>
 </div>
-<div class="w3-container">
-    <div class="animated fadeIn">
+ <?php while($row = mysqli_fetch_assoc($toastresult)) { ?>
+<tr>
+   <div class="toast" data-autohide="false">
+    <div class="toast-header">
+      <strong class="mr-auto text-primary">Reminders for Cancelled Dates this month</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body">
+      <?php echo date('M d Y',$row['date']) . " Reason: " .$row['reason'] ;?>
+    </div>
+  </div>
+      <?php  } ?>
+ <?php while($row = mysqli_fetch_assoc($toastresultbookeddates)) { ?>
+<tr>
+   <div class="toast" data-autohide="false">
+    <div class="toast-header">
+      <strong class="mr-auto text-primary">Reminders for Booking for this week</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body">
+      <?php echo date('M d Y',$row['start_day']) . " Timestart: " .
+       sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . $row['TimeBeginDenum'] ;?>
+    </div>
+  </div>
+      <?php  } ?>
+<script>
+$(document).ready(function(){
+  $('.toast').toast('show');
+});
+</script>
+</script>
+
+
+<div class="animated fadeIn">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
 width="100%" height="450px">
-<tr>
-<script>
-</script>
-   
-
 <td valign="top">
 <form action="index.php" method="post">
 <center><h3 class="fontfortitle">Make a Schedule</h3>
