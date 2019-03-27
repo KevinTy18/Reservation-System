@@ -12,9 +12,14 @@ if (isset($_GET['logout'])) {
   unset($_SESSION['user']);
   header("location: ../userlogin.php");
 }
-/*echo '<pre>';
-    die(var_dump($_SESSION['user']['username']));
-    echo '</pre>';*/
+
+$cancelleddatestoast = "SELECT * FROM `unavailable_dates` WHERE date between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 month')))));
+/*test_progress($cancelleddatestoast);*/
+$toastresult = mysqli_query($db, $cancelleddatestoast);
+$reservingName = $_SESSION['user']['firstname'] ." ". $_SESSION['user']['middlename']." " . $_SESSION['user']['lastname'];
+$bookeddatestoast = "SELECT * FROM `bookingcalendar` WHERE reservee_name = '$reservingName' AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
+/*test_progress($_SESSION['user']);*/
+$toastresultbookeddates = mysqli_query($db, $bookeddatestoast);
 
 $query = "SELECT *, room_department.Department FROM tbl_student INNER JOIN room_department on tbl_student.Department_Id = room_department.Id WHERE username=  '". $_SESSION['user']['username'] . "'  AND
 password= '". $_SESSION['user']['password'] . "' LIMIT 1";
@@ -641,7 +646,8 @@ refresh();
         loadCategories();
     }
 </script>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <body onload='startall();'>
 <?php
 include('../includes/bookingalerts.php');
@@ -672,36 +678,58 @@ style="margin-right:10px;background-color:white;color:maroon;">
 width="14%"> <b> LRC BOOKING SYSTEM </b> </h2>
 
 </div>
+<br>
 <div>
 <div class="buttons" style="margin:0 auto;">
-<form action="checkbookingsUsers.php" method="POST">
-    <button class="smallbuttonnav" type="submit" name="AllDepartment"
-style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> Check
-Calendar</span></button>
-</form>
-<form action="EmployeeBookedDates.php" method="POST">
-    <button class="smallbuttonnav" type="submit" name="AllDepartment"
-style="float:left"><span><i class="fa
-fa-calendar" style="font-size:24px;color:red"></i> Check
-Bookings</span></button>
-</form>
+  <a href="checkbookingsUsers.php" class="smallbuttonnav" style="" >
+          <span><i class="fa fa-calendar" style="font-size:24px;color:red"></i> Check
+Calendar</span>
+    </a>
+
+<a href="bookedDates.php" class="smallbuttonnav" >
+          <span><i class="fa fa-gears" style="font-size:24px;color:red"></i> Booked Dates</span>
+    </a>
 
     </div>
 </div>
+<br>
+<div>
+ <?php while($row = mysqli_fetch_assoc($toastresult)) { ?>
+
+   <div class="toast" data-autohide="false" style="position:absolute;z-index:1;right:0%;top:10%;">
+    <div class="toast-header">
+      <strong class="mr-auto text-primary">Reminders for Cancelled Dates this month</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body">
+      <?php echo date('M d Y',$row['date']) . " Reason: " .$row['reason'] ;?>
+    </div>
+  </div>
+      <?php  } ?>
+ <?php while($row = mysqli_fetch_assoc($toastresultbookeddates)) { ?>
+   <div class="toast" data-autohide="false" style="position:absolute;z-index:1;right:0%;top:20%;">
+    <div class="toast-header">
+      <strong class="mr-auto text-primary">Reminders for Booking for this week</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body">
+      <?php echo date('M d Y',$row['start_day']) . " Timestart: " .
+       sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . $row['TimeBeginDenum'] ;?>
+    </div>
+  </div>
+      <?php  } ?>
+    </div>
+<script>
+$(document).ready(function(){
+  $('.toast').toast('show');
+});
+</script>
 <div class="w3-container">
        <div class="animated fadeIn">
 <table id="divcon" cellpadding="0" cellspacing="0" border="0"
 width="100%" height="450px">
 <tr>
-<script>
 
-    /*function change_picture(imageValue)
-    {     
-    document.getElementById("imagedest").innerHTML = '<div><div class="landscape"><img src="../sanbedapics/' + imageValue + '" style="width:100%"></div></div>';
-    }*/
-
-</script>
    
 
 <td valign="top">
