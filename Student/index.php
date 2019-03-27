@@ -694,7 +694,7 @@ $(document).ready(function(){
   $('.toast').toast('show');
 });
 </script>
-</script>
+
 
 
 <div class="animated fadeIn">
