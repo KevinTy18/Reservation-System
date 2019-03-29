@@ -588,6 +588,19 @@ img {
     max-height: 350px;
     overflow-y: scroll;
 }
+.smallbuttonnav {
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: crimson;
+  text-align: center;
+  font-size: 17px;
+  padding: 11px 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
 </style>
 
 </head>
@@ -686,7 +699,7 @@ width="14%"> <b> LRC BOOKING SYSTEM </b> </h2>
 Calendar</span>
     </a>
 
-<a href="bookedDates.php" class="smallbuttonnav" >
+<a href="EmployeeBookedDates.php" class="smallbuttonnav" >
           <span><i class="fa fa-gears" style="font-size:24px;color:red"></i> Booked Dates</span>
     </a>
 
