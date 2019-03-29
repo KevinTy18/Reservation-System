@@ -87,10 +87,12 @@ $(document).ready(function(){
     });
 });
 </script>
-<link href="../cssforlogin/css/checkbookings.css" rel="stylesheet">
-<style>   
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ --><link href="../cssforlogin/css/checkbookings.css" rel="stylesheet">
 
-</style>
+
 </head>
 <link rel="icon" type="image/png" href="../sanbedapics/sbcalogo.png"/>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -321,5 +323,6 @@ echo '<br>';
 
     </div>
 </div>
+
 </body>
 </html>

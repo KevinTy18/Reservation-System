@@ -6,9 +6,18 @@ session_start();
     $_SESSION['capacity'] =  "";
     $_SESSION['mincapacity'] =  "";
     $_SESSION['venueimagee'] =  "";
-
-
     $_SESSION['levelcourse'] =  "";
+
+
+    // Edit the Bookings already MAde
+    $_SESSION['booked_Id'] =  "";
+    $_SESSION['booked_Room'] =  "";
+    $_SESSION['booked_TimeStart'] =  "";
+    $_SESSION['booked_TimeEnd'] =  "";
+    $_SESSION['booked_Room'] =  "";
+    $_SESSION['booked_SchoolId'] =  "";
+    $_SESSION['booked_Organization'] =  "";
+    $_SESSION['booked_SchoolLevel'] =  "";
 
 	// connect to database
 	$db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
@@ -1147,7 +1156,8 @@ function draw_calendar($month,$year){
   					</div>
 					</div>
                     </center>'
-					. "<hr><br>";
+					. "<hr><br>" /*. "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+							include('button.php')*/;
     					}
     					else {
     						$calendar .= "<b>". "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br></b>"  .
