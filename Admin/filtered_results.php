@@ -130,7 +130,11 @@ include('../includes/navigation.php');
 	
 
 </button> 
-</form>   
+</form>
+    <form method='post' action='excel_MasterList.php'>
+<button type='submit' name="export" value="Export" class="smallbutton"  style="float:right;margin-right:10px;width:160px"><i class="fa fa-print" style="font-size:24px;color:red;"></i><span> Export to Excel </span>
+</button> 
+</form>
 <br>
 <div class="w3-container">
 <table id="divcon" color="black" border="1" cellpadding="5"
@@ -152,12 +156,11 @@ width="800" class="w3-table w3-centered" >
 
 				$con=mysqli_connect($servername,$username,$password,$db);
 				$_SESSION['FilterResult'] =  $_POST['invoiceID'];
-        $_SESSION['FilterMonths'] =  $_POST['filtermonth'];
-           $_SESSION['FilterResult'] =  $_POST['invoiceID']; 
+                $_SESSION['FilterMonths'] =  $_POST['filtermonth'];
+                $_SESSION['FilterYear'] =  $_POST['filteryear'];
 
 			  $result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '". $_POST['invoiceID'] ."' AND  (MONTH(FROM_UNIXTIME(start_day)) = '" . $_POST['filtermonth'] . "' AND  YEAR(FROM_UNIXTIME(start_day)) = '" . $_POST['filteryear'] . "' )  ORDER BY start_day ASC"); 
 
-          $_SESSION['FilterYear'] =  $_POST['filteryear'];
 
         if (mysqli_affected_rows($con)  > 0) {
           echo "<table style='border: solid 1px black; text-align:center;' >";

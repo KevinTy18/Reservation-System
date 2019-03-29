@@ -460,7 +460,7 @@ if ($_SESSION['user']['user_type']  == "student") {
   if(count($errors) == 0){
     if (mysqli_num_rows($result2) > 0) {
         
-        echo header('location:../Student/index.php?datetilable=0');
+        echo header('location:../Student/index.php?dateunavailable=0');
        
         goto end;
     }
@@ -1231,4 +1231,58 @@ function draw_calendar($month,$year){
 	/* all done, return result */
 	return $calendar;
 }
+/*$output = '';
+
+
+
+$filterResult    =   $_SESSION['FilterResult'];
+$filterMonths    =   $_SESSION['FilterMonths'];
+$filterYear    =    $_SESSION['FilterYear'];
+if(isset($_POST["export"]))
+{
+    include 'config.php';
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password,  $dbname);
+ $query = "SELECT * FROM bookingcalendar WHERE  canceled = 0 AND room= '$filterResult' AND  (MONTH(FROM_UNIXTIME(start_day)) = '$filterMonths' AND  YEAR(FROM_UNIXTIME(start_day)) = '$filterYear' )  ORDER BY start_day ASC";
+
+ $result = mysqli_query($conn, $query);
+ if(mysqli_num_rows($result) > 0)
+ {
+  $output .= '
+   <table class="table" bordered="1">  
+                    <tr>  
+       <th>EventName</th>
+       <th>Organization</th> 
+       <th>PhoneNum</th>
+       <th>Venue</th>
+       <th>Start Day</th>
+       <th>End Day</th>
+       <th>Start Time</th>
+       <th>End Time</th>
+       <th>Expected Attendee</th>
+                    </tr>
+  ';
+  while($row = mysqli_fetch_array($result))
+  {
+   $output .= '
+    <tr>  					
+						<td>'.$row["eventname"].'</td>  
+                        <td>'.$row["organization"].'</td>  
+                        <td>'.$row["phone"].'</td>  
+                        <td>'.$row["room"].'</td>    
+				        <td>'.date('d/m/Y',$row['start_day']).'</td> 
+						<td>'.date('d/m/Y',$row['end_day']).'</td>
+                        <td>'.sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)).'</td>  
+                        <td>'.sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)).'</td>  
+                        <td>'.$row["Capacity"].'</td>  
+                    </tr>
+   ';
+  }
+  $output .= '</table>';
+  header('Content-Type: application/xls');
+  header('Content-Disposition: attachment; filename=download.xls');
+  echo $output;
+ }
+}*/
 ?>
