@@ -20,6 +20,6 @@ style="margin-right:10px;color:maroon;">
 </div>
 <div class="divsize" align="center">
 <!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="../../sanbedapics/sbcalogo.png" alt="SBCA Logo"
-width="14%"><b> LRC BOOKING SYSTEM</b></h2>
+<h2 class="fontforlogo"><img src="../../sanbedapics/LRClogo.png" alt="LRC Logo"
+width="19%"><b> LRC BOOKING SYSTEM</b></h2>
 </div>

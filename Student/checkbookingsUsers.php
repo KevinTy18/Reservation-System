@@ -407,8 +407,8 @@ style="display: none;">Top<span></span></a>
 <div class="parallax" style="">
    <div class="divsize" style="margin:0 auto;margin-top:250px">
 
-    <div class="divlogo"><img src="../sanbedapics/sbcalogo.png" alt="SBCA Logo"
-width="20%" height="80%" style="margin-left:20px"></div>
+    <div class="divlogo"><img src="../sanbedapics/LRClogo.png" alt="SBCA Logo"
+width="23%" height="80%" style="margin-left:20px"></div>
     <div class="divsbcalogo" ><h2 class="fontforlogo">  SBCA Booking
 Calendar</h2></div>
 </div>
