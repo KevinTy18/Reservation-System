@@ -54,7 +54,7 @@ session_start();
 } ?>
 <?php
 	$sql = "SELECT * FROM `bookingcalendar` WHERE room ='$room' AND
-(start_day>=$start_day OR end_day >=$start_day) AND canceled=0";
+(start_day>=$start_day OR end_day >=$start_day) AND canceled=0 AND id != $id";
 $sql1 = "SELECT * FROM `venues` where RoomName = '$room'";
 $sql2 = "SELECT * FROM unavailable_dates WHERE date='$start_day'";
 $result = mysqli_query($conn, $sql);
