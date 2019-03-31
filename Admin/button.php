@@ -96,13 +96,13 @@ $(function() {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <center><h4 class="modal-title" id="myModalLabel">Edit</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Edit Booking</h4></center>
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
 				<form method="POST" action="edit.php?id=<?php echo $erow['id']; ?>">
 					<div class="row">
-						<div class="col-lg-2">Purpose
+						<div class="col-lg-2">
 							<label style="position:relative; top:7px;">Purpose:</label>
 						</div>
 						<div class="col-lg-10">
@@ -227,7 +227,7 @@ $(function() {
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-check"></span> Save</button>
+                    <button type="submit" class="btn btn-warning" style="color:black;"><span class="glyphicon glyphicon-check"></span> Save</button>
                 </div>
 				</form>
             </div>
