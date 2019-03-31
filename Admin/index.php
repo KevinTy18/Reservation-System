@@ -144,14 +144,6 @@ $row['RoomID'], "val" => $row['VenueImage']);
       }
 
 
-    $(function() {
-      $('input[name="start_day"]').daterangepicker({
-        singleDatePicker: true,
-        showDropdowns: true,
-        minYear: 1901,
-        maxYear: parseInt(moment().format('YYYY'),10)
-      });
-    });
 </script>
 <style>
   
@@ -165,28 +157,7 @@ $row['RoomID'], "val" => $row['VenueImage']);
 
 
 <!--<script src="lang/datepicker-fi.js"></script>-->
-<script>
-    $(function() {
-<!--$.datepicker.setDefaults($.datepicker.regional['fi']);-->
-    $( "#from" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#to" ).datepicker({
-      defaultDate: "+1w",
-  regional: "fi",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-  });
-  </script>
+
   <script>
 $(function() {
   $('input[name="start_day"]').daterangepicker({

@@ -1137,7 +1137,9 @@ function draw_calendar($month,$year){
   					</div>
 					</div>
                     </center>'
-					. "<hr><br>";
+					. "<br>" . "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+							include('button.php');
+							$calendar.="<hr><br>" ;
               }
     				else {
     					if ($row["end_time"] / 60 / 60 == 12) {
@@ -1156,8 +1158,9 @@ function draw_calendar($month,$year){
   					</div>
 					</div>
                     </center>'
-					. "<hr><br>" /*. "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
-							include('button.php')*/;
+					. "<br>" . "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+							include('button.php');
+							$calendar.="<hr><br>" ;
     					}
     					else {
     						$calendar .= "<b>". "Booking end: " . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) . " " . $row["TimeBeginDenum"] ."<br></b>"  .
@@ -1175,7 +1178,9 @@ function draw_calendar($month,$year){
   					</div>
 					</div>
                     </center>'
-					. "<hr><br>";
+					. "<br>". "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+							include('button.php');
+							$calendar.="<hr><br>" ;
     					}
               
             }
