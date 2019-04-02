@@ -13,6 +13,7 @@ while($rs=mysqli_fetch_array($sql)){
 		$selector = "asde";
 		if ($erow['School_Level_or_Course'] == $rs['Name_or_Course']) { 
       	 $selector = "selected='selected'";
+
       }
       $selectCourse.='<option value="'.$rs['Name_or_Course'].'"' . $selector .'>'.$rs['Name_or_Course'].'</option>';
   }
@@ -28,6 +29,7 @@ while($rs=mysqli_fetch_array($sql)){
 		$selector = "asde";
 		if ($erow['room'] == $rs['RoomName']) { 
       	 $selector = "selected='selected'";
+
       }
       $selectRoom.='<option value="'.$rs['RoomName'].'"' . $selector .'>'.$rs['RoomName'].'</option>';
   }
@@ -38,26 +40,39 @@ $selectRoom.='</select>';
 $sql= mysqli_query($db,"SELECT * FROM `department_schedule` where Department_Id='".$row['Room_Department']."'");
 if(mysqli_num_rows($sql)){
 //dropdown for Course And School Level
-$selectTimeStart= '<select name="start_time" class="form-control">';
+$selectTimeStart= '<select name="starttime" class="form-control">';
 $selectTimeMinutes= '<select name="start_minutes" class="form-control">';
+
+$selectorMinutes0= "asde";
+$selectorMinutes30 = "asde";
+
 while($rs=mysqli_fetch_array($sql)){
+
 		$selector = "asde";
-		$selectorMinutes0= "asde";
-		$selectorMinutes30 = "asde";
-		if ($erow['start_time'] == 60*60*intval(htmlspecialchars($rs['Schedule_Value']))) { 
+		$starttime = explode(" ",$rs['Schedule_Value']);
+		$starttimehours =($starttime[0]);
+		
+		if (intval($erow['start_time'])/60/60 === intval($starttimehours) ||
+			(intval($erow['start_time'])/60/60 >= intval($starttimehours)) && intval($erow['start_time'])/60/60 <= intval($starttimehours + 1)) { 
       	 $selector = "selected='selected'";
-      }
-      if ($erow['start_time'] - 60*60*intval(htmlspecialchars($rs['Schedule_Value'])) == 0) { 
+      	
+  		if (intval($erow['start_time'])/60/60 - ($starttimehours) == 0) { 
       	 $selectorMinutes0 = "selected='selected'";
+      	 
       }
-      if ($erow['start_time'] - 60*60*intval(htmlspecialchars($rs['Schedule_Value'])) == 1800) { 
+      if (intval($erow['start_time'])/60/60 - ($starttimehours) > 0.1) { 
       	 $selectorMinutes30 = "selected='selected'";
+      	 
       }
+      }
+	
+      
 
       $selectTimeStart.='<option value="'.$rs['Schedule_Value'].'"' . $selector .'>'.$rs['Schedule_Description'].'</option>';
   }
   	$selectTimeMinutes .= '<option value="0"' . $selectorMinutes0 .'>'. '0'.'</option>';
-  	$selectTimeMinutes .= '<option value="1800"' . $selectorMinutes30 .'>'.'30'.'</option>';
+  	$selectTimeMinutes .= '<option value="30"' . $selectorMinutes30 .'>'.'30'.'</option>';
+
 }
 $selectTimeStart.='</select>'; 
 $selectTimeMinutes.='</select>';
@@ -71,6 +86,7 @@ while($rs=mysqli_fetch_array($sql)){
 		$selector = "asde";
 		if ($erow['end_time'] - $erow['start_time'] == $rs['Duration_Value']) { 
       	 $selector = "selected='selected'";
+
       }
       $selectDuration.='<option value="'.$rs['Duration_Value'].'"' . $selector .'>'.$rs['Duration_Description'].'</option>';
   }
@@ -207,7 +223,6 @@ $(function() {
 							<label style="position:relative; top:7px;">Time Start:</label>
 						</div>
 						<div class="col-lg-10">
-							<!-- <input type="text" name="start_time" class="form-control" value="<?php echo $erow['start_time']; ?>"> -->
 							<?php echo $selectTimeStart;?>
 							<?php echo $selectTimeMinutes;?>
             </select>
@@ -219,7 +234,6 @@ $(function() {
 							<label style="position:relative; top:7px;">Duration of Booking:</label>
 						</div>
 						<div class="col-lg-10">
-							<!-- <input type="text" name="duration" class="form-control" value="<?php echo $erow['end_time'] - $erow['start_time']; ?>"> -->
 							<?php echo $selectDuration;?>
 						</div>
 					</div>

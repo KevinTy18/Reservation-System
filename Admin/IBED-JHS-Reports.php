@@ -1,9 +1,9 @@
 <?php
-include('../../functions.php');
-include('../config.php');
+include('../functions.php');
+include('config.php');
 if (!isAdmin()) {
 $_SESSION['msg'] = "You must log in first";
-header('location: ../../adminlogin.php');
+header('location: ../adminlogin.php');
 }
 
     if (isset($_GET['logout'])) {
@@ -11,8 +11,7 @@ session_destroy();
 unset($_SESSION['user']);
 header("location: login.php");
 }
-$_SESSION['WebpageOrigin'] = "IBED-GS-Reports";
-
+$_SESSION['WebpageOrigin'] = "IBED-JHS-Reports";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -20,7 +19,6 @@ $_SESSION['WebpageOrigin'] = "IBED-GS-Reports";
 
 <head>
 <style>
-
 .tooltip {
     position: relative;
     display: inline-block;
@@ -125,84 +123,100 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 crossorigin="anonymous">
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../../cssforlogin/css/CancelReservation.css">
-<link rel="stylesheet" href="../../cssforlogin/css/side.css">
+<link rel="stylesheet" href="../cssforlogin/css/CancelReservation.css">
+
+
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="jquery-1.10.2.js"></script>
 <script src="jquery-ui.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<?php
+
+<!--<script src="lang/datepicker-fi.js"></script>-->
+<script>
+    $(function() {
+<!--$.datepicker.setDefaults($.datepicker.regional['fi']);-->
+    $( "#from" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#to" ).datepicker({
+      defaultDate: "+1w",
+  regional: "fi",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+  });
+  </script>
+
+   <?php
 	  $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
 
 					//show invoices list as options
-				$result = $db->query("select *, count(room) as Number from bookingcalendar WHERE Room_Department = 1 GROUP by reservee_type ");
+					$query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE Room_Department = 2 GROUP by reservee_type ");
+				
 				
 				?>
-          <script type="text/javascript">
-                    google.charts.load('current', {'packages':['corechart']});
-                    google.charts.setOnLoadCallback(drawChart);
+           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+           <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChart);  
+           function drawChart()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['reservee_type', 'Number'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($query))  
+                          {  
+                               echo "['".$row["reservee_type"]."', ".$row["Number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Percentage of Reservee of IBED-JHS',  
+                      //is3D:true,  
+                      pieHole: 0.4  
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
+                chart.draw(data, options);  
+           }  
+           </script>
 
-                    function drawChart() {
-
-                        var data = google.visualization.arrayToDataTable([
-                          ['Reservee Type', 'Total'],
-                          <?php
-                          if($result->num_rows > 0){
-                              while($row = $result->fetch_assoc()){
-                                echo "['".$row['reservee_type']."', ".$row['Number']."],";
-                              }
-                          }
-                          ?>
-                        ]);
-                        
-                        var options = {
-                            title: 'Percentage of Reservees',
-                            width: 500,
-                            height: 300,
-                            is3D: true,
-                        };
-                        
-                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                        
-                        chart.draw(data, options);
-                    }
-                    </script>
-             
-
-<?php
-  $result = $db->query("select *, count(room) as Number from bookingcalendar WHERE School_Level_or_Course = 'Grade 4' OR School_Level_or_Course = 'Grade 5' OR School_Level_or_Course = 'Grade 6' GROUP by School_Level_or_Course");     
+           <?php
+  $query = mysqli_query($db,"select *, count(room) as Number from bookingcalendar WHERE School_Level_or_Course = 'Grade 7' OR School_Level_or_Course = 'Grade 8' OR School_Level_or_Course = 'Grade 9' OR School_Level_or_Course = 'Grade 10' GROUP by School_Level_or_Course");
+        
         
         ?> 
-              <script type="text/javascript">
-                    google.charts.load('current', {'packages':['corechart']});
-                    google.charts.setOnLoadCallback(drawChartbyLevel);
-
-                    function drawChartbyLevel() {
-
-                        var data = google.visualization.arrayToDataTable([
-                          ['School Level', 'Total'],
-                          <?php
-                          if($result->num_rows > 0){
-                              while($row = $result->fetch_assoc()){
-                                echo "['".$row['School_Level_or_Course']."', ".$row['Number']."],";
-                              }
-                          }
-                          ?>
-                        ]);
-                        
-                        var options = {
-                            title: 'Percentage of Levels',
-                            width: 500,
-                            height: 300,
-                            is3D: true,
-                        };
-                        
-                        var chart = new google.visualization.PieChart(document.getElementById('piechartforSchoolLevel'));
-                        
-                        chart.draw(data, options);
-                    }
-           </script>  
+           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+           <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChartbyLevel);  
+           function drawChartbyLevel()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['School_Level_or_Course', 'Number'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($query))  
+                          {  
+                               echo "['".$row["School_Level_or_Course"]."', ".$row["Number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Percentage of Reservee of IBED-JHS by Grade Level',  
+                      //is3D:true,  
+                      pieHole: 0.4  
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('piechartforSchoolLevel'));  
+                chart.draw(data, options);  
+           } 
+           </script>
     
 <script>
 function openNav() {
@@ -216,35 +230,43 @@ function closeNav() {
 }
 </script>
 </head>
-<script type="text/javascript"> 
-function refresh(){
-var refresh=1000; // Refresh rate in milli seconds
-mytime=setTimeout('time()',refresh)
-}
 
-function time() {
-var x = new Date()
-var x1=x.toLocaleDateString() + " " + x.toLocaleTimeString();// changing the display to UTC string
-document.getElementById('ct').innerHTML = x1;
-refresh();
- }
-    function startall(){
-        time();
-        loadCategories();
-    }
-</script>
-<body onload=startall();>
+<body>
 
-<!-- end header -->
-<?php
-include('includes/header.php');
-include('includes/nav.php');  
+<div class="header" id="main">
+  <a class="logo" style="color:white;"> Welcome, <?php  if
+(isset($_SESSION['user'])) : ?>
+<strong><?php echo $_SESSION['user']['username']; ?>!</strong>
 
-?>
+
+<?php endif ?></a>
+  <div class="header-right">
+    <a href="index.php" class="smallbutton" style="margin-right:5px;color:maroon;">
+          <span class="fa fa-home" style="font-size:20px"></span> Home
+    </a>
+    <a href="index.php?logout='1'" class="smallbutton"
+style="margin-right:10px;color:maroon;">
+          <span class="fa fa-sign-out" style="font-size:20px"></span> Log out
+    </a>
+  </div>
+</div><!-- end header -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="designationreports.php">Reservee Reports</a>
+  <a href="IBED-GS-Reports.php">IBED-GS Reports</a>
+  <a href="IBED-JHS-Reports.php">IBED-JHS Reports</a>
+  <a href="SHS-Reports.php">SHS Reports</a>
+  <a href="CAS-Reports.php">CAS Reports</a>
+  <a href="GSL-Reports.php">GSL Reports</a>
+  <a href="SOL-Reports.php">SOL Reports</a>
+</div>
 <br>
-<?php 
-include('../../includes/SideNavbarDepartmentReports.php');
-  ?>
+<div class="divsize" align="center">
+<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
+<h2 class="fontforlogo"><img src="sbcalogo.png" alt="SBCA Logo"
+width="14%">  SBCA Booking System</h2>
+</div>
+<span style="font-size:25px;cursor:pointer;color:white;padding:2px;" id="divcon" onclick="openNav()">&#9776; more reports</span>
 <br>
 
 <div class="w3-container" >
@@ -257,7 +279,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
            <div style="width:950px;height:50px">
                <div class="w3-row">
     <a href="javascript:void(0)" onclick="openCity(event, 'London');">
-      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">IBED-GS Reservees</div>
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">IBED-JHS Reservees</div>
     </a>
     <a href="javascript:void(0)" onclick="openCity(event, 'Paris');">
       <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" style="color:white">By Level</div>
@@ -266,14 +288,14 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
                
         <div id="London" class="w3-container city" style="display:none">
     
-    <h2>Percentage of Reservee of IBED-GS</h2>  
+    <h2>Percentage of Reservee of IBED-JHS</h2>  
                 <center><div id="piechart" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
-<!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
+<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
 	
 
-</button>--> 
+</button> 
 </form> 
             </center>
                 <br />  
@@ -283,11 +305,11 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
     <h2>Reports by level</h2>
       <center><div id="piechartforSchoolLevel" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
-<!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
+<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
 	
 
-</button>--> 
+</button> 
 </form> 
             </center>
                 <br />
@@ -306,6 +328,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
 
 </table>
+
     </div>
 <script>
 function openCity(evt, cityName) {
@@ -322,6 +345,5 @@ function openCity(evt, cityName) {
   evt.currentTarget.firstElementChild.className += " w3-border-red";
 }
 </script>
-
 </body>
 </html>

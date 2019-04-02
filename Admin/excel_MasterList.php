@@ -51,7 +51,47 @@ $filterYear    =    $_SESSION['FilterYear'];
   }
   $output .= '</table>';
   header('Content-Type: application/xls');
-  header('Content-Disposition: attachment; filename=download.xls');
+/*  $filterResult    =   $_SESSION['FilterResult'];
+$filterMonths    =   $_SESSION['FilterMonths'];
+$filterYear    =    $_SESSION['FilterYear'];*/
+$filterMonthsinWords = "default";
+if ($filterMonths == 1){
+  $filterMonthsinWords = "January";
+}
+if ($filterMonths == 2){
+  $filterMonthsinWords = "February";
+}
+if ($filterMonths == 3){
+  $filterMonthsinWords = "March";
+}
+if ($filterMonths == 4){
+  $filterMonthsinWords = "April";
+}
+if ($filterMonths == 5){
+  $filterMonthsinWords = "May";
+}
+if ($filterMonths == 6){
+  $filterMonthsinWords = "June";
+}
+if ($filterMonths == 7){
+  $filterMonthsinWords = "July";
+}
+if ($filterMonths == 8){
+  $filterMonthsinWords = "August";
+}
+if ($filterMonths == 9){
+  $filterMonthsinWords = "September";
+}
+if ($filterMonths == 10){
+  $filterMonthsinWords = "October";
+}
+if ($filterMonths == 11){
+  $filterMonthsinWords = "November";
+}
+if ($filterMonths == 12){
+  $filterMonthsinWords = "December";
+}
+  header('Content-Disposition: attachment; filename='."Results_For_".$filterResult ."For_" .$filterMonthsinWords."_".$filterYear.'.xls');
   echo $output;
  }
 }

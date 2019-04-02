@@ -12,7 +12,14 @@ session_start();
 	$school_level=htmlspecialchars($_POST['school_level']);
 	$room=htmlspecialchars($_POST['room']);
 	$start_day=intval(strtotime(htmlspecialchars($_POST["start_day"])));
-	$starttime = explode(" ",$_POST["start_time"]);
+	$end_day=$start_day;
+/*echo '<pre>';
+    die(var_dump(intval(strtotime(htmlspecialchars("4/4/2019")))));
+    echo '</pre>';*/
+	/*echo '<pre>';
+    die(var_dump($start_day));
+    echo '</pre>';*/
+	$starttime = explode(" ",$_POST["starttime"]);
 	$end_day = $start_day;
 	$capacity = intval(($_POST["atendee"]));
 	$start_time = (60*60*intval(htmlspecialchars($starttime[0]))) +
@@ -21,6 +28,7 @@ session_start();
 	$start_epoch = $start_day + $start_time;
 	$end_epoch = $end_day + $end_time;
 	/*$duration=$_POST['duration'];*/
+	
 	if (empty($start_day)) {
 	array_push($errors, "Starting Day is required");
 	}
@@ -59,9 +67,6 @@ $sql1 = "SELECT * FROM `venues` where RoomName = '$room'";
 $sql2 = "SELECT * FROM unavailable_dates WHERE date='$start_day'";
 $result = mysqli_query($conn, $sql);
 $result1 = mysqli_query($conn, $sql1);
-/*echo '<pre>';
-    die(var_dump($item));
-    echo '</pre>';*/
 $result2 = mysqli_query($conn, $sql2);
 if ($_SESSION['user']['user_type']  == "admin") {
 
@@ -87,9 +92,6 @@ goto end;
 }
 }
 }
-/*echo '<pre>';
-    die(var_dump($result));
-    echo '</pre>';*/
    if (mysqli_num_rows($result) > 0) {
     
     while($row = mysqli_fetch_assoc($result)) {
@@ -106,7 +108,7 @@ goto end;
 }
 }
 	/*mysqli_query($conn,"update user set firstname='$firstname', lastname='$lastname', address='$address' where userid='$id'");*/
-	$sql = "UPDATE `bookingcalendar` SET `eventname`='$purpose',`organization`='$organization',`reservee_name`='$reservee',`reservee_type`= '$reservee_type',`designation_id`='$reservee_id',`School_Level_or_Course`='$school_level',`room`='$room',`start_day`=$start_day,`start_time`=$start_time,`end_time`=$end_time, Capacity = $capacity  WHERE id = $id";
+	$sql = "UPDATE `bookingcalendar` SET `eventname`='$purpose',`organization`='$organization',`reservee_name`='$reservee',`reservee_type`= '$reservee_type',`designation_id`='$reservee_id',`School_Level_or_Course`='$school_level',`room`='$room',`start_day`=$start_day,end_day=$end_day,`start_time`=$start_time,`end_time`=$end_time,TimeBeginDenum='$starttime[1]', Capacity = $capacity  WHERE id = $id";
 	
 if (mysqli_num_rows($result1) > 0 ){
   
