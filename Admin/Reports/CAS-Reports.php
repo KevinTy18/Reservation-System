@@ -114,7 +114,7 @@ $_SESSION['WebpageOrigin'] = "CAS-Reports";
 </style>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LRC Booking System</title>
+<title>SBCA Booking Calendar</title>
 <link href="jquery-ui.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
@@ -131,28 +131,6 @@ crossorigin="anonymous">
 
 
 <!--<script src="lang/datepicker-fi.js"></script>-->
-<script>
-    $(function() {
-<!--$.datepicker.setDefaults($.datepicker.regional['fi']);-->
-    $( "#from" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#to" ).datepicker({
-      defaultDate: "+1w",
-  regional: "fi",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-  });
-  </script>
 
 <?php
 	  $db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
@@ -181,7 +159,7 @@ crossorigin="anonymous">
                         
                         var options = {
                             title: 'Percentage of Reservees',
-                            width: 700,
+                            width: 500,
                             height: 300,
                             is3D: true,
                         };
@@ -290,7 +268,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
         <div id="London" class="w3-container city" style="display:none">
     
     <h2>Percentage of Reservee of CAS</h2>  
-                <div id="piechart" style="width: 580px; height: 350px;margin-left:100px"></div>
+                <center><div id="piechart" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
 <!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
@@ -298,13 +276,13 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
 </button>--> 
 </form> 
-            
+            </center>
                 <br />  
   </div>
 
   <div id="Paris" class="w3-container city" style="display:none">
     <h2>Reports by courses</h2>
-      <div id="piechartforSchoolLevel" style="width: 580px; height: 350px;margin-left:100px"></div>
+      <center><div id="piechartforSchoolLevel" style="width: 580px; height: 350px;"></div>
             <form method='post' action='PDFInvoice/invoice-db.php'>
 <!--<button type='submit' class="smallbutton"  style="float:right;margin-right: 400px;
     margin-top: -90px;"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
@@ -312,7 +290,7 @@ width="400" align="center"  style="margin-top:5px;margin-bottom:10px">
 
 </button> -->
 </form> 
-            
+            </center>
                 <br />
   </div>       
                
