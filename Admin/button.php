@@ -98,9 +98,9 @@ $(function() {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <center><h4 class="modal-title" id="myModalLabel">Edit Booking</h4></center>
                 </div>
+				<form method="POST" action="edit.php?id=<?php echo $erow['id']; ?>">
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" action="edit.php?id=<?php echo $erow['id']; ?>">
 					<div class="row">
 						<div class="col-lg-2">
 							<label style="position:relative; top:7px;">Purpose:</label>
@@ -210,7 +210,7 @@ $(function() {
 							<!-- <input type="text" name="start_time" class="form-control" value="<?php echo $erow['start_time']; ?>"> -->
 							<?php echo $selectTimeStart;?>
 							<?php echo $selectTimeMinutes;?>
-            </select>
+          
 						</div>
 					</div>
 					<div style="height:10px;"></div>

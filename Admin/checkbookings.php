@@ -280,6 +280,7 @@ class="smallbuttonnav" style="margin:0 auto;background-color:black">Import</butt
     </div>
 <div class="divmargin" style="margin-top:100px">
     <div class="divcalendar">
+        <div class="table-responsive">
         <center>
 <?php
 echo '<br>';
@@ -326,7 +327,7 @@ echo '<br>';
 
 
 
-
+    </div>
     </div>
 </div>
 
