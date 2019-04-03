@@ -176,8 +176,7 @@ echo '<td><form method="post" action="checkrooms.php" enctype="multipart/form-da
 <button id="edit_btn" type="submit" class="btn" name="selectvenue" >Select</button>
 </td>
 <td>
-<button type="button" class="btn" data-toggle="modal"
-data-target="#exampleModalCenter">Deactivate</button>
+<button type="submit" class="btn" name="deletevenue">Deactivate</button>
 </td>
 <td>
 <button type="submit" class="btn" name="restorevenue">Activate</button>
@@ -190,38 +189,7 @@ data-target="#exampleModalCenter">Deactivate</button>
 </table>
     </div>
 </div>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-role="dialog" aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Deactivate room</h5>
-        <button type="button" class="close" data-dismiss="modal"
-aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to deactivate the room?
-          
-          <div class="wrap-input100 validate-input" data-validate="Enter password">
-              Please enter password:
-                   
-						<input class="input100" type="password" name="password" placeholder="Password" required>
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-data-dismiss="modal">Close</button>
-        <button name="deletevenue" type="submit" type="button"
-class="btn btn-primary">Yes, deactivate the room</button>
-      </div>
-    </div>
-  </form>
-  </div>
-</div>
+
 
 
 
@@ -304,9 +272,5 @@ autocomplete="off" min="1" value="<?php echo $_SESSION['mincapacity']?>" /></td>
     </div>
 
     </div>
-
- <script src="../cssforlogin/js/jquery-3.2.1.slim.min.js"></script>
-<script src="../cssforlogin/js/popper1.min.js"></script>
-<script src="../cssforlogin/js/bootstrap1.min.js"></script>
 </body>
 </html>

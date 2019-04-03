@@ -98,4 +98,11 @@ if (isset($_GET['leveldeactivated']) == true) {
     </script>
 <?php
 }
+if (isset($_GET['wrongpass']) == true) {
+    ?>
+    <script type="text/javascript">
+	swal("Wrong password!", "Please enter the correct password!", "error");
+    </script>
+<?php
+}
 ?>

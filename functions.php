@@ -776,13 +776,13 @@ $dbname = "cbfosystem";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
-$userpassword = $_POST['password'];
+/*$userpassword = $_POST['password'];*/
 $date_cancelled = intval(strtotime(htmlspecialchars(date("d-m-Y"))));
 
 	$sql = "UPDATE  venues SET Availability = 'Unavailable' WHERE RoomID = '$id'";
     $QueryUpdateBookingsUnavailableVenue= "UPDATE bookingcalendar INNER JOIN venues on bookingcalendar.room  = venues.RoomName SET canceled = 1   Where RoomID = '$id' AND start_day >= $date_cancelled";
     /*test_progress($QueryUpdateBookingsUnavailableVenue);*/
-    if ($_SESSION['user']['password']== $userpassword){
+    /*if ($_SESSION['user']['password']== $userpassword){*/
        if ($conn->query($sql) === TRUE) {
     $conn->query($QueryUpdateBookingsUnavailableVenue);
     /*?>
@@ -794,7 +794,7 @@ $date_cancelled = intval(strtotime(htmlspecialchars(date("d-m-Y"))));
 } else {
     echo "Error deleting venue: " . $conn->error;
 } 
-    }
+    
     //wrong password
     echo header('location:../Admin/checkrooms.php?venuedeactivated=0');
 
@@ -1021,7 +1021,7 @@ if ($_SESSION['user']['password'] == $userpassword){
 }
 else {
     //wrongpasso
-     echo header('location:../Admin/ManageStudentDatabase.php?StudentDeleted=0');
+     echo header('location:../Admin/ManageStudentDatabase.php?wrongpass=0');
 }
 
 }
@@ -1065,7 +1065,7 @@ else {
 }
 }
 else {
-    echo header('location:../Admin/checkbookings.php?SetUnavailableDateError=0');
+    echo header('location:../Admin/checkbookings.php?wrongpass=0');
 }
 
 
