@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
     $_SESSION['venuename'] =  "";
@@ -170,7 +171,7 @@ if (count($errors) == 0) {
 
 $query = "SELECT * FROM tbl_student WHERE username='$username' AND
 password='$password' AND deleted_at IS  NULL ORDER BY id DESC LIMIT 1  ";
-/*test_progress($query);*/
+test_progress($query);
 $results = mysqli_query($db, $query);
 
 if (mysqli_num_rows($results) == 1) { // user found
@@ -775,11 +776,13 @@ $dbname = "cbfosystem";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
-
+$date_cancelled = intval(strtotime(htmlspecialchars(date("d-m-Y"))));
 
 	$sql = "UPDATE  venues SET Availability = 'Unavailable' WHERE RoomID = '$id'";
-
+    $QueryUpdateBookingsUnavailableVenue= "UPDATE bookingcalendar INNER JOIN venues on bookingcalendar.room  = venues.RoomName SET canceled = 1   Where RoomID = '$id' AND start_day >= $date_cancelled";
+    /*test_progress($QueryUpdateBookingsUnavailableVenue);*/
 if ($conn->query($sql) === TRUE) {
+    $conn->query($QueryUpdateBookingsUnavailableVenue);
     /*?>
     <script>
          alert("Venue deactivated successfully")
@@ -802,10 +805,12 @@ $dbname = "cbfosystem";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 
-
+$date_restored = intval(strtotime(htmlspecialchars(date("d-m-Y"))));
 	$sql = "UPDATE  venues SET Availability = 'Available' WHERE RoomID = '$id'";
-
+    $QueryUpdateBookingsRestoredVenue= "UPDATE bookingcalendar INNER JOIN venues on bookingcalendar.room  = venues.RoomName SET canceled = 0   Where RoomID = '$id' AND start_day >= $date_restored";
+    /*test_progress($QueryUpdateBookingsRestoredVenue);*/
 if ($conn->query($sql) === TRUE) {
+    $conn->query($QueryUpdateBookingsRestoredVenue);
    /* ?>
     <script>
          alert("Venue activated successfully")
@@ -1027,10 +1032,11 @@ $DateCancelledResult = $conn->query($DateCancelled);
 
 if ($DateCancelledResult->num_rows <= 0) {
     // output data of each row
-    $sql = "INSERT INTO unavailable_dates (date, reason)
-VALUES ($unavailable_day,'$reason')";
-
+    $sql = "INSERT INTO unavailable_dates (date, reason) VALUES ($unavailable_day,'$reason')";
+ $CancelBookingBecauseOfCancelledDates= "UPDATE bookingcalendar  SET canceled = 1   Where  start_day = $unavailable_day";
+/* test_progress($CancelBookingBecauseOfCancelledDates);*/
 if ($conn->query($sql) === TRUE) {
+    $conn->query($CancelBookingBecauseOfCancelledDates);
     echo header('location:../Admin/checkbookings.php?SetUnavailableDate=0');
 }
 else {
@@ -1141,7 +1147,7 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";  
                     if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
                             include('button.php');
                             $calendar.="<hr><br>" ;
                     }
@@ -1165,7 +1171,7 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";
                      if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
                             include('button.php');
                             $calendar.="<hr><br>" ;
                     }
@@ -1188,7 +1194,7 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";
                     if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
                             include('button.php');
                             $calendar.="<hr><br>" ;
                     }
