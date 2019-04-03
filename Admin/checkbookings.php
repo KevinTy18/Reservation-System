@@ -240,7 +240,7 @@ aria-hidden="true">
 						<input class="input100" type="password" name="password" placeholder="Password" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
- </form>
+ 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary"
@@ -249,6 +249,7 @@ data-dismiss="modal">Close</button>
 class="btn btn-primary">Yes, cancel the Schedule</button>
       </div>
     </div>
+    </form>
   </div>
 </div>
 </form>

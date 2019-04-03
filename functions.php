@@ -257,6 +257,7 @@ include 'config.php';
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
 
+$userpassword = $_POST['password'];
 // Check connection
 if (!$conn) {
 die("Connection failed: " . mysqli_connect_error());
@@ -268,19 +269,25 @@ $AlreadyCalled = "SELECT * FROM $tablename  WHERE id = $id AND canceled = 1";
 $CancellBooking = "UPDATE $tablename SET canceled = 1 WHERE id = $id";
 $result = $conn->query($AlreadyCalled);
 $affected_rows = $conn->affected_rows;
-if (mysqli_affected_rows($conn) >= 1){
-	// test_progress("Cancelled Failed");
-	echo header('location:../Admin/checkbookings.php?BookingCancelledFailed=0');
+if ($_SESSION['user']['password'] == $userpassword) {
+    if (mysqli_affected_rows($conn) >= 1){
+    // test_progress("Cancelled Failed");
+    echo header('location:../Admin/checkbookings.php?BookingCancelledFailed=0');
 }
 $result = $conn->query($IfBookingExist);
 if (mysqli_affected_rows($conn) < 1) {
  echo header('location:../Admin/checkbookings.php?BookingCancelledFailed=0');
  }
 else{
-	mysqli_query($conn, $CancellBooking);
-	/*test_progress("Cancelled Success");*/
+    mysqli_query($conn, $CancellBooking);
+    /*test_progress("Cancelled Success");*/
     echo header('location:../Admin/checkbookings.php?BookingCancelled=0');
             }
+}
+else {
+    // wrong password
+    
+}
 }
 
 else {
