@@ -22,6 +22,7 @@ session_start();
 	// connect to database
 	$db = mysqli_connect('localhost', 'root', '', 'cbfosystem');
 
+
 	// variable declaration
 	$username = "";
 	$email    = "";
@@ -168,7 +169,8 @@ array_push($errors, "Password is required");
 if (count($errors) == 0) {
 
 $query = "SELECT * FROM tbl_student WHERE username='$username' AND
-password='$password'AND deleted_at IS NULL LIMIT 1";
+password='$password' AND deleted_at IS  NULL ORDER BY id DESC LIMIT 1  ";
+/*test_progress($query);*/
 $results = mysqli_query($db, $query);
 
 if (mysqli_num_rows($results) == 1) { // user found

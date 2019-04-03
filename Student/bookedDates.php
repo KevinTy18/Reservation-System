@@ -521,7 +521,7 @@ $db = "cbfosystem";
 
 
 				$con=mysqli_connect($servername,$username,$password,$db);
-				$result = mysqli_query($con,"SELECT id, eventname, organization,reservee_name,phone,Capacity,start_time, end_time FROM bookingcalendar WHERE designation_id = '". $_SESSION['user']['School_Id'] ."';
+				$result = mysqli_query($con,"SELECT id, eventname, organization,reservee_name,phone,Capacity,start_time, end_time FROM bookingcalendar WHERE designation_id = '". $_SESSION['user']['School_Id'] ."' AND canceled = 0;
                 
                 ");
       

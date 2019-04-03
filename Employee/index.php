@@ -17,9 +17,13 @@ $cancelleddatestoast = "SELECT * FROM `unavailable_dates` WHERE date between " .
 /*test_progress($cancelleddatestoast);*/
 $toastresult = mysqli_query($db, $cancelleddatestoast);
 $reservingName = $_SESSION['user']['firstname'] ." ". $_SESSION['user']['middlename']." " . $_SESSION['user']['lastname'];
-$bookeddatestoast = "SELECT * FROM `bookingcalendar` WHERE reservee_name = '$reservingName' AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
+$bookeddatestoast = "SELECT * FROM `bookingcalendar` WHERE reservee_name = '$reservingName' AND caneled = 0 AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
 /*test_progress($_SESSION['user']);*/
 $toastresultbookeddates = mysqli_query($db, $bookeddatestoast);
+
+$bookeddatescancelledtoast = "SELECT * FROM `bookingcalendar` WHERE reservee_name = '$reservingName' AND caneled = 1 AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
+/*test_progress($_SESSION['user']);*/
+$toastresultbookeddatescancelled = mysqli_query($db, $bookeddatescancelledtoast);
 
 $query = "SELECT *, room_department.Department FROM tbl_student INNER JOIN room_department on tbl_student.Department_Id = room_department.Id WHERE username=  '". $_SESSION['user']['username'] . "'  AND
 password= '". $_SESSION['user']['password'] . "' LIMIT 1";
@@ -705,6 +709,19 @@ Calendar</span>
    <div class="toast" data-autohide="false" style="position:absolute;z-index:1;right:0%;top:20%;">
     <div class="toast-header">
       <strong class="mr-auto text-primary">Reminders for Booking for this week</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body">
+      <?php echo date('M d Y',$row['start_day']) . " Timestart: " .
+       sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) . $row['TimeBeginDenum'] ;?>
+    </div>
+  </div>
+      <?php  } ?>
+    </div>
+    <?php while($row = mysqli_fetch_assoc($toastresultbookeddatescancelled)) { ?>
+   <div class="toast" data-autohide="false" style="position:absolute;z-index:1;right:0%;top:20%;">
+    <div class="toast-header">
+      <strong class="mr-auto text-primary">Reminders for Cancelled Booking for this week</strong>
       <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
     </div>
     <div class="toast-body">

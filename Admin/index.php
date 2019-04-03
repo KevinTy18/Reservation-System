@@ -246,7 +246,7 @@ autocomplete="off"/></td>
 <td style="color:black;padding-left:20px;">School Level / Course:</td>
 <td> 
     <?php
-    $query = $db->query("SELECT Id,Name_or_Course FROM school_level ORDER BY Name_or_Course ASC"); // Run your query
+    $query = $db->query("SELECT Id,Name_or_Course FROM school_level where Status = 0 ORDER BY Name_or_Course ASC "); // Run your query
     
     echo '<select name="School_Level" style="width:200px">'; // Open your drop down box
 

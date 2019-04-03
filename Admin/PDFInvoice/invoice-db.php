@@ -73,7 +73,45 @@ else {
 }
 
 
-
+$pdf->Cell(189	,10,'',0,1);
+$pdf->Cell(100	,5,'Records for the Month of:',0,1);
+$pdf->Cell(10	,5,'',0,0);
+if($_SESSION['FilterMonths'] == 1){
+$pdf->Cell(90	,5,'January ' . $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 2){
+$pdf->Cell(90	,5,'February ' . $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 3){
+$pdf->Cell(90	,5,'March ' . $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 4){
+$pdf->Cell(90	,5,'April ' . $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 5){
+$pdf->Cell(90	,5,'May ' . $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 6){
+$pdf->Cell(90	,5,'June ' . $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 7){
+$pdf->Cell(90	,5,'July ' . $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 8){
+$pdf->Cell(90	,5,'August '. $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 9){
+$pdf->Cell(90	,5,'September '. $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 10){
+$pdf->Cell(90	,5,'October '. $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 11){
+$pdf->Cell(90	,5,'November '. $_SESSION['FilterYear'],0,1);	
+}
+if($_SESSION['FilterMonths'] == 12){
+$pdf->Cell(90	,5,'December ' . $_SESSION['FilterYear'],0,1);	
+}
 //$pdf->Cell(130	,5,'Fax [+12345678]',0,0);
 //$pdf->Cell(25	,5,'Customer ID',0,0);
 //$pdf->Cell(34	,5,$invoice['UserID'],0,1);//end of line
