@@ -338,10 +338,44 @@ in the database.
 <a href="download.php?file=unavailabedatesample.csv">Download sample csv file.</a>
     <p></p>
                 <div class="buttons" >
-               <button name="submitunavailabledates" type="submit"
-class="smallbuttonnav" style="margin:0 auto;background-color:black">Import</button>
+               <button type="button"
+class="smallbuttonnav" style="margin:0 auto;background-color:black" data-toggle="modal"
+data-target="#exampleModalCenter2">Import</button>
 
             </div>
+    
+      <div class="modal fade" id="exampleModalCenter2" tabindex="-1"
+role="dialog" aria-labelledby="exampleModalCenterTitle"
+aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Import csv file</h5>
+        
+      </div>
+      <div class="modal-body">
+        Are you sure you want to import csv file?
+          
+
+
+   
+               <form action="checkbookings.php" method="POST"> 
+          <div class="wrap-input100 validate-input" data-validate="Enter password">
+              Please enter password:
+						<input class="input100" type="password" name="password" placeholder="Password" required>
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+ </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+data-dismiss="modal">Close</button>
+        <button name="submitunavailabledates" type="submit" type="button"
+class="btn btn-primary">Yes, please import</button>
+      </div>
+    </div>
+  </div>
+</div>
 </form>
     </div>
     </div>
