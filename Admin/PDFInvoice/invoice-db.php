@@ -170,7 +170,24 @@ while($item = mysqli_fetch_array($query)){
 	$pdf->Cell(40	,5,$item['organization'],1,0);
 	$pdf->Cell(25	,5,date('d/m/Y',$item['start_day']),1,0);
 	$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["start_time"]/60/60, ($item["start_time"]%(60*60)/60)) ." " . $item["TimeBeginDenum"],1,0);
-	$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["end_time"]/60/60, ($item["end_time"]%(60*60)/60)) ." " . $item["TimeEndDenum"],1,0);
+	 if ($item["end_time"] / 60 / 60 == 12) {
+ 	 $pdf->Cell(25	,5,sprintf("%02d:%02d", $item["end_time"]/60/60, ($item["end_time"]%(60*60)/60)) ." nn"  ,1,0);
+    }
+    else if ($item["end_time"]/60/60 > 12) {
+    	$TimeEnd = $item["end_time"]/60/60 - 12;
+    	if ($TimeEnd < 1) {
+    		$TimeEnd = 12;
+    		$pdf->Cell(25	,5,sprintf("%02d:%02d", $TimeEnd, ($item["end_time"]%(60*60)/60))." pm"  ,1,0);
+    	}
+    	else {
+    		$pdf->Cell(25	,5,sprintf("%02d:%02d", $TimeEnd, ($item["end_time"]%(60*60)/60)) ." pm"  ,1,0);
+    	}
+    
+    }
+    else {
+    $pdf->Cell(25	,5,sprintf("%02d:%02d", $item["end_time"]/60/60, ($item["end_time"]%(60*60)/60)) ." " . $item["TimeBeginDenum"],1,0);
+    }
+	/*$pdf->Cell(25	,5,sprintf("%02d:%02d", $item["end_time"]/60/60, ($item["end_time"]%(60*60)/60)) ." " . $item["TimeEndDenum"],1,0);*/
 	$pdf->Cell(20	,5,$item['Capacity'],1,1);
 
 	if($item['reservee_type'] == "Student") {

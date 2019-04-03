@@ -17,11 +17,12 @@ $cancelleddatestoast = "SELECT * FROM `unavailable_dates` WHERE date between " .
 /*test_progress($cancelleddatestoast);*/
 $toastresult = mysqli_query($db, $cancelleddatestoast);
 $reservingName = $_SESSION['user']['firstname'] ." ". $_SESSION['user']['middlename']." " . $_SESSION['user']['lastname'];
-$bookeddatestoast = "SELECT * FROM `bookingcalendar` WHERE reservee_name = '$reservingName' AND canceled = 0 AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
+$userID = $_SESSION['user']['School_Id'];
+$bookeddatestoast = "SELECT * FROM `bookingcalendar` WHERE designation_id = $userID AND canceled = 0 AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
 /*test_progress($_SESSION['user']);*/
 $toastresultbookeddates = mysqli_query($db, $bookeddatestoast);
 
-$bookeddatescancelledtoast = "SELECT * FROM `bookingcalendar` WHERE reservee_name = '$reservingName' AND canceled = 1 AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
+$bookeddatescancelledtoast = "SELECT * FROM `bookingcalendar` WHERE designation_id = $userID AND canceled = 1 AND start_day between " . intval(strtotime(htmlspecialchars(date('d-m-Y')))) . " AND " .  intval(strtotime(htmlspecialchars(date('d-m-Y',strtotime('+1 week')))));
 /*test_progress($_SESSION['user']);*/
 $toastresultbookeddatescancelled = mysqli_query($db, $bookeddatescancelledtoast);
 
@@ -786,7 +787,7 @@ autocomplete="off"/></td> -->
             <option>09 am</option>
             <option>10 am</option>
             <option>11 am</option>
-            <option>12 pm</option>
+            <option>12 nn</option>
             <option>1 pm</option>
             <option>2 pm</option>
             <option>3 pm</option>
@@ -811,7 +812,7 @@ autocomplete="off"/></td> -->
             <option>09 am</option>
             <option>10 am</option>
             <option>11 am</option>
-            <option>12 pm</option>
+            <option>12 nn</option>
             <option>1 pm</option>
             <option>2 pm</option>
             <option>3 pm</option>
@@ -838,7 +839,7 @@ autocomplete="off"/></td> -->
             <option>09 am</option>
             <option>10 am</option>
             <option>11 am</option>
-            <option>12 pm</option>
+            <option>12 nn</option>
             <option>1 pm</option>
             <option>2 pm</option>
             <option>3 pm</option>
@@ -866,7 +867,7 @@ autocomplete="off"/></td> -->
             <option>09 am</option>
             <option>10 am</option>
             <option>11 am</option>
-            <option>12 pm</option>
+            <option>12 nn</option>
             <option>1 pm</option>
             <option>2 pm</option>
             <option>3 pm</option>
@@ -889,7 +890,7 @@ autocomplete="off"/></td> -->
 <td> 
     <ul class="categorychecklist">
         <li><select name="start_hour">
-            <option selected="selected">12 pm</option>
+            <option selected="selected">12 nn</option>
             <option>1 pm</option>
             <option>2 pm</option>
             <option>3 pm</option>

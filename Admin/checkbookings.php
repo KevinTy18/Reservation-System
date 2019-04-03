@@ -23,7 +23,9 @@ mysqli_select_db($con,'cbfosystem');
 
 if(isset($_POST["submitunavailabledates"]))
 {
- if($_FILES['file']['name'])
+  $userpassword = $_POST['password'];
+  if ($_SESSION['user']['password'] == $userpassword) {
+     if($_FILES['file']['name'])
  {
   $filename = explode(".", $_FILES['file']['name']);
   if($filename[1] == 'csv')
@@ -36,35 +38,41 @@ if(isset($_POST["submitunavailabledates"]))
     $BatchInsert = array();
     $SQLInsert = array();
     foreach($rows as $row) {
-    	$row[0] = intval(strtotime(htmlspecialchars($row[0])));
+      $row[0] = intval(strtotime(htmlspecialchars($row[0])));
         $csv[] = array_combine($header, $row);
        
 
     }
- 	
+  
     foreach ($csv as $rows) {
-    	$BatchInsert[]=implode("','",$rows);
-    		 
-    	    }
+      $BatchInsert[]=implode("','",$rows);
+         
+          }
 
- 	    foreach ($BatchInsert as $value) {
-    	$query = "INSERT into unavailable_dates(date,reason) values ('$value')";
-    	
+      foreach ($BatchInsert as $value) {
+      $query = "INSERT into unavailable_dates(date,reason) values ('$value')";
+      
 mysqli_query($con, $query);
 }
 
   /* while($data = fgetcsv($handle))
    {
-				$item1 = mysqli_real_escape_string($connect, $data[0]);  
+        $item1 = mysqli_real_escape_string($connect, $data[0]);  
                 $item2 = mysqli_real_escape_string($connect, $data[1]);
-				
+        
                 $query = "INSERT into unavailable_dates(date,reason) values('$item1','$item2')";
                 mysqli_query($connect, $query);
    }*/
    fclose($handle);
    echo header('location:../Admin/checkbookings.php?ImportDateSuccess=0');
   }
+
  }
+  }
+  else {
+     echo header('location:../Admin/checkbookings.php?wrongpass=0');
+  }
+
 }
 ?>
 <html>
@@ -365,7 +373,7 @@ aria-hidden="true">
 						<input class="input100" type="password" name="password" placeholder="Password" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
- </form>
+ 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary"
@@ -374,6 +382,7 @@ data-dismiss="modal">Close</button>
 class="btn btn-primary">Yes, please import</button>
       </div>
     </div>
+    </form>
   </div>
 </div>
 </form>

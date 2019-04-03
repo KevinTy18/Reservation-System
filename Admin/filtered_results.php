@@ -125,7 +125,7 @@ refresh();
 include('header.php');
 include('../includes/navigation.php');
 ?>
-    <form method='post' action='PDFInvoice/invoice-db.php'>
+    <form method='post' action='PDFInvoice/invoice-db.php' target="_blank">
 <button type='submit' class="smallbutton"  style="float:right;margin-right:80px"><i class="fa fa-print" style="font-size:24px;color:red;" ></i><span> Print Reports</span>
 	
 

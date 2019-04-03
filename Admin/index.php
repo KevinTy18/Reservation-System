@@ -300,7 +300,7 @@ autocomplete="off" /></td>
             <option>09 am</option>
             <option>10 am</option>
             <option>11 am</option>
-            <option>12 pm</option>
+            <option>12 nn</option>
             <option>1 pm</option>
             <option>2 pm</option>
             <option>3 pm</option>

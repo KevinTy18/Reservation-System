@@ -286,7 +286,7 @@ else{
 }
 else {
     // wrong password
-    
+
 }
 }
 
@@ -1158,6 +1158,8 @@ function draw_calendar($month,$year){
     				if($current_epoch == $row["end_day"]) {
               if($row["end_time"]/60/60 > 12){
                 $TimeEnd = $row["end_time"]/60/60 - 12;
+                 if($TimeEnd < 1){
+                $TimeEnd = 12;
                  $calendar .= "<b>" . "Booking end: " . sprintf("%02d:%02d", $TimeEnd, ($row["end_time"]%(60*60)/60)) . " " . "Pm" ."<br></b>" .
 					'
                     <center>
@@ -1179,6 +1181,30 @@ function draw_calendar($month,$year){
                             include('button.php');
                             $calendar.="<hr><br>" ;
                     }
+                }
+                else {
+                    $calendar .= "<b>" . "Booking end: " . sprintf("%02d:%02d", $TimeEnd, ($row["end_time"]%(60*60)/60)) . " " . "Pm" ."<br></b>" .
+                    '
+                    <center>
+                    <div class="dropdown">
+                    <button class="dropbtn">Information</button>
+                    <div class="dropdown-content">
+                    <p>' . "Reservation ID: " . $row['id']  . '</p>
+                    <p>' . "School ID: " . $row['designation_id']  . '</p>
+                    <p>' . "Name: " . $row['reservee_name']  . '</p>
+                    <p>' . "Organization: " . $row['organization']  . '</p>
+                    <p>' . "Purpose: " . $row['eventname']  . '</p>
+                    <p>' . "School Level/Course: " . $row['School_Level_or_Course']  . '</p>
+                    </div>
+                    </div>
+                    </center>'
+                    . "<br>";  
+                    if ($_SESSION['user']['user_type'] == "admin") {
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
+                            include('button.php');
+                            $calendar.="<hr><br>" ;
+                    }
+                }
               }
     				else {
     					if ($row["end_time"] / 60 / 60 == 12) {

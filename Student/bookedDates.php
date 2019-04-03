@@ -521,7 +521,7 @@ $db = "cbfosystem";
 
 
 				$con=mysqli_connect($servername,$username,$password,$db);
-				$result = mysqli_query($con,"SELECT id, eventname, organization,reservee_name,phone,Capacity,start_time, end_time FROM bookingcalendar WHERE designation_id = '". $_SESSION['user']['School_Id'] ."' AND canceled = 0;
+				$result = mysqli_query($con,"SELECT * FROM bookingcalendar WHERE designation_id = '". $_SESSION['user']['School_Id'] ."' AND canceled = 0;
                 
                 ");
       
@@ -549,6 +549,7 @@ else {
  <th>Reservee name</th>
  <th>Phone Num</th>
  <th>Attendees</th>
+ <th>Reserved Day</th>
  <th>Time Start</th>
  <th>Time End</th>
  <th>Print</th>
@@ -566,12 +567,19 @@ while($row = mysqli_fetch_array($result)) {
     echo "<td style='width:150px;border:1px solid black;'>" . $row['organization'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['reservee_name'] . "</td>";
     echo "<td style='width:150px;border:1px solid black;'>" . $row['phone'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['Capacity'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['start_time'] . "</td>";
-    echo "<td style='width:150px;border:1px solid black;'>" . $row['end_time'] . "</td>";
-    
-    
-echo '<td><form method="post" action="PDFInvoice/invoice-db.php">
+    echo "<td style='width:150px;border:1px solid black;'>" . $row['Capacity'] . "</td>"; 
+    echo "<td style='width:150px;border:1px solid black;'>" . date('d/m/Y',$row['start_day']) . "</td>";
+    echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["start_time"]/60/60, ($row["start_time"]%(60*60)/60)) ." " . $row["TimeBeginDenum"] . "</td>";
+    if ($row["end_time"] / 60 / 60 == 12) {
+    echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) ." nn"  . "</td>";
+    }
+    else if ($row["end_time"]/60/60 > 12) {
+    echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) ." pm"  . "</td>";
+    }
+    else {
+    echo "<td style='width:150px;border:1px solid black;'>" . sprintf("%02d:%02d", $row["end_time"]/60/60, ($row["end_time"]%(60*60)/60)) ." " .$row["TimeBeginDenum"]  . "</td>";
+    }
+echo '<td><form method="post" action="PDFInvoice/invoice-db.php" target="_blank">
 
 <button id="print_btn" type="submit" class="btn">Print</button>
 
@@ -581,11 +589,11 @@ echo '<td><form method="post" action="PDFInvoice/invoice-db.php">
 
 <td>';
 
-
+echo '<input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
+ 
 }
-echo '</table>
-<input type="hidden" name="venueid" value="' . $id . '"/></td></form>';
- echo "</tr>";
+echo '</table>';
+echo "</tr>";
 }
 ?>
     </div>
