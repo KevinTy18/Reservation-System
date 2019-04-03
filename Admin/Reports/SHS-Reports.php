@@ -341,8 +341,8 @@ Check Reports</span></button>
 <!-- </form> -->
         
 <!-- <form action="reports.php"> -->
-    <a href="../report.php" class="buttoncal" type="submit" style="float:left"><span><i class=" fa fa-table" style="font-size:17px;color:red;"></i>
-Check Reports</span></a>
+    <!--<a href="../report.php" class="buttoncal" type="submit" style="float:left"><span><i class=" fa fa-table" style="font-size:17px;color:red;"></i>
+Check Reports</span></a>-->
 <!-- </form> -->
 <script>
 function openCity(evt, cityName) {

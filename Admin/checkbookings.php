@@ -75,7 +75,7 @@ mysqli_query($con, $query);
 box-sizing: initial;
 }
 .btn-primary{
-color:black;
+color:crimson;
 }
 
     </style>
@@ -238,6 +238,7 @@ autocomplete="off"/></td>
            autocomplete="off"/></td>
 </tr>           
 </table>
+    
                <!-- <div class="buttons">
 <input name="cancel" type="submit" value="Cancel" />
                <button name="cancel" type="submit"
@@ -246,11 +247,33 @@ class="smallbuttonnav">Cancel</button>
             </div> -->
     <p></p>
      <div class="buttons">
-               <button name="unavailabledates" type="submit"
-class="smallbuttonnav" style="margin:0 auto;background-color:black">Cancel Date</button>
+               <button type="button" class="btn btn-primary" data-toggle="modal"
+data-target="#exampleModalCenter">
+  Cancel Dated
+</button>
 
             </div>
-    
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+role="dialog" aria-labelledby="exampleModalCenterTitle"
+aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cancel Date</h5>
+        
+      </div>
+      <div class="modal-body">
+        Are you sure you want to cancel the date?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+data-dismiss="modal">Close</button>
+        <button name="unavailabledates" type="submit" type="button"
+class="btn btn-primary">Yes, cancel the date</button>
+      </div>
+    </div>
+  </div>
+</div>
 </form>
 
 </center>
@@ -331,6 +354,10 @@ echo '<br>';
     </div>
     </div>
 </div>
+<form action="checkbookings.php" method="post"
+enctype='multipart/form-data'>
+<!-- Modal -->
 
+    </form>
 </body>
 </html>
