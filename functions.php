@@ -1139,7 +1139,7 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";  
                     if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
                             include('button.php');
                             $calendar.="<hr><br>" ;
                     }
@@ -1163,7 +1163,7 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";
                      if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
                             include('button.php');
                             $calendar.="<hr><br>" ;
                     }
@@ -1186,7 +1186,7 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";
                     if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span> Edit</a>".
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
                             include('button.php');
                             $calendar.="<hr><br>" ;
                     }
