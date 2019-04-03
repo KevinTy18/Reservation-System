@@ -265,8 +265,12 @@ aria-hidden="true">
       <div class="modal-body">
         Are you sure you want to cancel the date?
           
+
+
+   
           <div class="wrap-input100 validate-input" data-validate="Enter password">
               Please enter password:
+               <form action="checkbookings.php" method="POST"> 
 						<input class="input100" type="password" name="password" placeholder="Password" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
@@ -276,6 +280,7 @@ aria-hidden="true">
 data-dismiss="modal">Close</button>
         <button name="unavailabledates" type="submit" type="button"
 class="btn btn-primary">Yes, cancel the date</button>
+ </form>
       </div>
     </div>
   </div>

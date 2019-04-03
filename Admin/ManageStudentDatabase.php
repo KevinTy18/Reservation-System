@@ -291,6 +291,7 @@ aria-label="Close">
           
           <div class="wrap-input100 validate-input" data-validate="Enter password">
               Please enter password:
+              <form action="ManageStudentDatabase.php" method="POST">
 						<input class="input100" type="password" name="password" placeholder="Password" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>

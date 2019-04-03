@@ -106,6 +106,7 @@ refresh();
     }
 </script>
     
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <body onload=startall();>
 
     
@@ -206,6 +207,7 @@ aria-label="Close">
           
           <div class="wrap-input100 validate-input" data-validate="Enter password">
               Please enter password:
+                   
 						<input class="input100" type="password" name="password" placeholder="Password" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
@@ -217,6 +219,7 @@ data-dismiss="modal">Close</button>
 class="btn btn-primary">Yes, deactivate the room</button>
       </div>
     </div>
+  </form>
   </div>
 </div>
 

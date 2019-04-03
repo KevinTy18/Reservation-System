@@ -165,13 +165,13 @@ array_push($errors, "Username is required");
 if (empty($password)) {
 array_push($errors, "Password is required");
 }
-
+/*test_progress($db);*/
 // attempt login if no errors on form
 if (count($errors) == 0) {
 
 $query = "SELECT * FROM tbl_student WHERE username='$username' AND
 password='$password' AND deleted_at IS  NULL ORDER BY id DESC LIMIT 1  ";
-test_progress($query);
+/*test_progress($query);*/
 $results = mysqli_query($db, $query);
 
 if (mysqli_num_rows($results) == 1) { // user found
@@ -776,12 +776,14 @@ $dbname = "cbfosystem";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
+$userpassword = $_POST['password'];
 $date_cancelled = intval(strtotime(htmlspecialchars(date("d-m-Y"))));
 
 	$sql = "UPDATE  venues SET Availability = 'Unavailable' WHERE RoomID = '$id'";
     $QueryUpdateBookingsUnavailableVenue= "UPDATE bookingcalendar INNER JOIN venues on bookingcalendar.room  = venues.RoomName SET canceled = 1   Where RoomID = '$id' AND start_day >= $date_cancelled";
     /*test_progress($QueryUpdateBookingsUnavailableVenue);*/
-if ($conn->query($sql) === TRUE) {
+    if ($_SESSION['user']['password']== $userpassword){
+       if ($conn->query($sql) === TRUE) {
     $conn->query($QueryUpdateBookingsUnavailableVenue);
     /*?>
     <script>
@@ -791,7 +793,11 @@ if ($conn->query($sql) === TRUE) {
     echo header('location:../Admin/checkrooms.php?venuedeactivated=0');
 } else {
     echo "Error deleting venue: " . $conn->error;
-}
+} 
+    }
+    //wrong password
+    echo header('location:../Admin/checkrooms.php?venuedeactivated=0');
+
 }
 function restorevenue(){
 
@@ -997,11 +1003,12 @@ $dbname = "cbfosystem";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
-
+$userpassword = $_POST['password'];
 
 	$sql = "UPDATE  tbl_student SET deleted_at = NOW() WHERE user_type = 'student'";
 
-if ($conn->query($sql) === TRUE) {
+if ($_SESSION['user']['password'] == $userpassword){
+    if ($conn->query($sql) === TRUE) {
     /*?>
     <script>
          alert("Venue deactivated successfully")
@@ -1012,12 +1019,20 @@ if ($conn->query($sql) === TRUE) {
     echo "Error deleting students: " . $conn->error;
 }
 }
+else {
+    //wrongpasso
+     echo header('location:../Admin/ManageStudentDatabase.php?StudentDeleted=0');
+}
+
+}
 function AddUnavailableDate(){
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "cbfosystem";
 
+$userpassword = $_POST['password'];
+/*$userpassword = '123';*/
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -1026,11 +1041,13 @@ if ($conn->connect_error) {
 } 
 $unavailable_day = intval(strtotime(htmlspecialchars($_POST["unavailable_day"])));
 $reason = $_POST["Reason"];
+/*test_progress($userpassword);*/
 
 $DateCancelled = "SELECT date FROM unavailable_dates where date = $unavailable_day";
 $DateCancelledResult = $conn->query($DateCancelled);
 
-if ($DateCancelledResult->num_rows <= 0) {
+if ($_SESSION['user']['password'] == $userpassword){
+    if ($DateCancelledResult->num_rows <= 0) {
     // output data of each row
     $sql = "INSERT INTO unavailable_dates (date, reason) VALUES ($unavailable_day,'$reason')";
  $CancelBookingBecauseOfCancelledDates= "UPDATE bookingcalendar  SET canceled = 1   Where  start_day = $unavailable_day";
@@ -1045,6 +1062,10 @@ else {
     }
  else {
    echo header('location:../Admin/checkbookings.php?SetUnavailableDateError=0');
+}
+}
+else {
+    echo header('location:../Admin/checkbookings.php?SetUnavailableDateError=0');
 }
 
 
