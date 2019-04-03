@@ -288,6 +288,12 @@ aria-label="Close">
       </div>
       <div class="modal-body">
         Are you sure you want to delete all the students in the database?
+          
+          <div class="wrap-input100 validate-input" data-validate="Enter password">
+              Please enter password:
+						<input class="input100" type="password" name="password" placeholder="Password" required>
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary"
