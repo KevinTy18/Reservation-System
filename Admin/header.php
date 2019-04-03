@@ -26,7 +26,9 @@ style="margin-right:10px;background-color:white;color:maroon;">
 </div>
 <div class="divsize" align="center">
 <!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
-<h2 class="fontforlogo"><img src="../sanbedapics/LRClogo.png" alt="LRC Logo"
-width="19%"> <b> LRC BOOKING SYSTEM </b> </h2>
+<img src="../sanbedapics/LRClogo.png" alt="LRC Logo" width="20%" height="100%" style="margin-top: -10px;margin-left: 18px;float:left;">
+<img src="../sanbedapics/sbcalogo.png" alt="LRC Logo" width="15%" height="90%" style="margin-right: 18px;float:right;">
+<h2 class="fontforlogo" style="vertical-align: middle;
+    text-align: center; "> <b> LRC BOOKING SYSTEM </b> </h2>
 
 </div>

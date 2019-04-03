@@ -194,12 +194,13 @@ style="display: none;">Top<span></span></a>
 
 
 <div class="parallax" style="">
-   <div class="divsize" style="margin:0 auto;margin-top:250px">
+<div class="divsize" align="center">
+<!--<img src="sbcalogo.png" alt="SBCA Logo" width="7%" align="center" > -->
+<img src="../sanbedapics/LRClogo.png" alt="LRC Logo" width="20%" height="80%" style="margin-top: -10px;margin-left: 18px;float:left;margin-top:0px">
+<img src="../sanbedapics/sbcalogo.png" alt="LRC Logo" width="15%" height="70%" style="margin-right: 18px;float:right;margin-top:10px">
+<h2 class="fontforlogo" style="vertical-align: middle;
+    text-align: center; "> <b> LRC BOOKING SYSTEM </b> </h2>
 
-    <div class="divlogo"><img src="../sanbedapics/LRClogo.png" alt="SBCA Logo"
-width="23%" height="80%" style="margin-left:20px"></div>
-    <div class="divsbcalogo" ><h2 class="fontforlogo">  LRC Booking
-Calendar</h2></div>
 </div>
 </div>
 <div class="containerer">

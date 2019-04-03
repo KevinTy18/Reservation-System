@@ -277,7 +277,7 @@ code {
   font: inherit;
 }
 .fontforlogo {
-    font-weight: bold;
+    
     font-family: helvetica;
     color: black;
 }

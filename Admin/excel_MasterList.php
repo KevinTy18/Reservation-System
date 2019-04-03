@@ -91,7 +91,7 @@ if ($filterMonths == 11){
 if ($filterMonths == 12){
   $filterMonthsinWords = "December";
 }
-  header('Content-Disposition: attachment; filename='."Results_For_".$filterResult ."For_" .$filterMonthsinWords."_".$filterYear.'.xls');
+  header('Content-Disposition: attachment; filename='."Results_For_".$filterResult ."_For_" .$filterMonthsinWords."_".$filterYear.'.xls');
   echo $output;
  }
 }
