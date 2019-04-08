@@ -331,34 +331,42 @@ $end_epoch = $end_day + $end_time;
 
 if (empty($start_day)) {
     //ilagay mo dito kev yung parang alert na error
+    echo header('location:../Admin/index.php?errorstartday=0');
 array_push($errors, "Starting Day is required");
 }
 if (empty($start_time)) {
     //ilagay mo dito kev yung parang alert na error
+    echo header('location:../Admin/index.php?errorstarttime=0');
 array_push($errors, "Starting Time is required");
 }
 if (empty($end_day)) {
     //ilagay mo dito kev yung parang alert na error
+    echo header('location:../Admin/index.php?errorendday=0');
 array_push($errors, "End day of event is required");
 }
 if (empty($end_time)) {
     //ilagay mo dito kev yung parang alert na error
+    echo header('location:../Admin/index.php?errorendtime=0');
 array_push($errors, "End Time is required");
 }
 if (!is_numeric($capacity)) {
     //ilagay mo dito kev yung parang alert na error
+    echo header('location:../Admin/index.php?errorcapacity=0');
 array_push($errors, "Capacity must be numeric");
 }
 if (!preg_match("/^[a-zA-Z0-9 .\-]*$/",$organization)) {
     //ilagay mo dito kev yung parang alert na error
+    echo header('location:../Admin/index.php?errororganization=0');
 array_push($errors, "Organization must contain only letters");
 }
 if (!preg_match("/^[a-zA-ZÀ-ž\- , . \s]+$/",$reservee)) {
     //ilagay mo dito kev yung parang alert na error
+    echo header('location:../Admin/index.php?errorname=0');
 array_push($errors, "Name must be Valid");
 }
 if (!preg_match("/^[a-z0-9 .\-]+$/i",$Id)) {
     //ilagay mo dito kev yung parang alert na error
+    echo header('location:../Admin/index.php?errorid=0');
 array_push($errors, "ID must contain be Valid");
 }
 if (!is_numeric($phone) || strlen($phone) != 11) {

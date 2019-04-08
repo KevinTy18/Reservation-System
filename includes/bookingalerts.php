@@ -112,4 +112,60 @@ if (isset($_GET['errorcontact']) == true) {
     </script>
 <?php
 }
+if (isset($_GET['errorstartday']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid Start Day!", "Please enter the start day again!", "error");
+    </script>
+<?php
+}
+if (isset($_GET['errorstarttime']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid Start Time!", "Please enter the start time again!", "error");
+    </script>
+<?php
+}
+if (isset($_GET['errorendday']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid End Day!", "Please enter the End Day again!", "error");
+    </script>
+<?php
+}
+if (isset($_GET['errorendtime']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid End Time!", "Please enter the End Time again!", "error");
+    </script>
+<?php
+}
+if (isset($_GET['errorcapacity']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid Capacity!", "Please enter the correct capacity again!", "error");
+    </script>
+<?php
+}
+if (isset($_GET['errororganization']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid Organization!", "Please enter the correct organization again!", "error");
+    </script>
+<?php
+}
+if (isset($_GET['errorname']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid Reservee Name!", "Please enter the correct name again!", "error");
+    </script>
+<?php
+}
+if (isset($_GET['errorid']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid ID!", "Please enter the correct ID again!", "error");
+    </script>
+<?php
+}
 ?>
