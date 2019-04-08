@@ -21,7 +21,7 @@ while($rs=mysqli_fetch_array($sql)){
 $selectCourse.='</select>'; 
 
 //Dropdown for room
-$sql= mysqli_query($db,"SELECT * FROM `venues` where Department_Id='".$row['Room_Department']."'");
+$sql= mysqli_query($db,"SELECT * FROM `venues` where Department_Id='".$row['Room_Department']."' AND Availability = 'Available'");
 if(mysqli_num_rows($sql)){
 //dropdown for Course And School Level
 $selectRoom= '<select name="room" class="form-control">';
@@ -114,9 +114,9 @@ $(function() {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <center><h4 class="modal-title" id="myModalLabel">Edit Booking</h4></center>
                 </div>
-				<form method="POST" action="edit.php?id=<?php echo $erow['id']; ?>">
                 <div class="modal-body">
 				<div class="container-fluid">
+				<form method="POST" action="edit.php?id=<?php echo $erow['id']; ?>">
 					<div class="row">
 						<div class="col-lg-2">
 							<label style="position:relative; top:7px;">Purpose:</label>
@@ -225,7 +225,7 @@ $(function() {
 						<div class="col-lg-10">
 							<?php echo $selectTimeStart;?>
 							<?php echo $selectTimeMinutes;?>
-          
+            </select>
 						</div>
 					</div>
 					<div style="height:10px;"></div>

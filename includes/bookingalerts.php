@@ -105,4 +105,11 @@ if (isset($_GET['wrongpass']) == true) {
     </script>
 <?php
 }
+if (isset($_GET['errorcontact']) == true) {
+    ?>
+    <script type="text/javascript">
+    swal("Invalid number!", "Please enter correct cellphone number!", "error");
+    </script>
+<?php
+}
 ?>

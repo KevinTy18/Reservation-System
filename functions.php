@@ -169,8 +169,8 @@ array_push($errors, "Password is required");
 // attempt login if no errors on form
 if (count($errors) == 0) {
 
-$query = "SELECT * FROM tbl_student WHERE username='$username' AND
-password='$password' AND deleted_at IS  NULL ORDER BY id DESC LIMIT 1  ";
+$query = "SELECT * FROM `tbl_student` WHERE `username`='$username' AND
+`password` ='$password' AND `deleted_at` IS  NULL ORDER BY id DESC LIMIT 1  ";
 /*test_progress($query);*/
 $results = mysqli_query($db, $query);
 
@@ -311,7 +311,7 @@ $date_reserved = intval(strtotime(htmlspecialchars(date("d-m-Y"))));
 $starttime = explode(" ",$_POST["start_hour"]);
 $start_time = (60*60*intval(htmlspecialchars($starttime[0]))) +
 (60*intval(htmlspecialchars($_POST["start_minute"])));
-$end_day = intval(strtotime(htmlspecialchars($_POST["start_day"])));
+$end_day = $start_day;
 $end_time = $start_time + (intval(htmlspecialchars($_POST["Duration"])));
 $eventname = htmlspecialchars($_POST["eventname"]);
 $organization = htmlspecialchars($_POST["organization"]);
@@ -330,31 +330,42 @@ $end_epoch = $end_day + $end_time;
 
 
 if (empty($start_day)) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "Starting Day is required");
 }
 if (empty($start_time)) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "Starting Time is required");
 }
 if (empty($end_day)) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "End day of event is required");
 }
 if (empty($end_time)) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "End Time is required");
 }
 if (!is_numeric($capacity)) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "Capacity must be numeric");
 }
 if (!preg_match("/^[a-zA-Z0-9 .\-]*$/",$organization)) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "Organization must contain only letters");
 }
 if (!preg_match("/^[a-zA-ZÀ-ž\- , . \s]+$/",$reservee)) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "Name must be Valid");
 }
 if (!preg_match("/^[a-z0-9 .\-]+$/i",$Id)) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "ID must contain be Valid");
 }
-if (!is_numeric($phone)) {
+if (!is_numeric($phone) || strlen($phone) != 11) {
+    //ilagay mo dito kev yung parang alert na error
 array_push($errors, "Please Enter  a valid Phone Number");
+/*test_progress(intval(strlen($phone)));*/
+ echo header('location:../Admin/index.php?errorcontact=0');
 }
     ?>
 <?php
@@ -370,14 +381,17 @@ $sql = "SELECT * FROM `bookingcalendar` WHERE room ='$item' AND
 (start_day>=$start_day OR end_day >=$start_day) AND canceled=0";
 $sql1 = "SELECT * FROM `venues` where RoomName = '$item'";
 $sql2 = "SELECT * FROM unavailable_dates WHERE date='$start_day'";
+$EndTimeChecker = "SELECT * FROM `bookingcalendar` WHERE room ='$item' AND
+(start_day>=$start_day OR end_day >=$start_day) AND canceled=0";
+/*test_progress($EndTimeChecker);*/
 $result = mysqli_query($conn, $sql);
 $result1 = mysqli_query($conn, $sql1);
+$CheckEndTimerResult = mysqli_query($conn, $EndTimeChecker);;
 /*echo '<pre>';
     die(var_dump($item));
     echo '</pre>';*/
 $result2 = mysqli_query($conn, $sql2);
 if ($_SESSION['user']['user_type']  == "admin") {
-
   if(count($errors) == 0){
     if (mysqli_num_rows($result2) > 0) {
         
@@ -392,16 +406,56 @@ if ($_SESSION['user']['user_type']  == "admin") {
     
     while($row = mysqli_fetch_assoc($result)) {
     
+    //start epoch = start day + start time
+    // end ecpoch = end day + end time
+   /*    */
     for ($i = $start_epoch; $i <= $end_epoch; $i=$i+600) {
-       
-    if ($i>($row["start_day"]+$row["start_time"]) &&
-    $i<($row["end_day"]+$row["end_time"])) {
+/*       test_progress($endtime);
+       test_progress($row['end_time']);*/
+      /*if ($endtime > $row["start_time"] && $endtime <= $row['end_time']) {
+    echo header('location:../Admin/index.php?hasbooked=0');
+    goto end;
+      }*/
+    if (($i>($row["start_day"]+$row["start_time"]) && $i<($row["end_day"]+$row["end_time"]))  ) {
         echo header('location:../Admin/index.php?hasbooked=0');
  
 goto end;
 }
 }
 }
+}
+/*test_progress(mysqli_num_rows($CheckEndTimerResult) > 0);*/
+if (mysqli_num_rows($CheckEndTimerResult) > 0) {
+
+    while($row = mysqli_fetch_assoc($CheckEndTimerResult)) {
+        if ($end_time/60/60 > 12) {
+            $time_end = $end_time/60/60 - 12;
+            if ($time_end < 1) {
+              $time_end = 12;  
+            }
+        }
+    /*    test_progress($end_time<($row["end_time"]/60/60));*/
+     /*test_progress($end_epoch<($row["end_day"]+$row["start_time"]));*/
+    if (($time_end>($row["start_time"]/60/60) && $time_end<($row["end_time"]/60/60))  ) {
+        echo header('location:../Admin/index.php?hasbooked=0');
+ 
+goto end;
+}
+}
+    
+   /* while($row = mysqli_fetch_assoc($CheckEndTimerResult)) {*/
+    /*test_progress($end_epoch);
+    test_progress($row);*/
+
+  /* foreach ($row as $value) {
+   test_progress($value['']);
+    if (($end_epoch>($value["start_day"]+$value["start_time"]) && $end_epoch<($value["end_day"]+$value["end_time"]))  ) {
+        echo header('location:../Admin/index.php?hasbooked=0');
+ 
+goto end;
+}
+    }*/
+/*}*/
 }
 /*$sql1 = "SELECT * FROM $tablevenue WHERE RoomID='$item'";*/
 /**/
