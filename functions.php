@@ -449,21 +449,7 @@ if (mysqli_num_rows($CheckEndTimerResult) > 0) {
  
 goto end;
 }
-}
-    
-   /* while($row = mysqli_fetch_assoc($CheckEndTimerResult)) {*/
-    /*test_progress($end_epoch);
-    test_progress($row);*/
-
-  /* foreach ($row as $value) {
-   test_progress($value['']);
-    if (($end_epoch>($value["start_day"]+$value["start_time"]) && $end_epoch<($value["end_day"]+$value["end_time"]))  ) {
-        echo header('location:../Admin/index.php?hasbooked=0');
- 
-goto end;
-}
-    }*/
-/*}*/
+}    
 }
 /*$sql1 = "SELECT * FROM $tablevenue WHERE RoomID='$item'";*/
 /**/
@@ -556,6 +542,24 @@ goto end;
 }
 }
 }
+if (mysqli_num_rows($CheckEndTimerResult) > 0) {
+
+    while($row = mysqli_fetch_assoc($CheckEndTimerResult)) {
+        if ($end_time/60/60 > 12) {
+            $time_end = $end_time/60/60 - 12;
+            if ($time_end < 1) {
+              $time_end = 12;  
+            }
+        }
+    /*    test_progress($end_time<($row["end_time"]/60/60));*/
+     /*test_progress($end_epoch<($row["end_day"]+$row["start_time"]));*/
+    if (($time_end>($row["start_time"]/60/60) && $time_end<($row["end_time"]/60/60))  ) {
+        echo header('location:../Admin/index.php?hasbooked=0');
+ 
+goto end;
+}
+}    
+}
 /*$sql1 = "SELECT * FROM $tablevenue WHERE RoomID='$item'";*/
 /**/
 /*$Roomsql = "SELECT * FROM $tablevenue WHERE room = '$item'";
@@ -641,6 +645,24 @@ goto end;
 }
 }
 }
+}
+if (mysqli_num_rows($CheckEndTimerResult) > 0) {
+
+    while($row = mysqli_fetch_assoc($CheckEndTimerResult)) {
+        if ($end_time/60/60 > 12) {
+            $time_end = $end_time/60/60 - 12;
+            if ($time_end < 1) {
+              $time_end = 12;  
+            }
+        }
+    /*    test_progress($end_time<($row["end_time"]/60/60));*/
+     /*test_progress($end_epoch<($row["end_day"]+$row["start_time"]));*/
+    if (($time_end>($row["start_time"]/60/60) && $time_end<($row["end_time"]/60/60))  ) {
+        echo header('location:../Admin/index.php?hasbooked=0');
+ 
+goto end;
+}
+}    
 }
 /*$sql1 = "SELECT * FROM $tablevenue WHERE RoomID='$item'";*/
 /**/
@@ -1239,8 +1261,8 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";  
                     if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
-                            include('button.php');
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>";
+                         include('button.php');
                             $calendar.="<hr><br>" ;
                     }
                 }
@@ -1262,9 +1284,9 @@ function draw_calendar($month,$year){
                     </center>'
                     . "<br>";  
                     if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
-                            include('button.php');
-                            $calendar.="<hr><br>" ;
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>";
+                         include('button.php');
+                        $calendar .="<hr><br>" ;
                     }
                 }
               }
@@ -1287,8 +1309,8 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";
                      if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
-                            include('button.php');
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>";
+                             include('button.php');
                             $calendar.="<hr><br>" ;
                     }
     					}
@@ -1310,9 +1332,9 @@ function draw_calendar($month,$year){
                     </center>'
 					. "<br>";
                     if ($_SESSION['user']['user_type'] == "admin") {
-                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>".
-                            include('button.php');
-                            $calendar.="<hr><br>" ;
+                        $calendar .= "<a href='#edit".$row['id'] ."' data-toggle='modal' class='btn btn-warning'><span class='fa fa-edit'></span> Edit</a>";
+                        include('button.php');
+                        $calendar.="<hr><br>" ;
                     }
                     
     					}
