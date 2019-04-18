@@ -113,6 +113,20 @@ button {
   cursor: pointer;
   margin: 5px;
 }
+.currentsmallbuttonnav {
+  border-radius: 3px;
+  /*background: #FF0000;*/
+  border: none;
+  color: crimson;
+  text-align: center;
+  font-size: 16px;
+  padding: 2px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  font-weight: bold; 
+}
 button.right::before {
             transform: translate(100%, 0);
         }

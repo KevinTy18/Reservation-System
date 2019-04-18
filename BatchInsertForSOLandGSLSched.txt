@@ -1,0 +1,2 @@
+// for GSL
+INSERT INTO `department_schedule`(`Schedule_Description`, `Schedule_Value`, `Department_Id`) VALUES ("8 am","8 am",5),("9 am","9 am",5),("10 am","10 am",5),("11 am","11 am",5)
